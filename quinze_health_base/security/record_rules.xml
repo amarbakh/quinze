@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Record-level Security Rules
+    قواعد الأمان على مستوى السجلات
+
+    Every model that carries company_id gets a multi-company rule so users
+    can only see records belonging to a company they belong to.
+
+    The pattern used is the Odoo-standard "allowed_company_ids" rule which
+    respects the multi-company switcher in the top bar.
+
+    Rule naming convention:
+        health_<model>_multi_company_rule
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  health.branch — multi-company                                 -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="health_branch_multi_company_rule" model="ir.rule">
+            <field name="name">Health Branch: Multi-Company / الفرع الصحي: متعدد الشركات</field>
+            <field name="model_id" ref="model_health_branch"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                [('company_id', 'in', company_ids)]
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  health.specialty — multi-company                              -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="health_specialty_multi_company_rule" model="ir.rule">
+            <field name="name">Health Specialty: Multi-Company / التخصص الطبي: متعدد الشركات</field>
+            <field name="model_id" ref="model_health_specialty"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                [('company_id', 'in', company_ids)]
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  health.allergy — global (shared catalog, no company filter)   -->
+        <!--  Allergies are a shared medical catalog — no company isolation -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!-- No company rule needed — allergy catalog is global -->
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  health.icd10 — global (ICD codes are international standard)  -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!-- No company rule needed — ICD-10 catalog is global -->
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  res.partner — restrict medical data to Health group members   -->
+        <!--                                                                 -->
+        <!--  Patient records (is_patient=True) should only be readable     -->
+        <!--  by users who belong to at least one Health group.             -->
+        <!--  We achieve this by NOT adding a global rule (that would be    -->
+        <!--  too restrictive on the general partner model), but instead    -->
+        <!--  the clinic/pharmacy modules apply domain filters on their     -->
+        <!--  views.  The health.patient model (in clinic) carries its own  -->
+        <!--  strict rules.                                                  -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+
+    </data>
+</odoo>

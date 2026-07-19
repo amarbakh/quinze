@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Demo Data
+    البيانات التجريبية
+
+    Loaded only when demo=True (fresh demo DB or -load-demo flag).
+    Uses realistic Arabic names from Saudi context.
+-->
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Branch                                                    -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_branch_riyadh" model="health.branch">
+            <field name="name">Riyadh Main Branch / فرع الرياض الرئيسي</field>
+            <field name="code">RYD</field>
+        </record>
+
+        <record id="demo_branch_jeddah" model="health.branch">
+            <field name="name">Jeddah Branch / فرع جدة</field>
+            <field name="code">JED</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Specialties (with placeholder consultation products)     -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_specialty_gp" model="health.specialty">
+            <field name="name">General Practice / الطب العام</field>
+            <field name="code">GP</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="demo_specialty_cardiology" model="health.specialty">
+            <field name="name">Cardiology / أمراض القلب</field>
+            <field name="code">CARD</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="demo_specialty_internal" model="health.specialty">
+            <field name="name">Internal Medicine / الطب الباطني</field>
+            <field name="code">INT</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="demo_specialty_orthopedics" model="health.specialty">
+            <field name="name">Orthopedics / جراحة العظام</field>
+            <field name="code">ORTH</field>
+            <field name="color">6</field>
+        </record>
+
+        <record id="demo_specialty_pediatrics" model="health.specialty">
+            <field name="name">Pediatrics / طب الأطفال</field>
+            <field name="code">PED</field>
+            <field name="color">10</field>
+        </record>
+
+        <record id="demo_specialty_ob" model="health.specialty">
+            <field name="name">Obstetrics &amp; Gynecology / أمراض النساء والتوليد</field>
+            <field name="code">OBG</field>
+            <field name="color">9</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Allergies                                                 -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_allergy_penicillin" model="health.allergy">
+            <field name="name">Penicillin / بنسلين</field>
+            <field name="allergy_type">drug</field>
+            <field name="note">Cross-reactive with cephalosporins in ~10% of cases.
+قد يحدث تفاعل متقاطع مع السيفالوسبورينات في ~10% من الحالات.</field>
+        </record>
+
+        <record id="demo_allergy_nsaids" model="health.allergy">
+            <field name="name">NSAIDs / مضادات الالتهاب غير الستيرويدية</field>
+            <field name="allergy_type">drug</field>
+        </record>
+
+        <record id="demo_allergy_sulfa" model="health.allergy">
+            <field name="name">Sulfonamides / السلفوناميدات</field>
+            <field name="allergy_type">drug</field>
+        </record>
+
+        <record id="demo_allergy_peanut" model="health.allergy">
+            <field name="name">Peanuts / الفول السوداني</field>
+            <field name="allergy_type">food</field>
+        </record>
+
+        <record id="demo_allergy_shellfish" model="health.allergy">
+            <field name="name">Shellfish / المحار والقشريات</field>
+            <field name="allergy_type">food</field>
+        </record>
+
+        <record id="demo_allergy_latex" model="health.allergy">
+            <field name="name">Latex / لاتكس</field>
+            <field name="allergy_type">latex</field>
+        </record>
+
+        <record id="demo_allergy_iodine_contrast" model="health.allergy">
+            <field name="name">Iodine Contrast Media / وسيط التباين اليودي</field>
+            <field name="allergy_type">contrast</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Doctors (res.partner)                                    -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_doctor_khalid" model="res.partner">
+            <field name="name">Dr. Khalid Al-Rashidi / د. خالد الراشدي</field>
+            <field name="is_doctor">True</field>
+            <field name="specialty_id"
+                   ref="demo_specialty_cardiology"/>
+            <field name="medical_license_no">SAH-2021-0041</field>
+            <field name="gender">male</field>
+            <field name="lang">ar_001</field>
+            <field name="email">khalid.rashidi@quinze-demo.sa</field>
+            <field name="phone">+966-11-555-0001</field>
+        </record>
+
+        <record id="demo_doctor_sara" model="res.partner">
+            <field name="name">Dr. Sara Al-Qahtani / د. سارة القحطاني</field>
+            <field name="is_doctor">True</field>
+            <field name="specialty_id"
+                   ref="demo_specialty_internal"/>
+            <field name="medical_license_no">SAH-2019-0188</field>
+            <field name="gender">female</field>
+            <field name="lang">ar_001</field>
+            <field name="email">sara.qahtani@quinze-demo.sa</field>
+            <field name="phone">+966-11-555-0002</field>
+        </record>
+
+        <record id="demo_doctor_faisal" model="res.partner">
+            <field name="name">Dr. Faisal Al-Dossari / د. فيصل الدوسري</field>
+            <field name="is_doctor">True</field>
+            <field name="specialty_id"
+                   ref="demo_specialty_gp"/>
+            <field name="medical_license_no">SAH-2022-0307</field>
+            <field name="gender">male</field>
+            <field name="lang">ar_001</field>
+            <field name="email">faisal.dossari@quinze-demo.sa</field>
+            <field name="phone">+966-11-555-0003</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Patients (res.partner)                                   -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_patient_ahmed" model="res.partner">
+            <field name="name">Ahmed Mohammed Al-Otaibi / أحمد محمد العتيبي</field>
+            <field name="is_patient">True</field>
+            <field name="national_id">1023456789</field>
+            <field name="dob">1985-06-14</field>
+            <field name="gender">male</field>
+            <field name="blood_type">O+</field>
+            <field name="lang">ar_001</field>
+            <field name="phone">+966-50-111-2001</field>
+            <field name="emergency_contact_name">Mohammed Al-Otaibi / محمد العتيبي</field>
+            <field name="emergency_contact_phone">+966-50-111-2000</field>
+            <field name="emergency_contact_relation">Father / والد</field>
+            <field name="allergies_ids"
+                   eval="[(4, ref('demo_allergy_penicillin'))]"/>
+        </record>
+
+        <record id="demo_patient_fatima" model="res.partner">
+            <field name="name">Fatima Abdullah Al-Shehri / فاطمة عبدالله الشهري</field>
+            <field name="is_patient">True</field>
+            <field name="national_id">1098765432</field>
+            <field name="dob">1992-11-03</field>
+            <field name="gender">female</field>
+            <field name="blood_type">A+</field>
+            <field name="lang">ar_001</field>
+            <field name="phone">+966-55-222-3001</field>
+            <field name="emergency_contact_name">Abdullah Al-Shehri / عبدالله الشهري</field>
+            <field name="emergency_contact_phone">+966-55-222-3000</field>
+            <field name="emergency_contact_relation">Father / والد</field>
+            <field name="allergies_ids"
+                   eval="[(4, ref('demo_allergy_nsaids')),
+                          (4, ref('demo_allergy_shellfish'))]"/>
+        </record>
+
+        <record id="demo_patient_omar" model="res.partner">
+            <field name="name">Omar Saleh Al-Ghamdi / عمر صالح الغامدي</field>
+            <field name="is_patient">True</field>
+            <field name="national_id">1056789012</field>
+            <field name="dob">1970-02-28</field>
+            <field name="gender">male</field>
+            <field name="blood_type">B+</field>
+            <field name="lang">ar_001</field>
+            <field name="phone">+966-56-333-4001</field>
+            <field name="emergency_contact_name">Saleh Al-Ghamdi / صالح الغامدي</field>
+            <field name="emergency_contact_phone">+966-56-333-4000</field>
+            <field name="emergency_contact_relation">Son / ابن</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Pharmacist                                               -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_pharmacist_noura" model="res.partner">
+            <field name="name">Noura Ali Al-Zahrani / نورة علي الزهراني</field>
+            <field name="is_pharmacist">True</field>
+            <field name="gender">female</field>
+            <field name="lang">ar_001</field>
+            <field name="email">noura.zahrani@quinze-demo.sa</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Demo Lab Technician                                           -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="demo_lab_tech_hassan" model="res.partner">
+            <field name="name">Hassan Ibrahim Al-Malki / حسن إبراهيم المالكي</field>
+            <field name="is_lab_tech">True</field>
+            <field name="gender">male</field>
+            <field name="lang">ar_001</field>
+            <field name="email">hassan.malki@quinze-demo.sa</field>
+        </record>
+
+    </data>
+</odoo>

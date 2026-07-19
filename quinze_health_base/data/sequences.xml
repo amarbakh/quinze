@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Document Sequences
+    تسلسلات المستندات
+
+    All sequences are defined here (in health_base) so that downstream
+    modules can reference them without circular dependencies.
+
+    Format:  PREFIX/YYYY/NNNNN  (e.g.  PAT/2026/00042)
+    Padding: 5 digits, resets yearly per company.
+
+    NOTE: sequences are NOT noupdate — they must update if the module is
+    upgraded so that company-specific copies are not clobbered.
+    But the base sequence definition uses noupdate=0 (default).
+-->
+<odoo>
+    <data>
+
+        <!-- ── Patient number ──────────────────────────────────────────── -->
+        <record id="seq_health_patient" model="ir.sequence">
+            <field name="name">Health Patient Number / رقم المريض</field>
+            <field name="code">health.patient</field>
+            <field name="prefix">PAT/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Appointment number ──────────────────────────────────────── -->
+        <record id="seq_health_appointment" model="ir.sequence">
+            <field name="name">Health Appointment Number / رقم الموعد</field>
+            <field name="code">health.appointment</field>
+            <field name="prefix">APT/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Encounter number ────────────────────────────────────────── -->
+        <record id="seq_health_encounter" model="ir.sequence">
+            <field name="name">Health Encounter Number / رقم الزيارة</field>
+            <field name="code">health.encounter</field>
+            <field name="prefix">ENC/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Prescription number ─────────────────────────────────────── -->
+        <record id="seq_health_prescription" model="ir.sequence">
+            <field name="name">Health Prescription Number / رقم الوصفة الطبية</field>
+            <field name="code">health.prescription</field>
+            <field name="prefix">RX/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Lab request number ──────────────────────────────────────── -->
+        <record id="seq_health_lab_request" model="ir.sequence">
+            <field name="name">Health Lab Request Number / رقم طلب المختبر</field>
+            <field name="code">health.lab.request</field>
+            <field name="prefix">LRQ/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Lab order number ────────────────────────────────────────── -->
+        <record id="seq_lab_order" model="ir.sequence">
+            <field name="name">Lab Order Number / رقم طلب التحليل</field>
+            <field name="code">lab.order</field>
+            <field name="prefix">LAB/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Dispensing number ───────────────────────────────────────── -->
+        <record id="seq_pharmacy_dispensing" model="ir.sequence">
+            <field name="name">Pharmacy Dispensing Number / رقم صرف الدواء</field>
+            <field name="code">pharmacy.dispensing</field>
+            <field name="prefix">DIS/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- ── Insurance claim number ──────────────────────────────────── -->
+        <record id="seq_pharmacy_insurance_claim" model="ir.sequence">
+            <field name="name">Insurance Claim Number / رقم المطالبة التأمينية</field>
+            <field name="code">pharmacy.insurance.claim</field>
+            <field name="prefix">CLM/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

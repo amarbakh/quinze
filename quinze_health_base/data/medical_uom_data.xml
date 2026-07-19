@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Medical Units of Measure (seed data)
+    وحدات القياس الطبية — البيانات الأولية
+
+    noupdate="1": loaded once on installation; never overwritten on upgrade.
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- ── Mass ──────────────────────────────────────────────────── -->
+        <record id="uom_medical_mg" model="health.uom.medical">
+            <field name="name">Milligram / ملليغرام</field>
+            <field name="symbol">mg</field>
+            <field name="uom_type">mass</field>
+        </record>
+        <record id="uom_medical_mcg" model="health.uom.medical">
+            <field name="name">Microgram / ميكروغرام</field>
+            <field name="symbol">mcg</field>
+            <field name="uom_type">mass</field>
+        </record>
+        <record id="uom_medical_g" model="health.uom.medical">
+            <field name="name">Gram / غرام</field>
+            <field name="symbol">g</field>
+            <field name="uom_type">mass</field>
+        </record>
+
+        <!-- ── Volume ────────────────────────────────────────────────── -->
+        <record id="uom_medical_ml" model="health.uom.medical">
+            <field name="name">Millilitre / ملليلتر</field>
+            <field name="symbol">mL</field>
+            <field name="uom_type">volume</field>
+        </record>
+        <record id="uom_medical_l" model="health.uom.medical">
+            <field name="name">Litre / لتر</field>
+            <field name="symbol">L</field>
+            <field name="uom_type">volume</field>
+        </record>
+
+        <!-- ── Count ─────────────────────────────────────────────────── -->
+        <record id="uom_medical_tablet" model="health.uom.medical">
+            <field name="name">Tablet / حبة</field>
+            <field name="symbol">tab</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_capsule" model="health.uom.medical">
+            <field name="name">Capsule / كبسولة</field>
+            <field name="symbol">cap</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_vial" model="health.uom.medical">
+            <field name="name">Vial / أمبولة</field>
+            <field name="symbol">vial</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_drop" model="health.uom.medical">
+            <field name="name">Drop / قطرة</field>
+            <field name="symbol">gtt</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_unit" model="health.uom.medical">
+            <field name="name">Unit / وحدة</field>
+            <field name="symbol">unit</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_suppository" model="health.uom.medical">
+            <field name="name">Suppository / تحميلة</field>
+            <field name="symbol">supp</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_patch" model="health.uom.medical">
+            <field name="name">Patch / لصقة</field>
+            <field name="symbol">patch</field>
+            <field name="uom_type">count</field>
+        </record>
+        <record id="uom_medical_sachet" model="health.uom.medical">
+            <field name="name">Sachet / كيس</field>
+            <field name="symbol">sachet</field>
+            <field name="uom_type">count</field>
+        </record>
+
+        <!-- ── Activity ───────────────────────────────────────────────── -->
+        <record id="uom_medical_iu" model="health.uom.medical">
+            <field name="name">International Unit / وحدة دولية</field>
+            <field name="symbol">IU</field>
+            <field name="uom_type">activity</field>
+        </record>
+        <record id="uom_medical_mu" model="health.uom.medical">
+            <field name="name">Million Units / مليون وحدة</field>
+            <field name="symbol">MU</field>
+            <field name="uom_type">activity</field>
+        </record>
+
+        <!-- ── Concentration ──────────────────────────────────────────── -->
+        <record id="uom_medical_mgl" model="health.uom.medical">
+            <field name="name">Milligram per Litre / ملليغرام لكل لتر</field>
+            <field name="symbol">mg/L</field>
+            <field name="uom_type">concentration</field>
+        </record>
+        <record id="uom_medical_mgdl" model="health.uom.medical">
+            <field name="name">Milligram per Decilitre / ملليغرام لكل ديسيلتر</field>
+            <field name="symbol">mg/dL</field>
+            <field name="uom_type">concentration</field>
+        </record>
+        <record id="uom_medical_mmoll" model="health.uom.medical">
+            <field name="name">Millimole per Litre / ميليمول لكل لتر</field>
+            <field name="symbol">mmol/L</field>
+            <field name="uom_type">concentration</field>
+        </record>
+        <record id="uom_medical_uml" model="health.uom.medical">
+            <field name="name">Units per Millilitre / وحدة لكل ملليلتر</field>
+            <field name="symbol">U/mL</field>
+            <field name="uom_type">concentration</field>
+        </record>
+
+        <!-- ── Ratio ──────────────────────────────────────────────────── -->
+        <record id="uom_medical_percent" model="health.uom.medical">
+            <field name="name">Percent / نسبة مئوية</field>
+            <field name="symbol">%</field>
+            <field name="uom_type">ratio</field>
+        </record>
+
+    </data>
+</odoo>

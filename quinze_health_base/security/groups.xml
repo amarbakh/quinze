@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Security Groups
+    مجموعات أمان نظام QUINZE الصحي
+
+    Group hierarchy (lower → higher implies access):
+      User ← Doctor
+      User ← Lab Tech
+      User ← Pharmacist
+      Doctor + Lab Tech + Pharmacist ← Manager
+      Manager ← Admin
+
+    Downstream modules (clinic, lab, pharmacy) EXTEND these groups —
+    they never redefine them.
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Application Category                                          -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="module_category_health" model="ir.module.category">
+            <field name="name">Health / الصحة</field>
+            <field name="description">QUINZE Health Suite — Clinic, Laboratory, Pharmacy</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / User  (receptionist, front-desk)                     -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_user" model="res.groups">
+            <field name="name">User / مستخدم</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">
+                Basic access: read appointments, create/edit patients.
+                الوصول الأساسي: قراءة المواعيد، إنشاء/تعديل المرضى.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / Doctor                                               -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_doctor" model="res.groups">
+            <field name="name">Doctor / طبيب</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[(4, ref('group_health_user'))]"/>
+            <field name="comment">
+                Can create/edit encounters, prescriptions, lab requests.
+                يستطيع إنشاء/تعديل الزيارات والوصفات وطلبات المختبر.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / Lab Technician                                       -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_lab_tech" model="res.groups">
+            <field name="name">Lab Technician / تقني مختبر</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[(4, ref('group_health_user'))]"/>
+            <field name="comment">
+                Can process lab orders, enter results, validate tests.
+                يستطيع معالجة طلبات المختبر وإدخال النتائج واعتماد الفحوصات.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / Pharmacist                                           -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_pharmacist" model="res.groups">
+            <field name="name">Pharmacist / صيدلاني</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[(4, ref('group_health_user'))]"/>
+            <field name="comment">
+                Can dispense medications, manage pharmacy stock.
+                يستطيع صرف الأدوية وإدارة مخزون الصيدلية.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / Manager  (clinical supervisor / head of department)  -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_manager" model="res.groups">
+            <field name="name">Manager / مدير</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[
+                (4, ref('group_health_doctor')),
+                (4, ref('group_health_lab_tech')),
+                (4, ref('group_health_pharmacist')),
+            ]"/>
+            <field name="comment">
+                Full access to all clinical records; can post invoices,
+                validate lab results, and manage master data.
+                وصول كامل لجميع السجلات السريرية؛ يستطيع ترحيل الفواتير
+                واعتماد نتائج المختبر وإدارة البيانات الرئيسية.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Health / Admin  (IT / system administrator)                   -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="group_health_admin" model="res.groups">
+            <field name="name">Administrator / مسؤول</field>
+            <field name="category_id" ref="module_category_health"/>
+            <field name="implied_ids" eval="[(4, ref('group_health_manager'))]"/>
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="comment">
+                Full unrestricted access including configuration and deletion.
+                وصول كامل غير مقيّد بما يشمل الإعداد والحذف.
+            </field>
+        </record>
+
+    </data>
+</odoo>

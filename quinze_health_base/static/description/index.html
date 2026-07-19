@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>QUINZE Health Base</title></head>
+<body>
+<div class="qz">
+<style>
+.qz { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:#2c3e50; max-width:1000px; margin:0 auto; line-height:1.65; }
+.qz * { box-sizing:border-box; }
+.qz-hero { background:linear-gradient(135deg, #1565C0 0%, #0B3C73 100%); color:#fff; padding:56px 44px; border-radius:10px; margin-bottom:36px; }
+.qz-hero .glyph { font-size:60px; line-height:1; opacity:.92; margin-bottom:14px; }
+.qz-hero h1 { font-size:38px; margin:0 0 10px; color:#fff; font-weight:700; letter-spacing:-.5px; }
+.qz-hero p { font-size:18px; margin:0; opacity:.94; max-width:640px; }
+.qz-badges { margin-top:26px; }
+.qz-badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+            padding:6px 15px; border-radius:20px; font-size:13px; margin:0 8px 8px 0; }
+.qz h2 { font-size:25px; color:#1565C0; margin:44px 0 18px; padding-bottom:9px; border-bottom:2px solid #eef1f4; }
+.qz h3 { font-size:17px; margin:0 0 8px; color:#2c3e50; }
+.qz-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+.qz-card { background:#fafbfc; border:1px solid #e6eaee; border-left:3px solid #1565C0; border-radius:6px; padding:20px 22px; }
+.qz-card p { margin:0; font-size:14.5px; color:#54636f; }
+.qz-shot { margin:26px 0 34px; }
+.qz-shot img { width:100%; border:1px solid #dde3e8; border-radius:6px; display:block; }
+.qz-cap { font-size:13.5px; color:#7b8794; margin-top:9px; padding-left:2px; }
+.qz-cap strong { color:#1565C0; }
+.qz-flow { background:#fafbfc; border:1px solid #e6eaee; border-radius:6px; padding:20px 24px; margin:16px 0; }
+.qz-step { display:inline-block; background:#1565C0; color:#fff; padding:5px 14px; border-radius:4px; font-size:13.5px; font-weight:600; margin:4px 0; }
+.qz-arrow { color:#aab4bd; margin:0 8px; font-weight:700; }
+.qz table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14.5px; }
+.qz th { background:#1565C0; color:#fff; padding:11px 15px; text-align:left; font-weight:600; }
+.qz td { border-bottom:1px solid #e6eaee; padding:11px 15px; }
+.qz tr:nth-child(even) td { background:#fafbfc; }
+.qz-ar { direction:rtl; text-align:right; background:#fafbfc; border:1px solid #e6eaee;
+         border-right:3px solid #1565C0; border-left:none; border-radius:6px; padding:24px 28px; margin:22px 0; }
+.qz-ar h2 { border:none; margin:0 0 12px; padding:0; font-size:22px; }
+.qz-ar p, .qz-ar li { font-size:15.5px; color:#54636f; }
+.qz-ar ul { padding-right:20px; padding-left:0; }
+.qz-note { background:#fff8e6; border:1px solid #f2dfab; border-radius:6px; padding:16px 20px; font-size:14.5px; margin:20px 0; }
+.qz-foot { margin-top:44px; padding-top:22px; border-top:1px solid #e6eaee; font-size:13.5px; color:#7b8794; }
+.qz ul.qz-list { padding-left:20px; }
+.qz ul.qz-list li { margin-bottom:7px; font-size:14.5px; color:#54636f; }
+</style>
+
+<div class="qz-hero">
+  <div class="glyph">+</div>
+  <h1>QUINZE Health Base</h1>
+  <p>The shared foundation for the QUINZE Health Suite — security, master data, sequences and bilingual English/Arabic support.</p>
+  <div class="qz-badges"><span class="qz-badge">Odoo 17</span><span class="qz-badge">Free — LGPL-3</span><span class="qz-badge">English + Arabic</span><span class="qz-badge">Multi-Branch</span><span class="qz-badge">Multi-Company</span></div>
+</div>
+<h2>Overview</h2><p>Every module in the QUINZE Health Suite builds on this shared foundation. Install it first &mdash; it defines the security model, master data, sequences and the bilingual layer that the Clinic, Laboratory, Pharmacy and API modules all rely on.</p><div class="qz-note"><strong>Bilingual by design.</strong> Every field label, selection value and report renders in English and Arabic together, so a single database serves both an English-speaking administrator and an Arabic-speaking clinician without switching languages. The screenshots below are taken with the interface language set to English.</div><div class="qz-shot"><img src="shot_01_security_groups.png" alt="Security Groups"/><div class="qz-cap"><strong>Security Groups</strong> &mdash; Six dedicated roles appear in the user form: Administrator, Doctor, Lab Technician, Manager, Pharmacist and User. Each is backed by record rules scoped to company and branch.</div></div><h2>What's Included</h2><div class="qz-grid"><div class="qz-card"><h3>Six Security Groups</h3><p>User, Doctor, Lab Technician, Pharmacist, Manager and Administrator, each with record rules scoped by company and branch.</p></div><div class="qz-card"><h3>Patient Data on res.partner</h3><p>Medical role flags and demographics extend the standard partner &mdash; no duplicate contact database to maintain.</p></div><div class="qz-card"><h3>ICD-10 Catalogue</h3><p>A curated set of diagnosis codes with English and Arabic descriptions, organised by chapter.</p></div><div class="qz-card"><h3>Multi-Branch Support</h3><p>Run several branches inside one company, with data separation enforced by record rules.</p></div><div class="qz-card"><h3>Per-Company Sequences</h3><p>Numbered sequences for every transactional document across the suite.</p></div><div class="qz-card"><h3>Bilingual Interface</h3><p>Field labels, selection values and PDF reports render in English and Arabic together.</p></div></div><div class="qz-shot"><img src="shot_02_icd10_catalogue.png" alt="ICD-10 Diagnosis Codes"/><div class="qz-cap"><strong>ICD-10 Diagnosis Codes</strong> &mdash; Diagnosis codes ship with both English and Arabic descriptions and are grouped by ICD chapter. The catalogue is editable, so you can extend it with your own entries.</div></div><div class="qz-shot"><img src="shot_03_patient_record.png" alt="Patient Demographics on res.partner"/><div class="qz-cap"><strong>Patient Demographics on res.partner</strong> &mdash; National ID, date of birth, computed age, gender and blood type sit directly on the contact record, with medical history tabs and smart buttons linking to appointments, encounters and prescriptions.</div></div><h2>Master Data Provided</h2><ul class='qz-list'><li><strong>Specialties</strong> &mdash; medical specialties with per-specialty consultation pricing</li><li><strong>Allergies</strong> &mdash; structured allergy catalogue linked to patient records</li><li><strong>Medical Units of Measure</strong> &mdash; clinical units for dosage and lab results</li><li><strong>Branches</strong> &mdash; physical locations within a company</li></ul><div class="qz-note"><strong>Free module.</strong> This base layer is released under LGPL-3 at no cost. The Clinic, Laboratory, Pharmacy and API modules are sold separately.</div>
+<div class="qz-ar">
+  <h2>قاعدة نظام QUINZE الصحي</h2>
+  <p>الأساس المشترك لمجموعة QUINZE الصحية. يجب تثبيته أولاً، فهو يوفر:</p><ul><li>ست مجموعات صلاحيات مع قواعد وصول حسب الشركة والفرع</li><li>بيانات المرضى مدمجة في جهات الاتصال القياسية</li><li>كتالوج تشخيصات ICD-10 بوصف إنجليزي وعربي</li><li>دعم تعدد الفروع داخل الشركة الواحدة</li><li>تسلسلات ترقيم لكل المستندات</li><li>تسميات حقول وتقارير ثنائية اللغة</li></ul><p><strong>هذه الوحدة مجانية</strong> بترخيص LGPL-3.</p>
+</div>
+<h2>Technical Information</h2>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Odoo Version</td><td>17.0 Community &amp; Enterprise</td></tr>
+  <tr><td>Dependencies</td><td>base, mail, account, product</td></tr>
+  <tr><td>License</td><td>LGPL-3 (Free)</td></tr>
+  <tr><td>Price</td><td>Free</td></tr>
+  <tr><td>Languages</td><td>English and Arabic (ar_001), bilingual labels and reports</td></tr>
+  <tr><td>Automated Tests</td><td>Included</td></tr>
+</table>
+<div class="qz-foot">
+  <strong>Bakhit Alamin</strong> &mdash; Independent Odoo Developer<br/>
+  Email: amarnew198611@gmail.com &nbsp;&middot;&nbsp; WhatsApp: +966 55 167 3871<br/>
+  Includes 12 months of bug-fix support and version updates within Odoo 17.0.
+</div>
+</div>
+</body>
+</html>

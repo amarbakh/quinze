@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_health_branch_user,health.branch (user read),model_health_branch,quinze_health_base.group_health_user,1,0,0,0
+access_health_branch_manager,health.branch (manager full),model_health_branch,quinze_health_base.group_health_manager,1,1,1,0
+access_health_branch_admin,health.branch (admin delete),model_health_branch,quinze_health_base.group_health_admin,1,1,1,1
+access_health_specialty_user,health.specialty (user read),model_health_specialty,quinze_health_base.group_health_user,1,0,0,0
+access_health_specialty_manager,health.specialty (manager full),model_health_specialty,quinze_health_base.group_health_manager,1,1,1,0
+access_health_specialty_admin,health.specialty (admin delete),model_health_specialty,quinze_health_base.group_health_admin,1,1,1,1
+access_health_allergy_user,health.allergy (user read),model_health_allergy,quinze_health_base.group_health_user,1,0,0,0
+access_health_allergy_doctor,health.allergy (doctor create/edit),model_health_allergy,quinze_health_base.group_health_doctor,1,1,1,0
+access_health_allergy_admin,health.allergy (admin delete),model_health_allergy,quinze_health_base.group_health_admin,1,1,1,1
+access_health_icd10_user,health.icd10 (user read),model_health_icd10,quinze_health_base.group_health_user,1,0,0,0
+access_health_icd10_manager,health.icd10 (manager full),model_health_icd10,quinze_health_base.group_health_manager,1,1,1,0
+access_health_icd10_admin,health.icd10 (admin delete),model_health_icd10,quinze_health_base.group_health_admin,1,1,1,1
+access_health_uom_medical_user,health.uom.medical (user read),model_health_uom_medical,quinze_health_base.group_health_user,1,0,0,0
+access_health_uom_medical_manager,health.uom.medical (manager full),model_health_uom_medical,quinze_health_base.group_health_manager,1,1,1,0
+access_health_uom_medical_admin,health.uom.medical (admin delete),model_health_uom_medical,quinze_health_base.group_health_admin,1,1,1,1

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — ICD-10 Lite Seed Data (~60 codes)
+    بيانات رموز ICD-10 المختصرة
+
+    noupdate="1" — loaded once; never overwritten by upgrades.
+    Covers: Infectious, Endocrine, Circulatory, Respiratory, Digestive,
+            Musculoskeletal, Genitourinary, Neoplasms, Mental, Nervous,
+            Symptoms & Signs, Z-codes.
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter I — Infectious & Parasitic                           -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_A00" model="health.icd10">
+            <field name="code">A00</field>
+            <field name="name_en">Cholera</field>
+            <field name="name_ar">الكوليرا</field>
+            <field name="chapter">I</field>
+        </record>
+        <record id="icd10_A09" model="health.icd10">
+            <field name="code">A09</field>
+            <field name="name_en">Infectious gastroenteritis and colitis</field>
+            <field name="name_ar">التهاب المعدة والأمعاء المعدي</field>
+            <field name="chapter">I</field>
+        </record>
+        <record id="icd10_B34_9" model="health.icd10">
+            <field name="code">B34.9</field>
+            <field name="name_en">Viral infection, unspecified</field>
+            <field name="name_ar">عدوى فيروسية غير محددة</field>
+            <field name="chapter">I</field>
+        </record>
+        <record id="icd10_B20" model="health.icd10">
+            <field name="code">B20</field>
+            <field name="name_en">HIV disease</field>
+            <field name="name_ar">مرض فيروس نقص المناعة البشرية</field>
+            <field name="chapter">I</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter II — Neoplasms                                        -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_C18" model="health.icd10">
+            <field name="code">C18</field>
+            <field name="name_en">Malignant neoplasm of colon</field>
+            <field name="name_ar">ورم خبيث في القولون</field>
+            <field name="chapter">II</field>
+        </record>
+        <record id="icd10_C34" model="health.icd10">
+            <field name="code">C34</field>
+            <field name="name_en">Malignant neoplasm of bronchus and lung</field>
+            <field name="name_ar">ورم خبيث في القصبة الهوائية والرئة</field>
+            <field name="chapter">II</field>
+        </record>
+        <record id="icd10_C50" model="health.icd10">
+            <field name="code">C50</field>
+            <field name="name_en">Malignant neoplasm of breast</field>
+            <field name="name_ar">ورم خبيث في الثدي</field>
+            <field name="chapter">II</field>
+        </record>
+        <record id="icd10_C61" model="health.icd10">
+            <field name="code">C61</field>
+            <field name="name_en">Malignant neoplasm of prostate</field>
+            <field name="name_ar">ورم خبيث في البروستاتا</field>
+            <field name="chapter">II</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter IV — Endocrine & Metabolic                           -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_E10" model="health.icd10">
+            <field name="code">E10</field>
+            <field name="name_en">Type 1 diabetes mellitus</field>
+            <field name="name_ar">السكري من النوع الأول</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E11" model="health.icd10">
+            <field name="code">E11</field>
+            <field name="name_en">Type 2 diabetes mellitus</field>
+            <field name="name_ar">السكري من النوع الثاني</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E03_9" model="health.icd10">
+            <field name="code">E03.9</field>
+            <field name="name_en">Hypothyroidism, unspecified</field>
+            <field name="name_ar">قصور الغدة الدرقية غير المحدد</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E05_9" model="health.icd10">
+            <field name="code">E05.9</field>
+            <field name="name_en">Hyperthyroidism, unspecified</field>
+            <field name="name_ar">فرط نشاط الغدة الدرقية غير المحدد</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E66" model="health.icd10">
+            <field name="code">E66</field>
+            <field name="name_en">Obesity</field>
+            <field name="name_ar">السمنة</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E78" model="health.icd10">
+            <field name="code">E78</field>
+            <field name="name_en">Disorders of lipoprotein metabolism and other lipidaemias</field>
+            <field name="name_ar">اضطرابات استقلاب البروتين الدهني وارتفاع الدهون</field>
+            <field name="chapter">IV</field>
+        </record>
+        <record id="icd10_E55_9" model="health.icd10">
+            <field name="code">E55.9</field>
+            <field name="name_en">Vitamin D deficiency, unspecified</field>
+            <field name="name_ar">نقص فيتامين د غير المحدد</field>
+            <field name="chapter">IV</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter V — Mental & Behavioural                              -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_F32" model="health.icd10">
+            <field name="code">F32</field>
+            <field name="name_en">Depressive episode</field>
+            <field name="name_ar">نوبة اكتئابية</field>
+            <field name="chapter">V</field>
+        </record>
+        <record id="icd10_F41_9" model="health.icd10">
+            <field name="code">F41.9</field>
+            <field name="name_en">Anxiety disorder, unspecified</field>
+            <field name="name_ar">اضطراب القلق غير المحدد</field>
+            <field name="chapter">V</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter VI — Nervous System                                   -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_G20" model="health.icd10">
+            <field name="code">G20</field>
+            <field name="name_en">Parkinson disease</field>
+            <field name="name_ar">مرض باركنسون</field>
+            <field name="chapter">VI</field>
+        </record>
+        <record id="icd10_G30" model="health.icd10">
+            <field name="code">G30</field>
+            <field name="name_en">Alzheimer disease</field>
+            <field name="name_ar">مرض الزهايمر</field>
+            <field name="chapter">VI</field>
+        </record>
+        <record id="icd10_G43" model="health.icd10">
+            <field name="code">G43</field>
+            <field name="name_en">Migraine</field>
+            <field name="name_ar">الصداع النصفي</field>
+            <field name="chapter">VI</field>
+        </record>
+        <record id="icd10_G40" model="health.icd10">
+            <field name="code">G40</field>
+            <field name="name_en">Epilepsy</field>
+            <field name="name_ar">الصرع</field>
+            <field name="chapter">VI</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter IX — Circulatory System                               -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_I10" model="health.icd10">
+            <field name="code">I10</field>
+            <field name="name_en">Essential (primary) hypertension</field>
+            <field name="name_ar">ارتفاع ضغط الدم الأساسي</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I20" model="health.icd10">
+            <field name="code">I20</field>
+            <field name="name_en">Angina pectoris</field>
+            <field name="name_ar">الذبحة الصدرية</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I21" model="health.icd10">
+            <field name="code">I21</field>
+            <field name="name_en">Acute myocardial infarction</field>
+            <field name="name_ar">احتشاء عضلة القلب الحاد</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I25" model="health.icd10">
+            <field name="code">I25</field>
+            <field name="name_en">Chronic ischaemic heart disease</field>
+            <field name="name_ar">أمراض القلب الإقفارية المزمنة</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I48" model="health.icd10">
+            <field name="code">I48</field>
+            <field name="name_en">Atrial fibrillation and flutter</field>
+            <field name="name_ar">رجفان وارتعاش الأذينين</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I50" model="health.icd10">
+            <field name="code">I50</field>
+            <field name="name_en">Heart failure</field>
+            <field name="name_ar">قصور القلب</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I63" model="health.icd10">
+            <field name="code">I63</field>
+            <field name="name_en">Cerebral infarction</field>
+            <field name="name_ar">احتشاء دماغي</field>
+            <field name="chapter">IX</field>
+        </record>
+        <record id="icd10_I64" model="health.icd10">
+            <field name="code">I64</field>
+            <field name="name_en">Stroke, not specified as haemorrhage or infarction</field>
+            <field name="name_ar">السكتة الدماغية غير المحددة</field>
+            <field name="chapter">IX</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter X — Respiratory                                       -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_J00" model="health.icd10">
+            <field name="code">J00</field>
+            <field name="name_en">Acute nasopharyngitis (common cold)</field>
+            <field name="name_ar">التهاب البلعوم الأنفي الحاد (نزلة البرد)</field>
+            <field name="chapter">X</field>
+        </record>
+        <record id="icd10_J06_9" model="health.icd10">
+            <field name="code">J06.9</field>
+            <field name="name_en">Acute upper respiratory infection, unspecified</field>
+            <field name="name_ar">التهاب الجهاز التنفسي العلوي الحاد غير المحدد</field>
+            <field name="chapter">X</field>
+        </record>
+        <record id="icd10_J18" model="health.icd10">
+            <field name="code">J18</field>
+            <field name="name_en">Pneumonia, unspecified organism</field>
+            <field name="name_ar">التهاب الرئة غير المحدد</field>
+            <field name="chapter">X</field>
+        </record>
+        <record id="icd10_J44" model="health.icd10">
+            <field name="code">J44</field>
+            <field name="name_en">Other chronic obstructive pulmonary disease (COPD)</field>
+            <field name="name_ar">مرض الانسداد الرئوي المزمن (COPD)</field>
+            <field name="chapter">X</field>
+        </record>
+        <record id="icd10_J45" model="health.icd10">
+            <field name="code">J45</field>
+            <field name="name_en">Asthma</field>
+            <field name="name_ar">الربو</field>
+            <field name="chapter">X</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XI — Digestive System                                 -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_K21" model="health.icd10">
+            <field name="code">K21</field>
+            <field name="name_en">Gastro-oesophageal reflux disease (GERD)</field>
+            <field name="name_ar">مرض الارتداد المعدي المريئي</field>
+            <field name="chapter">XI</field>
+        </record>
+        <record id="icd10_K29" model="health.icd10">
+            <field name="code">K29</field>
+            <field name="name_en">Gastritis and duodenitis</field>
+            <field name="name_ar">التهاب المعدة والاثني عشر</field>
+            <field name="chapter">XI</field>
+        </record>
+        <record id="icd10_K35" model="health.icd10">
+            <field name="code">K35</field>
+            <field name="name_en">Acute appendicitis</field>
+            <field name="name_ar">التهاب الزائدة الدودية الحاد</field>
+            <field name="chapter">XI</field>
+        </record>
+        <record id="icd10_K80" model="health.icd10">
+            <field name="code">K80</field>
+            <field name="name_en">Cholelithiasis (gallstones)</field>
+            <field name="name_ar">تحصي المرارة</field>
+            <field name="chapter">XI</field>
+        </record>
+        <record id="icd10_K92_1" model="health.icd10">
+            <field name="code">K92.1</field>
+            <field name="name_en">Melaena</field>
+            <field name="name_ar">براز أسود دموي</field>
+            <field name="chapter">XI</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XIII — Musculoskeletal                                -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_M10" model="health.icd10">
+            <field name="code">M10</field>
+            <field name="name_en">Gout</field>
+            <field name="name_ar">النقرس</field>
+            <field name="chapter">XIII</field>
+        </record>
+        <record id="icd10_M16" model="health.icd10">
+            <field name="code">M16</field>
+            <field name="name_en">Coxarthrosis (osteoarthritis of hip)</field>
+            <field name="name_ar">فصال عظمي في مفصل الورك</field>
+            <field name="chapter">XIII</field>
+        </record>
+        <record id="icd10_M17" model="health.icd10">
+            <field name="code">M17</field>
+            <field name="name_en">Gonarthrosis (osteoarthritis of knee)</field>
+            <field name="name_ar">فصال عظمي في مفصل الركبة</field>
+            <field name="chapter">XIII</field>
+        </record>
+        <record id="icd10_M54_5" model="health.icd10">
+            <field name="code">M54.5</field>
+            <field name="name_en">Low back pain</field>
+            <field name="name_ar">ألم أسفل الظهر</field>
+            <field name="chapter">XIII</field>
+        </record>
+        <record id="icd10_M79_3" model="health.icd10">
+            <field name="code">M79.3</field>
+            <field name="name_en">Panniculitis</field>
+            <field name="name_ar">التهاب النسيج الدهني</field>
+            <field name="chapter">XIII</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XIV — Genitourinary                                   -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_N18" model="health.icd10">
+            <field name="code">N18</field>
+            <field name="name_en">Chronic kidney disease (CKD)</field>
+            <field name="name_ar">مرض الكلى المزمن</field>
+            <field name="chapter">XIV</field>
+        </record>
+        <record id="icd10_N20" model="health.icd10">
+            <field name="code">N20</field>
+            <field name="name_en">Calculus of kidney and ureter (kidney stones)</field>
+            <field name="name_ar">حصوات الكلى والحالب</field>
+            <field name="chapter">XIV</field>
+        </record>
+        <record id="icd10_N39_0" model="health.icd10">
+            <field name="code">N39.0</field>
+            <field name="name_en">Urinary tract infection (UTI)</field>
+            <field name="name_ar">التهاب المسالك البولية</field>
+            <field name="chapter">XIV</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XVIII — Symptoms & Signs                              -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_R05" model="health.icd10">
+            <field name="code">R05</field>
+            <field name="name_en">Cough</field>
+            <field name="name_ar">السعال</field>
+            <field name="chapter">XVIII</field>
+        </record>
+        <record id="icd10_R50" model="health.icd10">
+            <field name="code">R50</field>
+            <field name="name_en">Fever of other and unknown origin</field>
+            <field name="name_ar">حمى غير محددة المصدر</field>
+            <field name="chapter">XVIII</field>
+        </record>
+        <record id="icd10_R51" model="health.icd10">
+            <field name="code">R51</field>
+            <field name="name_en">Headache</field>
+            <field name="name_ar">صداع الرأس</field>
+            <field name="chapter">XVIII</field>
+        </record>
+        <record id="icd10_R55" model="health.icd10">
+            <field name="code">R55</field>
+            <field name="name_en">Syncope and collapse</field>
+            <field name="name_ar">الإغماء والانهيار</field>
+            <field name="chapter">XVIII</field>
+        </record>
+        <record id="icd10_R10" model="health.icd10">
+            <field name="code">R10</field>
+            <field name="name_en">Abdominal and pelvic pain</field>
+            <field name="name_ar">ألم البطن والحوض</field>
+            <field name="chapter">XVIII</field>
+        </record>
+        <record id="icd10_R07" model="health.icd10">
+            <field name="code">R07</field>
+            <field name="name_en">Pain in throat and chest</field>
+            <field name="name_ar">ألم الحلق والصدر</field>
+            <field name="chapter">XVIII</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XIX — Injury & Poisoning                              -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_S06" model="health.icd10">
+            <field name="code">S06</field>
+            <field name="name_en">Intracranial injury</field>
+            <field name="name_ar">إصابة داخل الجمجمة</field>
+            <field name="chapter">XIX</field>
+        </record>
+        <record id="icd10_T39" model="health.icd10">
+            <field name="code">T39</field>
+            <field name="name_en">Poisoning by non-opioid analgesics</field>
+            <field name="name_ar">التسمم بمسكنات الألم غير الأفيونية</field>
+            <field name="chapter">XIX</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Chapter XXI — Factors Influencing Health (Z-codes)           -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <record id="icd10_Z00" model="health.icd10">
+            <field name="code">Z00</field>
+            <field name="name_en">General examination and investigation of persons without complaint</field>
+            <field name="name_ar">الفحص العام للأشخاص بدون شكاوى</field>
+            <field name="chapter">XXI</field>
+        </record>
+        <record id="icd10_Z76_0" model="health.icd10">
+            <field name="code">Z76.0</field>
+            <field name="name_en">Issue of repeat prescription</field>
+            <field name="name_ar">إعادة إصدار وصفة طبية</field>
+            <field name="chapter">XXI</field>
+        </record>
+        <record id="icd10_Z82" model="health.icd10">
+            <field name="code">Z82</field>
+            <field name="name_en">Family history of certain conditions</field>
+            <field name="name_ar">التاريخ العائلي لحالات معينة</field>
+            <field name="chapter">XXI</field>
+        </record>
+        <record id="icd10_Z87" model="health.icd10">
+            <field name="code">Z87</field>
+            <field name="name_en">Personal history of other diseases and conditions</field>
+            <field name="name_ar">التاريخ الشخصي لأمراض وحالات أخرى</field>
+            <field name="chapter">XXI</field>
+        </record>
+
+    </data>
+</odoo>

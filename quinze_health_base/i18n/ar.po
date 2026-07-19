@@ -1,0 +1,397 @@
+# Arabic translation for QUINZE Health Base
+# الترجمة العربية لوحدة QUINZE الصحية الأساسية
+# Copyright (C) 2026 QUINZE Solutions
+# License LGPL-3.0 or later
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QUINZE Health Base 17.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-17 00:00+0300\n"
+"PO-Revision-Date: 2026-05-17 00:00+0300\n"
+"Last-Translator: Bakhit Al-Amin <bakhit@quinze-solutions.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. module: quinze_health_base
+#. model: ir.module.category
+#: model:ir.module.category,name:quinze_health_base.module_category_health
+msgid "Health / الصحة"
+msgstr "الصحة"
+
+#. module: quinze_health_base
+#. model: res.groups
+#: model:res.groups,name:quinze_health_base.group_health_user
+msgid "User / مستخدم"
+msgstr "مستخدم"
+
+#. module: quinze_health_base
+#: model:res.groups,name:quinze_health_base.group_health_doctor
+msgid "Doctor / طبيب"
+msgstr "طبيب"
+
+#. module: quinze_health_base
+#: model:res.groups,name:quinze_health_base.group_health_lab_tech
+msgid "Lab Technician / تقني مختبر"
+msgstr "تقني مختبر"
+
+#. module: quinze_health_base
+#: model:res.groups,name:quinze_health_base.group_health_pharmacist
+msgid "Pharmacist / صيدلاني"
+msgstr "صيدلاني"
+
+#. module: quinze_health_base
+#: model:res.groups,name:quinze_health_base.group_health_manager
+msgid "Manager / مدير"
+msgstr "مدير"
+
+#. module: quinze_health_base
+#: model:res.groups,name:quinze_health_base.group_health_admin
+msgid "Administrator / مسؤول"
+msgstr "مسؤول"
+
+#. module: quinze_health_base
+#. model_terms: health.branch
+#: model:health.branch,name:quinze_health_base.demo_branch_riyadh
+msgid "Riyadh Main Branch / فرع الرياض الرئيسي"
+msgstr "فرع الرياض الرئيسي"
+
+#. module: quinze_health_base
+#: model_terms:ir.ui.view,arch_db:quinze_health_base.view_health_branch_form
+msgid "Branch / فرع"
+msgstr "فرع"
+
+#. module: quinze_health_base
+#: model_terms:ir.ui.view,arch_db:quinze_health_base.view_health_branch_list
+msgid "Branches / الفروع"
+msgstr "الفروع"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_branch__name
+msgid "Branch Name / اسم الفرع"
+msgstr "اسم الفرع"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_branch__code
+msgid "Code / الرمز"
+msgstr "الرمز"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_branch__company_id
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_specialty__company_id
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_mixin__company_id
+msgid "Company / الشركة"
+msgstr "الشركة"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_branch__active
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_specialty__active
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_allergy__active
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_icd10__active
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_uom_medical__active
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_mixin__active
+msgid "Active / نشط"
+msgstr "نشط"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_mixin__branch_id
+msgid "Branch / الفرع"
+msgstr "الفرع"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_mixin__note
+msgid "Internal Notes / ملاحظات داخلية"
+msgstr "ملاحظات داخلية"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_specialty__name
+msgid "Specialty / التخصص"
+msgstr "التخصص"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_specialty__consultation_product_id
+msgid "Consultation Product / منتج الاستشارة"
+msgstr "منتج الاستشارة"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_allergy__name
+msgid "Allergy / اسم الحساسية"
+msgstr "اسم الحساسية"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_allergy__allergy_type
+msgid "Type / النوع"
+msgstr "النوع"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_allergy__allergy_type
+msgid "Drug / دواء"
+msgstr "دواء"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_allergy__allergy_type
+msgid "Food / غذاء"
+msgstr "غذاء"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_allergy__allergy_type
+msgid "Environmental / بيئي"
+msgstr "بيئي"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_allergy__allergy_type
+msgid "Latex / لاتكس"
+msgstr "لاتكس"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_allergy__allergy_type
+msgid "Contrast Media / وسيط تباين"
+msgstr "وسيط تباين"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_icd10__code
+msgid "ICD-10 Code / رمز ICD-10"
+msgstr "رمز ICD-10"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_icd10__name_en
+msgid "Description (EN) / الوصف (إنجليزي)"
+msgstr "الوصف (إنجليزي)"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_icd10__name_ar
+msgid "Description (AR) / الوصف (عربي)"
+msgstr "الوصف (عربي)"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_icd10__chapter
+msgid "Chapter / الفصل"
+msgstr "الفصل"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_uom_medical__name
+msgid "Unit Name / اسم الوحدة"
+msgstr "اسم الوحدة"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_uom_medical__symbol
+msgid "Symbol / الرمز"
+msgstr "الرمز"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Type / النوع"
+msgstr "النوع"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Mass / الكتلة"
+msgstr "الكتلة"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Volume / الحجم"
+msgstr "الحجم"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Count / العدد"
+msgstr "العدد"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Concentration / التركيز"
+msgstr "التركيز"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Activity / النشاط البيولوجي"
+msgstr "النشاط البيولوجي"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:quinze_health_base.field_health_uom_medical__uom_type
+msgid "Ratio / النسبة"
+msgstr "النسبة"
+
+#. module: quinze_health_base — res.partner fields
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__is_patient
+msgid "Is Patient / مريض"
+msgstr "مريض"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__is_doctor
+msgid "Is Doctor / طبيب"
+msgstr "طبيب"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__is_pharmacist
+msgid "Is Pharmacist / صيدلاني"
+msgstr "صيدلاني"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__is_lab_tech
+msgid "Is Lab Technician / تقني مختبر"
+msgstr "تقني مختبر"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__national_id
+msgid "National ID / رقم الهوية الوطنية"
+msgstr "رقم الهوية الوطنية"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__dob
+msgid "Date of Birth / تاريخ الميلاد"
+msgstr "تاريخ الميلاد"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__age
+msgid "Age / العمر"
+msgstr "العمر"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__gender
+msgid "Gender / الجنس"
+msgstr "الجنس"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:res_partner.field_res_partner__gender
+msgid "Male / ذكر"
+msgstr "ذكر"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,selection:res_partner.field_res_partner__gender
+msgid "Female / أنثى"
+msgstr "أنثى"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__blood_type
+msgid "Blood Type / فصيلة الدم"
+msgstr "فصيلة الدم"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__specialty_id
+msgid "Specialty / التخصص"
+msgstr "التخصص"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__medical_license_no
+msgid "Medical License No. / رقم الترخيص الطبي"
+msgstr "رقم الترخيص الطبي"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__emergency_contact_name
+msgid "Emergency Contact Name / اسم جهة الطوارئ"
+msgstr "اسم جهة الطوارئ"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__emergency_contact_phone
+msgid "Emergency Contact Phone / هاتف جهة الطوارئ"
+msgstr "هاتف جهة الطوارئ"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__emergency_contact_relation
+msgid "Relation / صلة القرابة"
+msgstr "صلة القرابة"
+
+#. module: quinze_health_base
+#: model:ir.model.fields,field_description:res_partner.field_res_partner__allergies_ids
+msgid "Known Allergies / الحساسيات المعروفة"
+msgstr "الحساسيات المعروفة"
+
+#. module: quinze_health_base — Validation error messages
+msgid "National ID \"%s\" is already registered for another patient in this company."
+msgstr "رقم الهوية الوطنية \"%s\" مسجّل لمريض آخر في هذه الشركة."
+
+msgid "Date of birth cannot be in the future."
+msgstr "تاريخ الميلاد لا يمكن أن يكون في المستقبل."
+
+msgid "The selected branch does not belong to the record's company."
+msgstr "الفرع المحدد لا ينتمي لشركة السجل."
+
+#. module: quinze_health_base — Menu labels
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_root
+msgid "Health / الصحة"
+msgstr "الصحة"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_configuration
+msgid "Configuration / الإعداد"
+msgstr "الإعداد"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_branch
+msgid "Branches / الفروع"
+msgstr "الفروع"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_specialty
+msgid "Specialties / التخصصات"
+msgstr "التخصصات"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_allergy
+msgid "Allergies / الحساسيات"
+msgstr "الحساسيات"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_icd10
+msgid "ICD-10 Codes / رموز ICD-10"
+msgstr "رموز ICD-10"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_uom_medical
+msgid "Medical Units / الوحدات الطبية"
+msgstr "الوحدات الطبية"
+
+#: model:ir.ui.menu,name:quinze_health_base.menu_health_doctors
+msgid "Doctors / الأطباء"
+msgstr "الأطباء"
+
+#. module: quinze_health_base — View tab labels
+#: model_terms:ir.ui.view,arch_db:quinze_health_base.view_partner_form_medical_tab
+msgid "Medical / طبي"
+msgstr "طبي"
+
+msgid "Medical Roles / الأدوار الطبية"
+msgstr "الأدوار الطبية"
+
+msgid "Doctor Information / بيانات الطبيب"
+msgstr "بيانات الطبيب"
+
+msgid "Patient Demographics / البيانات الديموغرافية"
+msgstr "البيانات الديموغرافية"
+
+msgid "Emergency Contact / جهة الطوارئ"
+msgstr "جهة الطوارئ"
+
+msgid "Known Allergies / الحساسيات المعروفة"
+msgstr "الحساسيات المعروفة"
+
+msgid "Financial Integration / الربط المالي"
+msgstr "الربط المالي"
+
+msgid "Notes / ملاحظات"
+msgstr "ملاحظات"
+
+msgid "Clinical Notes / ملاحظات سريرية"
+msgstr "ملاحظات سريرية"
+
+msgid "Group By / تجميع حسب"
+msgstr "تجميع حسب"
+
+msgid "Active / نشط"
+msgstr "نشط"
+
+msgid "Archived / مؤرشف"
+msgstr "مؤرشف"
+
+msgid "Company / الشركة"
+msgstr "الشركة"
+
+msgid "Type / النوع"
+msgstr "النوع"
+
+msgid "Chapter / الفصل"
+msgstr "الفصل"
+
+msgid "Create your first branch / أنشئ أول فرع"
+msgstr "أنشئ أول فرع"

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Suite — Main Menu Structure
+    هيكل القائمة الرئيسية لنظام QUINZE الصحي
+
+    Menu tree:
+        Health / الصحة  (root application)
+        ├── [Clinical modules inject here]
+        ├── [Lab modules inject here]
+        ├── [Pharmacy modules inject here]
+        └── Configuration / الإعداد
+            ├── Doctors
+            ├── Branches
+            ├── Specialties
+            ├── Allergies
+            ├── ICD-10 Codes
+            └── Medical Units
+-->
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Root application menu                                         -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <menuitem
+            id="menu_health_root"
+            name="Health / الصحة"
+            groups="quinze_health_base.group_health_user"
+            sequence="100"
+            web_icon="quinze_health_base,static/description/icon.png"/>
+
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <!--  Configuration sub-menu (Manager + Admin only)                 -->
+        <!-- ══════════════════════════════════════════════════════════════ -->
+        <menuitem
+            id="menu_health_configuration"
+            name="Configuration / الإعداد"
+            parent="menu_health_root"
+            groups="quinze_health_base.group_health_manager"
+            sequence="900"/>
+
+        <!-- ── Doctors ───────────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_doctors"
+            name="Doctors / الأطباء"
+            parent="menu_health_configuration"
+            action="action_health_doctors"
+            groups="quinze_health_base.group_health_manager"
+            sequence="5"/>
+
+        <!-- ── Branches ──────────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_branch"
+            name="Branches / الفروع"
+            parent="menu_health_configuration"
+            action="action_health_branch"
+            sequence="10"/>
+
+        <!-- ── Specialties ───────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_specialty"
+            name="Specialties / التخصصات"
+            parent="menu_health_configuration"
+            action="action_health_specialty"
+            sequence="20"/>
+
+        <!-- ── Allergies ─────────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_allergy"
+            name="Allergies / الحساسيات"
+            parent="menu_health_configuration"
+            action="action_health_allergy"
+            sequence="30"/>
+
+        <!-- ── ICD-10 Codes ───────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_icd10"
+            name="ICD-10 Codes / رموز ICD-10"
+            parent="menu_health_configuration"
+            action="action_health_icd10"
+            sequence="40"/>
+
+        <!-- ── Medical Units ─────────────────────────────────────────── -->
+        <menuitem
+            id="menu_health_uom_medical"
+            name="Medical Units / الوحدات الطبية"
+            parent="menu_health_configuration"
+            action="action_health_uom_medical"
+            sequence="50"/>
+
+    </data>
+</odoo>
