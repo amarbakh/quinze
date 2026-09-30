@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>QUINZE Health Clinic</title></head>
+<body>
+<div class="qz">
+<style>
+.qz { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:#2c3e50; max-width:1000px; margin:0 auto; line-height:1.65; }
+.qz * { box-sizing:border-box; }
+.qz-hero { background:linear-gradient(135deg, #00897B 0%, #004D40 100%); color:#fff; padding:56px 44px; border-radius:10px; margin-bottom:36px; }
+.qz-hero .glyph { font-size:60px; line-height:1; opacity:.92; margin-bottom:14px; }
+.qz-hero h1 { font-size:38px; margin:0 0 10px; color:#fff; font-weight:700; letter-spacing:-.5px; }
+.qz-hero p { font-size:18px; margin:0; opacity:.94; max-width:640px; }
+.qz-badges { margin-top:26px; }
+.qz-badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+            padding:6px 15px; border-radius:20px; font-size:13px; margin:0 8px 8px 0; }
+.qz h2 { font-size:25px; color:#00897B; margin:44px 0 18px; padding-bottom:9px; border-bottom:2px solid #eef1f4; }
+.qz h3 { font-size:17px; margin:0 0 8px; color:#2c3e50; }
+.qz-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+.qz-card { background:#fafbfc; border:1px solid #e6eaee; border-left:3px solid #00897B; border-radius:6px; padding:20px 22px; }
+.qz-card p { margin:0; font-size:14.5px; color:#54636f; }
+.qz-shot { margin:26px 0 34px; }
+.qz-shot img { width:100%; border:1px solid #dde3e8; border-radius:6px; display:block; }
+.qz-cap { font-size:13.5px; color:#7b8794; margin-top:9px; padding-left:2px; }
+.qz-cap strong { color:#00897B; }
+.qz-flow { background:#fafbfc; border:1px solid #e6eaee; border-radius:6px; padding:20px 24px; margin:16px 0; }
+.qz-step { display:inline-block; background:#00897B; color:#fff; padding:5px 14px; border-radius:4px; font-size:13.5px; font-weight:600; margin:4px 0; }
+.qz-arrow { color:#aab4bd; margin:0 8px; font-weight:700; }
+.qz table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14.5px; }
+.qz th { background:#00897B; color:#fff; padding:11px 15px; text-align:left; font-weight:600; }
+.qz td { border-bottom:1px solid #e6eaee; padding:11px 15px; }
+.qz tr:nth-child(even) td { background:#fafbfc; }
+.qz-ar { direction:rtl; text-align:right; background:#fafbfc; border:1px solid #e6eaee;
+         border-right:3px solid #00897B; border-left:none; border-radius:6px; padding:24px 28px; margin:22px 0; }
+.qz-ar h2 { border:none; margin:0 0 12px; padding:0; font-size:22px; }
+.qz-ar p, .qz-ar li { font-size:15.5px; color:#54636f; }
+.qz-ar ul { padding-right:20px; padding-left:0; }
+.qz-note { background:#fff8e6; border:1px solid #f2dfab; border-radius:6px; padding:16px 20px; font-size:14.5px; margin:20px 0; }
+.qz-foot { margin-top:44px; padding-top:22px; border-top:1px solid #e6eaee; font-size:13.5px; color:#7b8794; }
+.qz ul.qz-list { padding-left:20px; }
+.qz ul.qz-list li { margin-bottom:7px; font-size:14.5px; color:#54636f; }
+</style>
+
+<div class="qz-hero">
+  <div class="glyph">⚕</div>
+  <h1>QUINZE Health Clinic</h1>
+  <p>Patients, appointments, encounters, prescriptions and automatic invoicing — the clinical core of the suite.</p>
+  <div class="qz-badges"><span class="qz-badge">Odoo 17</span><span class="qz-badge">Patient Portal</span><span class="qz-badge">Bilingual PDF</span><span class="qz-badge">Auto Invoicing</span><span class="qz-badge">Conflict Detection</span></div>
+</div>
+<h2>Overview</h2><p>The clinical workflow layer: register patients, schedule appointments without conflicts, record the visit with vitals and diagnoses, issue prescriptions, request lab work, and invoice &mdash; all inside Odoo.</p><div class="qz-note"><strong>Bilingual by design.</strong> Every field label, selection value and report renders in English and Arabic together, so a single database serves both an English-speaking administrator and an Arabic-speaking clinician without switching languages. The screenshots below are taken with the interface language set to English.</div><div class="qz-shot"><img src="shot_01_appointment_calendar.png" alt="Appointment Calendar"/><div class="qz-cap"><strong>Appointment Calendar</strong> &mdash; A week view of confirmed and in-progress appointments. Doctor and room double-booking is blocked at save time, so a conflicting slot can never be committed.</div></div><h2>Encounter Workflow</h2><div class="qz-flow"><span class="qz-step">Draft</span><span class="qz-arrow">&rarr;</span><span class="qz-step">In Progress</span><span class="qz-arrow">&rarr;</span><span class="qz-step">Done</span><span class="qz-arrow">&rarr;</span><span class="qz-step">Invoiced</span></div><div class="qz-shot"><img src="shot_02_encounter_form.png" alt="Clinical Encounter"/><div class="qz-cap"><strong>Clinical Encounter</strong> &mdash; The visit record carries patient, doctor, branch and chief complaint, with tabs for vital signs, ICD-10 diagnoses, prescriptions, lab requests and notes. Smart buttons count each in the header.</div></div><h2>Key Features</h2><div class="qz-grid"><div class="qz-card"><h3>Patient Records</h3><p>Full medical history, allergies, chronic conditions and computed age, linked one-to-one with res.partner.</p></div><div class="qz-card"><h3>Conflict-Free Scheduling</h3><p>Doctor and room double-booking is blocked at save time. Calendar and Kanban views included.</p></div><div class="qz-card"><h3>Clinical Encounters</h3><p>Capture vital signs, ICD-10 diagnoses and clinical notes in a single form.</p></div><div class="qz-card"><h3>Automatic Invoicing</h3><p>Completing an encounter posts an account.move using the specialty's consultation product and price.</p></div><div class="qz-card"><h3>Prescriptions</h3><p>Drug, dose, frequency, duration and route, with live dispensing status fed back from the Pharmacy module.</p></div><div class="qz-card"><h3>Patient Portal</h3><p>Patients sign in to the standard Odoo portal to view their own appointments and prescriptions.</p></div></div><div class="qz-shot"><img src="shot_03_prescription.png" alt="Prescription with Dispensing Status"/><div class="qz-cap"><strong>Prescription with Dispensing Status</strong> &mdash; Each medication line records dose, unit, frequency, duration, quantity and route. Dispensed and remaining quantities update automatically as the Pharmacy module fulfils the prescription.</div></div><div class="qz-shot"><img src="shot_04_patient_record.png" alt="Patient Record"/><div class="qz-cap"><strong>Patient Record</strong> &mdash; Demographics, blood type and medical history in one place, with smart buttons opening the patient's appointments, encounters and prescriptions.</div></div><h2>Bilingual Prescription PDF</h2><p>Prescriptions print with every label, dose unit, frequency and route shown in English and Arabic side by side, so the same document serves the pharmacist and the patient.</p><div class="qz-shot"><img src="shot_05_prescription_pdf.png" alt="Printed Prescription"/><div class="qz-cap"><strong>Printed Prescription</strong> &mdash; Validity is derived from the issue date, the prescribing doctor's licence number appears under the signature line, and per-line instructions print in the language they were entered in.</div></div><h2>REST API Available</h2><p>A companion module, <strong>QUINZE Health REST API</strong>, exposes authenticated JSON endpoints for patients, appointments and prescriptions &mdash; list and create appointments, read a prescription with its full line detail, and drive it all from a mobile app or booking site. Sold separately.</p><div class="qz-note"><strong>Requires:</strong> QUINZE Health Base (free). Optionally pairs with QUINZE Health Lab and QUINZE Health Pharmacy for end-to-end operations.</div>
+<div class="qz-ar">
+  <h2>عيادة نظام QUINZE الصحي</h2>
+  <p>طبقة سير العمل السريري داخل أودو:</p><ul><li>ملفات المرضى مع التاريخ المرضي والحساسيات والأمراض المزمنة</li><li>جدولة مواعيد تمنع تعارض الأطباء والغرف تلقائياً</li><li>تسجيل الزيارة: العلامات الحيوية، التشخيص، الملاحظات السريرية</li><li>إصدار فاتورة تلقائياً عند إنهاء الزيارة بسعر التخصص</li><li>وصفات طبية مع تتبع حالة الصرف والكمية المتبقية</li><li>بوابة المريض لعرض مواعيده ووصفاته</li></ul>
+</div>
+<h2>Technical Information</h2>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Odoo Version</td><td>17.0 Community &amp; Enterprise</td></tr>
+  <tr><td>Dependencies</td><td>quinze_health_base, account, calendar, portal</td></tr>
+  <tr><td>License</td><td>OPL-1</td></tr>
+  <tr><td>Price</td><td>&euro;149</td></tr>
+  <tr><td>Languages</td><td>English and Arabic (ar_001), bilingual labels and reports</td></tr>
+  <tr><td>Automated Tests</td><td>Included</td></tr>
+</table>
+<div class="qz-foot">
+  <strong>Bakhit Alamin</strong> &mdash; Independent Odoo Developer<br/>
+  Email: amarnew198611@gmail.com &nbsp;&middot;&nbsp; WhatsApp: +966 55 167 3871<br/>
+  Includes 12 months of bug-fix support and version updates within Odoo 17.0.
+</div>
+</div>
+</body>
+</html>

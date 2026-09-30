@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ══ Clinic top-level sub-menus under Health root ═════════════ -->
+        <menuitem id="menu_health_clinic"
+                  name="Clinic / العيادة"
+                  parent="quinze_health_base.menu_health_root"
+                  sequence="10"
+                  groups="quinze_health_base.group_health_user"/>
+
+        <!-- Appointments -->
+        <menuitem id="menu_health_appointments"
+                  name="Appointments / المواعيد"
+                  parent="menu_health_clinic"
+                  action="action_health_appointment_calendar"
+                  sequence="10"/>
+
+        <!-- Encounters -->
+        <menuitem id="menu_health_encounters"
+                  name="Encounters / الزيارات"
+                  parent="menu_health_clinic"
+                  action="action_health_encounter"
+                  sequence="20"/>
+
+        <!-- Patients -->
+        <menuitem id="menu_health_patients"
+                  name="Patients / المرضى"
+                  parent="menu_health_clinic"
+                  action="action_health_patient"
+                  sequence="30"/>
+
+        <!-- Prescriptions -->
+        <menuitem id="menu_health_prescriptions"
+                  name="Prescriptions / الوصفات"
+                  parent="menu_health_clinic"
+                  action="action_health_prescription"
+                  sequence="40"/>
+
+        <!-- Lab Requests -->
+        <menuitem id="menu_health_lab_requests"
+                  name="Lab Requests / طلبات المختبر"
+                  parent="menu_health_clinic"
+                  action="action_health_lab_request"
+                  sequence="50"/>
+
+        <!-- ══ Configuration sub-items (injected into base config menu) ═ -->
+        <menuitem id="menu_health_rooms"
+                  name="Rooms / الغرف"
+                  parent="quinze_health_base.menu_health_configuration"
+                  action="action_health_room"
+                  groups="quinze_health_base.group_health_manager"
+                  sequence="60"/>
+
+    </data>
+</odoo>

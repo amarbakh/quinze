@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="view_lab_sample_form" model="ir.ui.view">
+        <field name="name">lab.sample.form</field>
+        <field name="model">lab.sample</field>
+        <field name="arch" type="xml">
+            <form string="Lab Sample / عينة مخبرية">
+                <header>
+                    <button name="action_collect" type="object"
+                            string="Mark Collected / تسجيل الجمع"
+                            invisible="state != 'pending'" class="oe_highlight"
+                            groups="quinze_health_base.group_health_lab_tech"/>
+                    <button name="action_receive" type="object"
+                            string="Mark Received / تسجيل الاستلام"
+                            invisible="state != 'collected'" class="oe_highlight"
+                            groups="quinze_health_base.group_health_lab_tech"/>
+                    <button name="action_reject" type="object"
+                            string="Reject / رفض"
+                            invisible="state not in ['pending', 'collected']"
+                            groups="quinze_health_base.group_health_lab_tech"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,collected,received"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Sample Info / بيانات العينة">
+                            <field name="lab_order_id"/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="sample_type"/>
+                            <field name="volume_ml"/>
+                            <field name="container"/>
+                            <field name="barcode"/>
+                        </group>
+                        <group string="Collection / الجمع">
+                            <field name="collection_datetime"/>
+                            <field name="collector_id"/>
+                            <field name="received_datetime"
+                                   invisible="state != 'received'"/>
+                            <field name="received_by_id"
+                                   invisible="state != 'received'"/>
+                        </group>
+                    </group>
+                    <separator string="Rejection Reason / سبب الرفض"/>
+                    <field colspan="2" name="rejection_reason" nolabel="1"/>
+                    <separator string="Notes / ملاحظات"/>
+                    <field colspan="2" name="note" nolabel="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lab_sample_list" model="ir.ui.view">
+        <field name="name">lab.sample.list</field>
+        <field name="model">lab.sample</field>
+        <field name="arch" type="xml">
+            <tree string="Samples / العينات"
+                  decoration-danger="state == 'rejected'"
+                  decoration-success="state == 'received'"
+                  decoration-warning="state == 'collected'">
+                <field name="name"/>
+                <field name="lab_order_id"/>
+                <field name="patient_id"/>
+                <field name="sample_type"/>
+                <field name="collection_datetime"/>
+                <field name="collector_id"/>
+                <field name="barcode" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'received'"
+                       decoration-warning="state == 'collected'"
+                       decoration-danger="state == 'rejected'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lab_sample_search" model="ir.ui.view">
+        <field name="name">lab.sample.search</field>
+        <field name="model">lab.sample</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="barcode"/>
+                <separator/>
+                <filter string="Pending / معلق" name="pending"
+                        domain="[('state','=','pending')]"/>
+                <filter string="Collected / تم الجمع" name="collected"
+                        domain="[('state','=','collected')]"/>
+                <filter string="Received / تم الاستلام" name="received"
+                        domain="[('state','=','received')]"/>
+                <filter string="Rejected / مرفوض" name="rejected"
+                        domain="[('state','=','rejected')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Sample Type / نوع العينة" name="group_type"
+                            context="{'group_by': 'sample_type'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lab_sample" model="ir.actions.act_window">
+        <field name="name">Samples / العينات</field>
+        <field name="res_model">lab.sample</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_pending': 1, 'search_default_collected': 1}</field>
+    </record>
+
+</data></odoo>

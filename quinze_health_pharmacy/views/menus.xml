@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Pharmacy top-level sub-menu under QUINZE Health root
+         (sequence=30 puts it between Clinic=10 and Lab=20)
+    ══════════════════════════════════════════════════════════════════════ -->
+    <menuitem id="menu_health_pharmacy"
+              name="Pharmacy / الصيدلية"
+              parent="quinze_health_base.menu_health_root"
+              sequence="30"
+              groups="quinze_health_base.group_health_user"/>
+
+    <!-- ── Dispensing ──────────────────────────────────────────────── -->
+    <menuitem id="menu_pharmacy_dispensing"
+              name="Dispensing / الصرف"
+              parent="menu_health_pharmacy"
+              action="action_pharmacy_dispensing"
+              sequence="10"
+              groups="quinze_health_base.group_health_pharmacist"/>
+
+    <!-- ── Insurance Claims ───────────────────────────────────────── -->
+    <menuitem id="menu_pharmacy_insurance_claims"
+              name="Insurance Claims / مطالبات التأمين"
+              parent="menu_health_pharmacy"
+              action="action_pharmacy_insurance_claim"
+              sequence="20"
+              groups="quinze_health_base.group_health_pharmacist"/>
+
+    <!-- ── Medications (product list) ─────────────────────────────── -->
+    <menuitem id="menu_pharmacy_medications"
+              name="Medications / الأدوية"
+              parent="menu_health_pharmacy"
+              action="action_pharmacy_medications"
+              sequence="30"
+              groups="quinze_health_base.group_health_pharmacist"/>
+
+    <!-- ── Configuration: Drug Categories ────────────────────────── -->
+    <menuitem id="menu_pharmacy_drug_categories"
+              name="Drug Categories / تصنيفات الأدوية"
+              parent="quinze_health_base.menu_health_configuration"
+              action="action_pharmacy_drug_category"
+              sequence="70"
+              groups="quinze_health_base.group_health_manager"/>
+
+</data>
+</odoo>

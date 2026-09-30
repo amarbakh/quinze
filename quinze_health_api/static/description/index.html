@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>QUINZE Health REST API</title></head>
+<body>
+<div class="qz">
+<style>
+.qz { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:#2c3e50; max-width:1000px; margin:0 auto; line-height:1.65; }
+.qz * { box-sizing:border-box; }
+.qz-hero { background:linear-gradient(135deg, #37474F 0%, #161D21 100%); color:#fff; padding:56px 44px; border-radius:10px; margin-bottom:36px; }
+.qz-hero .glyph { font-size:60px; line-height:1; opacity:.92; margin-bottom:14px; }
+.qz-hero h1 { font-size:38px; margin:0 0 10px; color:#fff; font-weight:700; letter-spacing:-.5px; }
+.qz-hero p { font-size:18px; margin:0; opacity:.94; max-width:640px; }
+.qz-badges { margin-top:26px; }
+.qz-badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+            padding:6px 15px; border-radius:20px; font-size:13px; margin:0 8px 8px 0; }
+.qz h2 { font-size:25px; color:#37474F; margin:44px 0 18px; padding-bottom:9px; border-bottom:2px solid #eef1f4; }
+.qz h3 { font-size:17px; margin:0 0 8px; color:#2c3e50; }
+.qz-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+.qz-card { background:#fafbfc; border:1px solid #e6eaee; border-left:3px solid #37474F; border-radius:6px; padding:20px 22px; }
+.qz-card p { margin:0; font-size:14.5px; color:#54636f; }
+.qz-shot { margin:26px 0 34px; }
+.qz-shot img { width:100%; border:1px solid #dde3e8; border-radius:6px; display:block; }
+.qz-cap { font-size:13.5px; color:#7b8794; margin-top:9px; padding-left:2px; }
+.qz-cap strong { color:#37474F; }
+.qz-flow { background:#fafbfc; border:1px solid #e6eaee; border-radius:6px; padding:20px 24px; margin:16px 0; }
+.qz-step { display:inline-block; background:#37474F; color:#fff; padding:5px 14px; border-radius:4px; font-size:13.5px; font-weight:600; margin:4px 0; }
+.qz-arrow { color:#aab4bd; margin:0 8px; font-weight:700; }
+.qz table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14.5px; }
+.qz th { background:#37474F; color:#fff; padding:11px 15px; text-align:left; font-weight:600; }
+.qz td { border-bottom:1px solid #e6eaee; padding:11px 15px; }
+.qz tr:nth-child(even) td { background:#fafbfc; }
+.qz-ar { direction:rtl; text-align:right; background:#fafbfc; border:1px solid #e6eaee;
+         border-right:3px solid #37474F; border-left:none; border-radius:6px; padding:24px 28px; margin:22px 0; }
+.qz-ar h2 { border:none; margin:0 0 12px; padding:0; font-size:22px; }
+.qz-ar p, .qz-ar li { font-size:15.5px; color:#54636f; }
+.qz-ar ul { padding-right:20px; padding-left:0; }
+.qz-note { background:#fff8e6; border:1px solid #f2dfab; border-radius:6px; padding:16px 20px; font-size:14.5px; margin:20px 0; }
+.qz-foot { margin-top:44px; padding-top:22px; border-top:1px solid #e6eaee; font-size:13.5px; color:#7b8794; }
+.qz ul.qz-list { padding-left:20px; }
+.qz ul.qz-list li { margin-bottom:7px; font-size:14.5px; color:#54636f; }
+
+.qz-code { background:#1e272e; color:#dfe6e9; border-radius:6px; padding:18px 22px; font-family:"SF Mono",Consolas,Monaco,monospace;
+           font-size:13px; line-height:1.7; overflow-x:auto; margin:16px 0; white-space:pre; }
+.qz-code .k { color:#74b9ff; } .qz-code .s { color:#a3e635; } .qz-code .c { color:#8395a7; }
+</style>
+
+<div class="qz-hero">
+  <div class="glyph">{ }</div>
+  <h1>QUINZE Health REST API</h1>
+  <p>Authenticated JSON endpoints across Clinic, Laboratory and Pharmacy — connect mobile apps, portals and devices.</p>
+  <div class="qz-badges"><span class="qz-badge">Odoo 17</span><span class="qz-badge">JSON REST</span><span class="qz-badge">API Key Auth</span><span class="qz-badge">Paginated</span><span class="qz-badge">Unified Envelope</span></div>
+</div>
+<h2>Overview</h2><p>Authenticated JSON REST endpoints covering the whole suite &mdash; connect a mobile app, a patient booking site, a laboratory analyser, or an external insurance system to your Odoo backend.</p><h2>Authentication</h2><p>Requests carry an <code>X-API-Key</code> header. Keys are created and revoked from Settings &rarr; Technical &rarr; API Keys, and each key is bound to a user so all standard Odoo access rules and record rules still apply.</p><h2>Endpoints</h2><table><tr><th>Area</th><th>Capabilities</th></tr><tr><td>Patients</td><td>List with pagination, retrieve full detail</td></tr><tr><td>Appointments</td><td>List, create, retrieve with encounter summary</td></tr><tr><td>Prescriptions</td><td>List, retrieve with full line detail</td></tr><tr><td>Lab Orders</td><td>List, retrieve with results, submit an individual result</td></tr><tr><td>Dispensings</td><td>List, create external dispensing, retrieve, confirm</td></tr><tr><td>Insurance Claims</td><td>List claims with status</td></tr></table><h2>Example Request</h2>
+<div class="qz-code"><span class="c"># List appointments for a given date</span>
+<span class="k">GET</span> /api/quinze/v1/appointments?date=2026-07-18&amp;page=1
+<span class="k">X-API-Key</span>: <span class="s">your-key-here</span>
+</div>
+<div class="qz-code"><span class="c">// Response</span>
+{
+  <span class="k">"status"</span>: <span class="s">"ok"</span>,
+  <span class="k">"data"</span>: [
+    {
+      <span class="k">"id"</span>: 4,
+      <span class="k">"name"</span>: <span class="s">"APT/2026/00004"</span>,
+      <span class="k">"patient"</span>: { <span class="k">"id"</span>: 2, <span class="k">"name"</span>: <span class="s">"PAT/2026/00002"</span> },
+      <span class="k">"doctor"</span>: <span class="s">"Dr. Alaa"</span>,
+      <span class="k">"start"</span>: <span class="s">"2026-07-18 08:15:00"</span>,
+      <span class="k">"state"</span>: <span class="s">"confirmed"</span>
+    }
+  ],
+  <span class="k">"meta"</span>: { <span class="k">"total"</span>: 5, <span class="k">"page"</span>: 1 }
+}
+</div>
+<p>Errors use the same envelope with a status of <code>error</code>, an HTTP-aligned code and a message, so a
+client can branch on one shape across every endpoint.</p>
+<h2>Consistent Response Envelope</h2><p>Every endpoint answers with the same structure &mdash; a status field, a data payload, and pagination metadata on list endpoints. Errors return the same envelope with an error code and message, so client-side handling stays simple across the entire API.</p><div class="qz-note"><strong>Requires:</strong> QUINZE Health Base (free), Clinic, Lab and Pharmacy modules.</div>
+<div class="qz-ar">
+  <h2>واجهة برمجة التطبيقات</h2>
+  <p>واجهة برمجية REST بصيغة JSON لكل وحدات النظام:</p><ul><li>مصادقة عبر ترويسة X-API-Key مربوطة بمستخدم فعلي</li><li>نقاط نهاية للمرضى والمواعيد والوصفات</li><li>نقاط نهاية للمختبر مع إمكانية إرسال النتائج</li><li>نقاط نهاية للصيدلية والصرف ومطالبات التأمين</li><li>مغلف استجابة موحد لكل النقاط</li></ul><p>مناسبة لربط تطبيق جوال، أو موقع حجز، أو جهاز تحليل مخبري.</p>
+</div>
+<h2>Technical Information</h2>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Odoo Version</td><td>17.0 Community &amp; Enterprise</td></tr>
+  <tr><td>Dependencies</td><td>quinze_health_clinic, quinze_health_lab, quinze_health_pharmacy</td></tr>
+  <tr><td>License</td><td>OPL-1</td></tr>
+  <tr><td>Price</td><td>&euro;99</td></tr>
+  <tr><td>Languages</td><td>English and Arabic (ar_001), bilingual labels and reports</td></tr>
+  <tr><td>Automated Tests</td><td>Included</td></tr>
+</table>
+<div class="qz-foot">
+  <strong>Bakhit Alamin</strong> &mdash; Independent Odoo Developer<br/>
+  Email: amarnew198611@gmail.com &nbsp;&middot;&nbsp; WhatsApp: +966 55 167 3871<br/>
+  Includes 12 months of bug-fix support and version updates within Odoo 17.0.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+# Arabic translation for QUINZE Health API
+# ترجمة عربية لوحدة QUINZE Health API
+# Copyright (C) 2026 QUINZE Solutions
+# License LGPL-3.0 or later
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QUINZE Health API 17.0.1.0.0\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+# ─── quinze.api.key ───────────────────────────────────────────────
+msgid "QUINZE API Key / مفتاح API"
+msgstr "مفتاح واجهة برمجة التطبيقات"
+
+msgid "Key Name / اسم المفتاح"
+msgstr "اسم المفتاح"
+
+msgid "Token / الرمز"
+msgstr "الرمز السري"
+
+msgid "Token Preview / معاينة الرمز"
+msgstr "معاينة الرمز"
+
+msgid "User / المستخدم"
+msgstr "المستخدم المرتبط"
+
+msgid "Scope / النطاق"
+msgstr "نطاق الصلاحية"
+
+msgid "Read Only / قراءة فقط"
+msgstr "قراءة فقط"
+
+msgid "Read & Write / قراءة وكتابة"
+msgstr "قراءة وكتابة"
+
+msgid "IP Whitelist / قائمة IP المسموح بها"
+msgstr "قائمة IP المسموح بها"
+
+msgid "Expiry Date / تاريخ الانتهاء"
+msgstr "تاريخ انتهاء المفتاح"
+
+msgid "Last Used / آخر استخدام"
+msgstr "آخر استخدام"
+
+msgid "# Requests / عدد الطلبات"
+msgstr "عدد الطلبات"
+
+# ─── Buttons ──────────────────────────────────────────────────────
+msgid "Rotate Token / تجديد الرمز"
+msgstr "تجديد الرمز السري"
+
+msgid "Revoke / إلغاء"
+msgstr "إلغاء المفتاح"
+
+msgid "API Keys / مفاتيح API"
+msgstr "مفاتيح واجهة برمجة التطبيقات"
+
+# ─── Error messages ───────────────────────────────────────────────
+msgid "Unauthorized. Provide a valid X-API-Key header."
+msgstr "غير مصرح. يُرجى تقديم مفتاح X-API-Key صالح."
+
+msgid "This API key is read-only."
+msgstr "هذا المفتاح للقراءة فقط ولا يُسمح بالكتابة."
+
+msgid "API token must be unique"
+msgstr "يجب أن يكون رمز API فريداً"
+
+msgid "Internal server error."
+msgstr "خطأ داخلي في الخادم."
+
+# ─── Response messages ────────────────────────────────────────────
+msgid "Patient not found."
+msgstr "المريض غير موجود."
+
+msgid "Appointment not found."
+msgstr "الموعد غير موجود."
+
+msgid "Prescription not found."
+msgstr "الوصفة الطبية غير موجودة."
+
+msgid "Lab order not found."
+msgstr "طلب المختبر غير موجود."
+
+msgid "Dispensing not found."
+msgstr "سجل الصرف غير موجود."
+
+msgid "Claim not found."
+msgstr "مطالبة التأمين غير موجودة."
+
+msgid "At least one medication line is required."
+msgstr "يُرجى إضافة دواء واحد على الأقل."
+
+msgid "'partner_id' or 'patient_id' is required."
+msgstr "يُرجى تحديد عميل أو مريض."
+
+msgid "'reason' is required for rejection."
+msgstr "سبب الرفض مطلوب."

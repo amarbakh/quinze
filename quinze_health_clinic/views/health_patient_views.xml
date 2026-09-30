@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="view_health_patient_form" model="ir.ui.view">
+        <field name="name">health.patient.form</field>
+        <field name="model">health.patient</field>
+        <field name="arch" type="xml">
+            <form string="Patient / مريض">
+                <sheet>
+                    <!-- Smart buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_appointments"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-calendar">
+                            <field name="appointment_count"
+                                   string="Appointments / المواعيد"
+                                   widget="statinfo"/>
+                        </button>
+                        <button name="action_view_encounters"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-stethoscope">
+                            <field name="encounter_count"
+                                   string="Encounters / الزيارات"
+                                   widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="prescription_count"
+                                   string="Prescriptions / الوصفات"
+                                   widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="partner_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="partner_id"
+                                   placeholder="Select Contact / اختر جهة الاتصال"
+                                   domain="[('is_patient','=',True)]"
+                                   options="{'no_create': False}"/>
+                        </h1>
+                        <h4 class="text-muted">
+                            <field name="patient_number" readonly="1"/>
+                        </h4>
+                    </div>
+
+                    <!-- Demographics bar -->
+                    <group>
+                        <group string="Demographics / البيانات الديموغرافية">
+                            <field name="national_id" readonly="1"/>
+                            <field name="dob" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="blood_type" readonly="1"/>
+                        </group>
+                        <group string="Company / الشركة">
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                            <field name="branch_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+
+                    <!-- Known allergies (hidden when empty) -->
+                    <group string="Known Allergies / الحساسيات المعروفة"
+                           invisible="not allergies_ids">
+                        <field name="allergies_ids"
+                               nolabel="1"
+                               widget="many2many_tags"
+                               readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Medical History / التاريخ الطبي"
+                              name="medical_history">
+                            <separator string="Chronic Conditions / الأمراض المزمنة"/>
+                            <field name="chronic_conditions" nolabel="1"
+                                   placeholder="Diabetes, Hypertension, CKD..."/>
+                            <separator string="Medical History / التاريخ الطبي"/>
+                            <field name="medical_history" nolabel="1"
+                                   placeholder="Past illnesses, surgeries..."/>
+                            <separator string="Family History / التاريخ العائلي"/>
+                            <field name="family_history" nolabel="1"
+                                   placeholder="Hereditary conditions... / أمراض وراثية..."/>
+                            <separator string="Surgical History / التاريخ الجراحي"/>
+                            <field name="surgical_history" nolabel="1"
+                                   placeholder="Previous operations... / عمليات سابقة..."/>
+                        </page>
+                        <page string="Notes / ملاحظات" name="notes">
+                            <field name="note" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_health_patient_list" model="ir.ui.view">
+        <field name="name">health.patient.list</field>
+        <field name="model">health.patient</field>
+        <field name="arch" type="xml">
+            <tree string="Patients / المرضى">
+                <field name="patient_number"/>
+                <field name="name"/>
+                <field name="national_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="blood_type" optional="show"/>
+                <field name="phone" optional="show"/>
+                <field name="branch_id" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_health_patient_search" model="ir.ui.view">
+        <field name="name">health.patient.search</field>
+        <field name="model">health.patient</field>
+        <field name="arch" type="xml">
+            <search string="Search Patients / بحث في المرضى">
+                <field name="name" string="Name / الاسم"/>
+                <field name="patient_number" string="Patient No."/>
+                <field name="national_id" string="National ID / الهوية"/>
+                <separator/>
+                <filter string="Male / ذكر" name="male"
+                        domain="[('gender','=','male')]"/>
+                <filter string="Female / أنثى" name="female"
+                        domain="[('gender','=','female')]"/>
+                <separator/>
+                <filter string="Active / نشط" name="active"
+                        domain="[('active','=',True)]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Branch / الفرع" name="group_branch"
+                            context="{'group_by': 'branch_id'}"/>
+                    <filter string="Gender / الجنس" name="group_gender"
+                            context="{'group_by': 'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_health_patient" model="ir.actions.act_window">
+        <field name="name">Patients / المرضى</field>
+        <field name="res_model">health.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+    </record>
+
+</data></odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quinze_api_key_user,quinze.api.key user,model_quinze_api_key,quinze_health_base.group_health_user,1,0,0,0
+access_quinze_api_key_manager,quinze.api.key manager,model_quinze_api_key,quinze_health_base.group_health_manager,1,1,1,1

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.prescription — Pharmacy extension
+         Inherits the clinic form to inject:
+           • Dispensing smart button (count badge)
+           • "dispensed_qty" and "remaining_qty" columns in the
+             prescription_line_ids list
+           • "Partially Dispensed" visible in the statusbar
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_health_prescription_form_pharmacy" model="ir.ui.view">
+        <field name="name">health.prescription.form.pharmacy</field>
+        <field name="model">health.prescription</field>
+        <field name="inherit_id" ref="quinze_health_clinic.view_health_prescription_form"/>
+        <field name="arch" type="xml">
+
+            <!-- 1. Add dispensing count smart button -->
+            <xpath expr="//sheet" position="before">
+                <!-- button_box is not defined in base form, so we add one -->
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <!-- Dispensings smart button -->
+                    <button name="action_view_dispensings" type="object"
+                            class="oe_stat_button" icon="fa-flask"
+                            invisible="dispensing_count == 0">
+                        <field name="dispensing_count" widget="statinfo"
+                               string="Dispensings / الصرف"/>
+                    </button>
+                    <!-- Create dispensing button when confirmed/partially_dispensed -->
+                    <button name="action_create_dispensing" type="object"
+                            class="oe_stat_button" icon="fa-plus-circle"
+                            invisible="state not in ['confirmed', 'partially_dispensed']"
+                            groups="quinze_health_base.group_health_pharmacist"
+                            string="New Dispensing / صرف جديد"/>
+                </div>
+            </xpath>
+
+            <!-- 2. Show "Partially Dispensed" in statusbar -->
+            <xpath expr="//field[@name='state'][@widget='statusbar']" position="attributes">
+                <attribute name="statusbar_visible">draft,confirmed,partially_dispensed,dispensed</attribute>
+            </xpath>
+
+            <!-- 3. Add dispensed_qty / remaining_qty / line_dispensing_state columns -->
+            <xpath expr="//field[@name='prescription_line_ids']//tree" position="inside">
+                <field name="dispensed_qty" readonly="1" optional="show"
+                       string="Dispensed / المصروف"/>
+                <field name="remaining_qty" readonly="1" optional="show"
+                       string="Remaining / المتبقي"/>
+                <field name="line_dispensing_state" optional="show"
+                       widget="badge"
+                       decoration-success="line_dispensing_state == 'dispensed'"
+                       decoration-warning="line_dispensing_state == 'partial'"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.prescription — List view extension
+         Add dispensing_count column and partially_dispensed decoration
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_health_prescription_list_pharmacy" model="ir.ui.view">
+        <field name="name">health.prescription.list.pharmacy</field>
+        <field name="model">health.prescription</field>
+        <field name="inherit_id" ref="quinze_health_clinic.view_health_prescription_list"/>
+        <field name="arch" type="xml">
+            <!-- Add dispensing count column before state -->
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="dispensing_count" string="# Disp." optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</odoo>

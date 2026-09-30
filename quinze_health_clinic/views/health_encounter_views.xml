@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="view_health_encounter_form" model="ir.ui.view">
+        <field name="name">health.encounter.form</field>
+        <field name="model">health.encounter</field>
+        <field name="arch" type="xml">
+            <form string="Encounter / زيارة">
+                <header>
+                    <button name="action_start" type="object"
+                            string="Start Visit / بدء الزيارة"
+                            invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_done" type="object"
+                            string="Complete / إتمام"
+                            invisible="state != 'in_progress'" class="oe_highlight"/>
+                    <button name="action_invoice" type="object"
+                            string="Post Invoice / ترحيل الفاتورة"
+                            invisible="state != 'done'" class="oe_highlight"
+                            groups="quinze_health_base.group_health_manager"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel / إلغاء"
+                            invisible="state not in ['draft', 'in_progress']"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,in_progress,done,invoiced"/>
+                    <!-- invisible fields required by Odoo 17 modifier validation -->
+                    <field name="invoice_id" invisible="1"/>
+                </header>
+                <sheet>
+                    <!-- Smart buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-heartbeat">
+                            <field name="vital_count" string="Vitals"
+                                   widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-file-text">
+                            <field name="prescription_count"
+                                   string="Prescriptions" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-flask">
+                            <field name="lab_request_count"
+                                   string="Lab Requests" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_invoice" type="object"
+                                class="oe_stat_button" icon="fa-pencil-square-o"
+                                invisible="not invoice_id">
+                            <span class="o_stat_text">Invoice / فاتورة</span>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="encounter_number" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Patient / المريض">
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="appointment_id"/>
+                        </group>
+                        <group string="Details / التفاصيل">
+                            <field name="encounter_date"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                            <field name="branch_id"/>
+                        </group>
+                    </group>
+
+                    <separator string="Chief Complaint / الشكوى الرئيسية"/>
+                    <field colspan="2" name="chief_complaint" nolabel="1" placeholder="Describe the patient's main complaint... / الشكوى الرئيسية للمريض..."/>
+
+                    <notebook>
+
+                        <!-- ── Vitals tab ─────────────────────────────── -->
+                        <page string="Vital Signs / العلامات الحيوية"
+                              name="vitals">
+                            <field name="vital_sign_ids">
+                                <tree editable="bottom">
+                                    <field name="measured_at"/>
+                                    <field name="systolic_bp"
+                                           string="SBP (mmHg)"/>
+                                    <field name="diastolic_bp"
+                                           string="DBP (mmHg)"/>
+                                    <field name="heart_rate" string="HR"/>
+                                    <field name="temperature" string="Temp(°C)"/>
+                                    <field name="spo2" string="SpO₂(%)"/>
+                                    <field name="weight_kg" string="Wt(kg)"/>
+                                    <field name="height_cm" string="Ht(cm)"/>
+                                    <field name="bmi" string="BMI"
+                                           readonly="1"/>
+                                    <field name="blood_glucose" string="Gluc"
+                                           optional="show"/>
+                                    <field name="note" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- ── Diagnosis tab ──────────────────────────── -->
+                        <page string="Diagnoses / التشخيصات" name="diagnoses">
+                            <field name="diagnosis_ids"
+                                   widget="many2many_tags"
+                                   options="{'no_create_edit': True}"
+                                   domain="[('active','=',True)]"/>
+                            <separator string="Clinical Notes / الملاحظات السريرية"/>
+                            <field name="clinical_notes" nolabel="1"/>
+                        </page>
+
+                        <!-- ── Prescriptions tab ──────────────────────── -->
+                        <page string="Prescriptions / الوصفات" name="prescriptions">
+                            <field name="prescription_ids">
+                                <tree>
+                                    <field name="prescription_number"/>
+                                    <field name="prescription_date"/>
+                                    <field name="line_count"
+                                           string="# Drugs"/>
+                                    <field name="valid_until"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <button name="action_new_prescription"
+                                        type="object"
+                                        string="&#x2795; New Prescription / وصفة جديدة"
+                                        class="btn btn-primary"/>
+                            </group>
+                        </page>
+
+                        <!-- ── Lab Requests tab ───────────────────────── -->
+                        <page string="Lab Requests / طلبات المختبر"
+                              name="lab_requests">
+                            <field name="lab_request_ids">
+                                <tree>
+                                    <field name="request_number"/>
+                                    <field name="request_date"/>
+                                    <field name="priority" widget="badge"/>
+                                    <field name="tests_description"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- ── Notes tab ─────────────────────────────── -->
+                        <page string="Notes / ملاحظات" name="notes">
+                            <field name="note" nolabel="1"/>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_health_encounter_list" model="ir.ui.view">
+        <field name="name">health.encounter.list</field>
+        <field name="model">health.encounter</field>
+        <field name="arch" type="xml">
+            <tree string="Encounters / الزيارات"
+                  decoration-success="state == 'invoiced'"
+                  decoration-warning="state == 'done'"
+                  decoration-info="state == 'in_progress'">
+                <field name="encounter_number"/>
+                <field name="encounter_date"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="chief_complaint"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'invoiced'"
+                       decoration-warning="state == 'done'"
+                       decoration-info="state == 'in_progress'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_health_encounter_search" model="ir.ui.view">
+        <field name="name">health.encounter.search</field>
+        <field name="model">health.encounter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="encounter_number"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <separator/>
+                <filter string="In Progress / جارٍ" name="in_progress"
+                        domain="[('state','=','in_progress')]"/>
+                <filter string="Done / منتهٍ" name="done"
+                        domain="[('state','=','done')]"/>
+                <filter string="Invoiced / مفوتر" name="invoiced"
+                        domain="[('state','=','invoiced')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Doctor / الطبيب" name="group_doctor"
+                            context="{'group_by': 'doctor_id'}"/>
+                    <filter string="Date / التاريخ" name="group_date"
+                            context="{'group_by': 'encounter_date'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_health_encounter" model="ir.actions.act_window">
+        <field name="name">Encounters / الزيارات</field>
+        <field name="res_model">health.encounter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_in_progress': 1}</field>
+    </record>
+
+</data></odoo>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Report action — bound to pharmacy.dispensing
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="action_report_dispensing_receipt" model="ir.actions.report">
+        <field name="name">Dispensing Receipt / إيصال الصرف</field>
+        <field name="model">pharmacy.dispensing</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quinze_health_pharmacy.report_dispensing_receipt_document</field>
+        <field name="report_file">quinze_health_pharmacy.report_dispensing_receipt_document</field>
+        <field name="binding_model_id" ref="model_pharmacy_dispensing"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         QWeb template
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="report_dispensing_receipt_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="direction: auto;">
+
+                        <!-- ── Header ────────────────────────────────────── -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2 style="color:#2c7be5;">
+                                    Dispensing Receipt
+                                </h2>
+                                <h3 class="text-muted">إيصال صرف الأدوية</h3>
+                            </div>
+                            <div class="col-6 text-end">
+                                <h3>
+                                    <span class="badge"
+                                          t-attf-style="background-color: #{
+                                              'internal' == o.dispensing_type and '#17a2b8' or '#fd7e14'
+                                          }; color: white; padding: 4px 10px;">
+                                        <t t-if="o.dispensing_type == 'internal'">
+                                            Internal / داخلي
+                                        </t>
+                                        <t t-else="">
+                                            External / خارجي
+                                        </t>
+                                    </span>
+                                </h3>
+                                <p class="mt-2">
+                                    <strong><t t-esc="o.dispensing_number"/></strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- ── Meta information ─────────────────────────── -->
+                        <div class="row mb-3"
+                             style="border: 1px solid #dee2e6; border-radius: 6px; padding: 12px; background: #f8f9fa;">
+                            <div class="col-6">
+                                <table class="table table-borderless table-sm mb-0">
+                                    <tr>
+                                        <td><strong>Date / التاريخ:</strong></td>
+                                        <td>
+                                            <span t-field="o.dispensing_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.patient_id">
+                                        <td><strong>Patient / المريض:</strong></td>
+                                        <td>
+                                            <span t-field="o.patient_id.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.dispensing_type == 'external' and o.partner_id">
+                                        <td><strong>Customer / العميل:</strong></td>
+                                        <td>
+                                            <span t-field="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-borderless table-sm mb-0">
+                                    <tr>
+                                        <td><strong>Pharmacist / الصيدلاني:</strong></td>
+                                        <td>
+                                            <span t-field="o.pharmacist_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.prescription_id">
+                                        <td><strong>Prescription / الوصفة:</strong></td>
+                                        <td>
+                                            <span t-field="o.prescription_id.prescription_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.dispensed_at">
+                                        <td><strong>Dispensed At / وقت الصرف:</strong></td>
+                                        <td>
+                                            <span t-field="o.dispensed_at"
+                                                  t-options="{'widget': 'datetime'}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- ── Medications table ────────────────────────── -->
+                        <h4 class="mt-3">Medications / الأدوية</h4>
+                        <table class="table table-bordered table-sm" style="font-size:11px;">
+                            <thead style="background-color:#2c7be5; color:white;">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Medication / الدواء</th>
+                                    <th>Generic Name / الاسم العلمي</th>
+                                    <th>Qty / الكمية</th>
+                                    <th>Unit / الوحدة</th>
+                                    <th>Lot / الدفعة</th>
+                                    <th>Expiry / انتهاء الصلاحية</th>
+                                    <th t-if="o.dispensing_type == 'external'">Unit Price / السعر</th>
+                                    <th t-if="o.dispensing_type == 'external'">Subtotal / المجموع</th>
+                                    <th>Instructions / التعليمات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <tr t-attf-style="background-color: #{line_index % 2 == 0 and '#ffffff' or '#f8f9fa'};">
+                                        <td t-esc="line_index + 1"/>
+                                        <td>
+                                            <strong t-field="line.product_id.name"/>
+                                            <span t-if="line.is_substitution"
+                                                  style="color: #fd7e14; font-size:10px;">
+                                                (Generic Sub. / بديل)
+                                            </span>
+                                        </td>
+                                        <td><span t-field="line.drug_name_ar"/></td>
+                                        <td><span t-field="line.qty_dispensed"/></td>
+                                        <td><span t-field="line.uom_id.name"/></td>
+                                        <td>
+                                            <t t-if="line.lot_id">
+                                                <span t-field="line.lot_id.name"/>
+                                            </t>
+                                            <t t-else="">—</t>
+                                        </td>
+                                        <td>
+                                            <t t-if="line.expiry_date">
+                                                <span t-field="line.expiry_date"
+                                                      t-attf-style="color: #{line.expiry_date and line.expiry_date.strftime('%Y-%m-%d') &lt; o.dispensing_date.strftime('%Y-%m-%d') and 'red' or 'inherit'}"/>
+                                            </t>
+                                            <t t-else="">—</t>
+                                        </td>
+                                        <td t-if="o.dispensing_type == 'external'">
+                                            <span t-field="line.price_unit"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                        <td t-if="o.dispensing_type == 'external'">
+                                            <span t-field="line.subtotal"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                        <td style="font-size:10px;"><span t-field="line.instructions"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <!-- Total row (external dispensing only) -->
+                            <tfoot t-if="o.dispensing_type == 'external'">
+                                <tr style="font-weight:bold; background-color:#e9ecef;">
+                                    <td colspan="7" class="text-end">
+                                        Total / المجموع الكلي:
+                                    </td>
+                                    <td/>
+                                    <td>
+                                        <span t-field="o.amount_total"
+                                              t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                    </td>
+                                    <td/>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <!-- ── Insurance claim summary (if any) ────────── -->
+                        <t t-if="o.insurance_claim_ids">
+                            <h4 class="mt-3">Insurance Claims / مطالبات التأمين</h4>
+                            <table class="table table-bordered table-sm" style="font-size:11px;">
+                                <thead style="background-color:#28a745; color:white;">
+                                    <tr>
+                                        <th>Claim No. / رقم المطالبة</th>
+                                        <th>Insurer / شركة التأمين</th>
+                                        <th>Claimed / المطالب به</th>
+                                        <th>Coverage % / نسبة التغطية</th>
+                                        <th>Covered / المغطى</th>
+                                        <th>Patient Share / حصة المريض</th>
+                                        <th>State / الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.insurance_claim_ids" t-as="claim">
+                                        <tr>
+                                            <td><span t-field="claim.claim_number"/></td>
+                                            <td><span t-field="claim.insurer_name"/></td>
+                                            <td>
+                                                <span t-field="claim.amount_claimed"
+                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                            </td>
+                                            <td><t t-esc="'%.0f%%' % claim.coverage_pct"/></td>
+                                            <td>
+                                                <span t-field="claim.amount_covered"
+                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="claim.amount_patient"
+                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                            </td>
+                                            <td><span t-field="claim.state"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- ── Notes ────────────────────────────────────── -->
+                        <t t-if="o.note">
+                            <div class="mt-3"
+                                 style="border-left: 4px solid #2c7be5; padding-left: 8px;">
+                                <strong>Notes / ملاحظات:</strong>
+                                <p t-field="o.note" class="mb-0"/>
+                            </div>
+                        </t>
+
+                        <!-- ── Footer ────────────────────────────────────── -->
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <div style="border-top: 1px solid #333; padding-top:5px;">
+                                    Pharmacist Signature / توقيع الصيدلاني
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="border-top: 1px solid #333; padding-top:5px;">
+                                    Patient Signature / توقيع المريض / المستلم
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-3" style="font-size:9px; color:#6c757d;">
+                            <p>
+                                Please verify that the medications dispensed match your prescription. /
+                                يرجى التحقق من أن الأدوية المصروفة تطابق وصفتك الطبية.
+                            </p>
+                            <p>
+                                For queries, contact the pharmacy. /
+                                للاستفسارات، تواصل مع الصيدلية.
+                            </p>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

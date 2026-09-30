@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- pharmacy.dispensing — company isolation -->
+    <record id="rule_pharmacy_dispensing_company" model="ir.rule">
+        <field name="name">Pharmacy Dispensing: Company Isolation / عزل سجلات الصرف</field>
+        <field name="model_id" ref="model_pharmacy_dispensing"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[
+            (4, ref('quinze_health_base.group_health_user')),
+            (4, ref('quinze_health_base.group_health_pharmacist')),
+        ]"/>
+    </record>
+
+    <!-- pharmacy.dispensing.line — via parent dispensing company isolation -->
+    <record id="rule_pharmacy_dispensing_line_company" model="ir.rule">
+        <field name="name">Dispensing Line: Company Isolation / عزل أسطر الصرف</field>
+        <field name="model_id" ref="model_pharmacy_dispensing_line"/>
+        <field name="domain_force">
+            [('dispensing_id.company_id', 'in', company_ids)]
+        </field>
+        <field name="groups" eval="[
+            (4, ref('quinze_health_base.group_health_user')),
+            (4, ref('quinze_health_base.group_health_pharmacist')),
+        ]"/>
+    </record>
+
+    <!-- pharmacy.insurance.claim — via dispensing company isolation -->
+    <record id="rule_pharmacy_insurance_claim_company" model="ir.rule">
+        <field name="name">Insurance Claim: Company Isolation / عزل مطالبات التأمين</field>
+        <field name="model_id" ref="model_pharmacy_insurance_claim"/>
+        <field name="domain_force">
+            [('dispensing_id.company_id', 'in', company_ids)]
+        </field>
+        <field name="groups" eval="[
+            (4, ref('quinze_health_base.group_health_user')),
+            (4, ref('quinze_health_base.group_health_pharmacist')),
+        ]"/>
+    </record>
+
+</odoo>

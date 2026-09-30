@@ -3,8 +3,10 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html)
 {
     'name': 'QUINZE Health Base',
-    'summary': 'QUINZE Health foundation modules',
-
+    'summary': (
+        'Shared base layer for QUINZE Health Suite '
+        '(Clinic, Laboratory, Pharmacy)'
+    ),
     'description': """
 QUINZE Health Base / قاعدة نظام QUINZE الصحي
 =============================================

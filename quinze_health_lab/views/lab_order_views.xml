@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <!-- ═══════════════ FORM ════════════════════════════════════════════ -->
+    <record id="view_lab_order_form" model="ir.ui.view">
+        <field name="name">lab.order.form</field>
+        <field name="model">lab.order</field>
+        <field name="arch" type="xml">
+            <form string="Lab Order / أمر مختبر">
+                <header>
+                    <button name="action_collect_sample" type="object"
+                            string="Collect Sample / جمع العينة"
+                            invisible="state != 'draft'" class="oe_highlight"
+                            groups="quinze_health_base.group_health_lab_tech"/>
+                    <button name="action_receive_samples" type="object"
+                            string="Receive Samples / استلام العينات"
+                            invisible="state != 'sample_collected'" class="oe_highlight"
+                            groups="quinze_health_base.group_health_lab_tech"/>
+                    <button name="action_print_report" type="object"
+                            string="Print Report / طباعة التقرير"
+                            invisible="state != 'done'"
+                            class="btn btn-secondary"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel / إلغاء"
+                            invisible="state not in ['draft', 'sample_collected', 'in_progress']"/>
+                    <button name="action_reset_draft" type="object"
+                            string="Reset to Draft / إعادة للمسودة"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sample_collected,in_progress,done"/>
+                </header>
+                <sheet>
+                    <!-- Smart buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-flask">
+                            <field name="line_count" string="Tests" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-tint">
+                            <field name="sample_count" string="Samples" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-check-circle"
+                                invisible="result_count == 0">
+                            <field name="result_count" string="Results" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-exclamation-triangle"
+                                invisible="abnormal_count == 0"
+                                style="color: #e65100;">
+                            <field name="abnormal_count" string="Abnormal" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-exclamation-circle"
+                                invisible="critical_count == 0"
+                                style="color: #c62828;">
+                            <field name="critical_count" string="Critical" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="order_number" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Order Info / بيانات الأمر">
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="lab_request_id" readonly="1"/>
+                        </group>
+                        <group string="Details / التفاصيل">
+                            <field name="order_date"/>
+                            <field name="expected_date"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="branch_id"/>
+                        </group>
+                    </group>
+
+                    <separator string="Clinical Indication / المؤشر السريري"/>
+                    <field colspan="2" name="clinical_indication" nolabel="1" placeholder="Clinical reason for the order... / السبب السريري للأمر..."/>
+
+                    <notebook>
+
+                        <!-- ── Tests &amp; Results tab ──────────────────── -->
+                        <page string="Tests &amp; Results / الفحوصات والنتائج"
+                              name="results">
+                            <field name="line_ids">
+                                <tree editable="bottom"
+                                      decoration-danger="flag in ('critical_high','critical_low')"
+                                      decoration-warning="flag in ('high','low')"
+                                      decoration-success="flag == 'normal' and state == 'resulted'">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="test_id"/>
+                                    <field name="test_name_ar" optional="show"/>
+                                    <field name="result_type" readonly="1"
+                                           optional="show"/>
+                                    <!-- Numeric result -->
+                                    <field name="result_value"
+                                           invisible="result_type != 'numeric'"
+                                           required="result_type == 'numeric' and state == 'resulted'"/>
+                                    <!-- Text result -->
+                                    <field name="result_text"
+                                           invisible="result_type != 'text'"/>
+                                    <!-- Boolean result -->
+                                    <field name="result_bool"
+                                           invisible="result_type != 'boolean'"/>
+                                    <field name="result_uom" readonly="1"
+                                           optional="show"/>
+                                    <field name="ref_display" readonly="1"
+                                           string="Ref. Range" optional="show"/>
+                                    <field name="flag" widget="badge"
+                                           decoration-danger="flag in ('critical_high','critical_low')"
+                                           decoration-warning="flag in ('high','low')"
+                                           decoration-success="flag == 'normal'"
+                                           optional="show"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'resulted'"
+                                           optional="show"/>
+                                    <button name="action_enter_result"
+                                            type="object"
+                                            string="Save Result"
+                                            icon="fa-save"
+                                            invisible="state == 'resulted'"
+                                            groups="quinze_health_base.group_health_lab_tech"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- ── Samples tab ────────────────────────────── -->
+                        <page string="Samples / العينات" name="samples">
+                            <field name="sample_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="sample_type"/>
+                                    <field name="volume_ml" optional="show"/>
+                                    <field name="barcode" optional="show"/>
+                                    <field name="collection_datetime"/>
+                                    <field name="collector_id"/>
+                                    <field name="received_datetime" optional="show"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'received'"
+                                           decoration-warning="state == 'collected'"
+                                           decoration-danger="state == 'rejected'"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- ── Notes tab ──────────────────────────────── -->
+                        <page string="Notes / ملاحظات" name="notes">
+                            <field name="note" nolabel="1"/>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ═══════════════ LIST ════════════════════════════════════════════ -->
+    <record id="view_lab_order_list" model="ir.ui.view">
+        <field name="name">lab.order.list</field>
+        <field name="model">lab.order</field>
+        <field name="arch" type="xml">
+            <tree string="Lab Orders / أوامر المختبر"
+                  decoration-danger="critical_count > 0"
+                  decoration-warning="abnormal_count > 0"
+                  decoration-success="state == 'done'"
+                  decoration-info="state == 'in_progress'">
+                <field name="order_number"/>
+                <field name="order_date"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="line_count" string="# Tests"/>
+                <field name="result_count" string="# Done"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="abnormal_count" string="Abnormal"
+                       decoration-warning="abnormal_count > 0" optional="show"/>
+                <field name="critical_count" string="Critical"
+                       decoration-danger="critical_count > 0" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-warning="state == 'in_progress'"
+                       decoration-info="state == 'sample_collected'"
+                       decoration-danger="state == 'cancelled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ═══════════════ SEARCH ══════════════════════════════════════════ -->
+    <record id="view_lab_order_search" model="ir.ui.view">
+        <field name="name">lab.order.search</field>
+        <field name="model">lab.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="order_number"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <separator/>
+                <filter string="Urgent / عاجل" name="urgent"
+                        domain="[('priority','=','2')]"/>
+                <filter string="Has Critical / به قيم حرجة" name="critical"
+                        domain="[('critical_count','>',0)]"/>
+                <filter string="Has Abnormal / به قيم شاذة" name="abnormal"
+                        domain="[('abnormal_count','>',0)]"/>
+                <separator/>
+                <filter string="Draft / مسودة" name="draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="In Progress / جارٍ" name="in_progress"
+                        domain="[('state','=','in_progress')]"/>
+                <filter string="Done / منتهٍ" name="done"
+                        domain="[('state','=','done')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Patient / المريض" name="group_patient"
+                            context="{'group_by': 'patient_id'}"/>
+                    <filter string="Doctor / الطبيب" name="group_doctor"
+                            context="{'group_by': 'doctor_id'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Date / التاريخ" name="group_date"
+                            context="{'group_by': 'order_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ═══════════════ ACTIONS ═════════════════════════════════════════ -->
+    <record id="action_lab_order" model="ir.actions.act_window">
+        <field name="name">Lab Orders / أوامر المختبر</field>
+        <field name="res_model">lab.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_in_progress': 1}</field>
+    </record>
+
+</data></odoo>

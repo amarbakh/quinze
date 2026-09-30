@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Report action
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="action_report_health_prescription"
+            model="ir.actions.report">
+        <field name="name">Prescription / وصفة طبية</field>
+        <field name="model">health.prescription</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quinze_health_clinic.report_prescription_document</field>
+        <field name="report_file">quinze_health_clinic.report_prescription_document</field>
+        <field name="print_report_name">(object.prescription_number or 'Prescription')</field>
+        <field name="binding_model_id" ref="quinze_health_clinic.model_health_prescription"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Paper format — A4
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="paperformat_health_prescription" model="report.paperformat">
+        <field name="name">Health Prescription A4</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         QWeb template
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="report_prescription_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" dir="auto">
+
+                        <!-- ── Bilingual header ─────────────────────── -->
+                        <div class="row mb-4">
+                            <div class="col-12 text-center">
+                                <h3 class="mb-0">
+                                    Medical Prescription / وصفة طبية
+                                </h3>
+                                <hr style="border-top: 2px solid #2c6fad;"/>
+                            </div>
+                        </div>
+
+                        <!-- ── Prescription meta ────────────────────── -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <table class="table table-borderless table-sm">
+                                    <tr>
+                                        <td style="width:40%; font-weight:bold;">
+                                            Rx No. / رقم الوصفة:
+                                        </td>
+                                        <td>
+                                            <t t-esc="o.prescription_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">
+                                            Date / التاريخ:
+                                        </td>
+                                        <td>
+                                            <t t-esc="o.prescription_date"
+                                               t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">
+                                            Valid Until / صالح حتى:
+                                        </td>
+                                        <td>
+                                            <t t-esc="o.valid_until"
+                                               t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-borderless table-sm">
+                                    <tr>
+                                        <td style="width:40%; font-weight:bold;">
+                                            Patient / المريض:
+                                        </td>
+                                        <td>
+                                            <t t-esc="o.patient_id.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">
+                                            Doctor / الطبيب:
+                                        </td>
+                                        <td>
+                                            Dr. <t t-esc="o.doctor_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.doctor_id.specialty_id">
+                                        <td style="font-weight:bold;">
+                                            Specialty / التخصص:
+                                        </td>
+                                        <td>
+                                            <t t-esc="o.doctor_id.specialty_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- ── Expired warning ──────────────────────── -->
+                        <t t-if="o.is_expired">
+                            <div class="alert alert-danger text-center mb-3"
+                                 style="border: 2px solid #dc3545; color: #dc3545;">
+                                <strong>
+                                    EXPIRED / منتهية الصلاحية
+                                </strong>
+                            </div>
+                        </t>
+
+                        <!-- ── Medications table ────────────────────── -->
+                        <h5 style="color: #2c6fad; border-bottom: 1px solid #2c6fad; padding-bottom: 4px;">
+                            Medications / الأدوية
+                        </h5>
+                        <table class="table table-bordered table-sm"
+                               style="font-size: 10pt;">
+                            <thead style="background-color: #e8f0fe;">
+                                <tr>
+                                    <th style="width:5%; text-align:center;">#</th>
+                                    <th style="width:22%;">
+                                        Drug Name<br/>
+                                        <small>اسم الدواء</small>
+                                    </th>
+                                    <th style="width:12%;">
+                                        Dose<br/>
+                                        <small>الجرعة</small>
+                                    </th>
+                                    <th style="width:13%;">
+                                        Frequency<br/>
+                                        <small>التكرار</small>
+                                    </th>
+                                    <th style="width:10%;">
+                                        Duration<br/>
+                                        <small>المدة</small>
+                                    </th>
+                                    <th style="width:13%;">
+                                        Route<br/>
+                                        <small>طريقة الإعطاء</small>
+                                    </th>
+                                    <th style="width:25%;">
+                                        Instructions<br/>
+                                        <small>التعليمات</small>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.prescription_line_ids"
+                                   t-as="line">
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <t t-esc="line_index + 1"/>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <t t-esc="line.product_id.name"/>
+                                            </strong>
+                                            <t t-if="line.drug_name_ar">
+                                                <br/>
+                                                <span dir="rtl" style="font-family: Tahoma, Arial, sans-serif;">
+                                                    <t t-esc="line.drug_name_ar"/>
+                                                </span>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.dose"/>
+                                            <t t-esc="' ' + (line.dose_uom_id.name or '')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="dict(line._fields['frequency'].selection).get(line.frequency, line.frequency)"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.duration_days"/> days
+                                        </td>
+                                        <td>
+                                            <t t-esc="dict(line._fields['route'].selection).get(line.route, line.route)"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.instructions or '—'"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- ── Notes ───────────────────────────────── -->
+                        <t t-if="o.note">
+                            <div class="mt-3">
+                                <strong>Notes / ملاحظات:</strong>
+                                <p style="font-style: italic;">
+                                    <t t-esc="o.note"/>
+                                </p>
+                            </div>
+                        </t>
+
+                        <!-- ── Signature area ───────────────────────── -->
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <div style="border-top: 1px solid #333; width: 60%; margin-top: 40px; padding-top: 4px; text-align: center;">
+                                    Doctor's Signature / توقيع الطبيب
+                                    <br/>
+                                    <small>Dr. <t t-esc="o.doctor_id.name"/></small>
+                                    <t t-if="o.doctor_id.medical_license_no">
+                                        <br/>
+                                        <small>
+                                            Lic: <t t-esc="o.doctor_id.medical_license_no"/>
+                                        </small>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="col-6 text-end">
+                                <div style="border-top: 1px solid #333; width: 60%; margin-top: 40px; margin-left: auto; padding-top: 4px; text-align: center;">
+                                    Pharmacist Stamp / ختم الصيدلي
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ── Footer disclaimer ────────────────────── -->
+                        <div class="mt-4 text-center"
+                             style="font-size: 8pt; color: #666; border-top: 1px dashed #ccc; padding-top: 6px;">
+                            This prescription is valid for 30 days from the issue date unless otherwise indicated. /
+                            هذه الوصفة صالحة لمدة 30 يومًا من تاريخ الإصدار ما لم يُحدَّد خلاف ذلك.
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

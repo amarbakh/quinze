@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>QUINZE Health Pharmacy</title></head>
+<body>
+<div class="qz">
+<style>
+.qz { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:#2c3e50; max-width:1000px; margin:0 auto; line-height:1.65; }
+.qz * { box-sizing:border-box; }
+.qz-hero { background:linear-gradient(135deg, #D84315 0%, #6B210A 100%); color:#fff; padding:56px 44px; border-radius:10px; margin-bottom:36px; }
+.qz-hero .glyph { font-size:60px; line-height:1; opacity:.92; margin-bottom:14px; }
+.qz-hero h1 { font-size:38px; margin:0 0 10px; color:#fff; font-weight:700; letter-spacing:-.5px; }
+.qz-hero p { font-size:18px; margin:0; opacity:.94; max-width:640px; }
+.qz-badges { margin-top:26px; }
+.qz-badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+            padding:6px 15px; border-radius:20px; font-size:13px; margin:0 8px 8px 0; }
+.qz h2 { font-size:25px; color:#D84315; margin:44px 0 18px; padding-bottom:9px; border-bottom:2px solid #eef1f4; }
+.qz h3 { font-size:17px; margin:0 0 8px; color:#2c3e50; }
+.qz-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+.qz-card { background:#fafbfc; border:1px solid #e6eaee; border-left:3px solid #D84315; border-radius:6px; padding:20px 22px; }
+.qz-card p { margin:0; font-size:14.5px; color:#54636f; }
+.qz-shot { margin:26px 0 34px; }
+.qz-shot img { width:100%; border:1px solid #dde3e8; border-radius:6px; display:block; }
+.qz-cap { font-size:13.5px; color:#7b8794; margin-top:9px; padding-left:2px; }
+.qz-cap strong { color:#D84315; }
+.qz-flow { background:#fafbfc; border:1px solid #e6eaee; border-radius:6px; padding:20px 24px; margin:16px 0; }
+.qz-step { display:inline-block; background:#D84315; color:#fff; padding:5px 14px; border-radius:4px; font-size:13.5px; font-weight:600; margin:4px 0; }
+.qz-arrow { color:#aab4bd; margin:0 8px; font-weight:700; }
+.qz table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14.5px; }
+.qz th { background:#D84315; color:#fff; padding:11px 15px; text-align:left; font-weight:600; }
+.qz td { border-bottom:1px solid #e6eaee; padding:11px 15px; }
+.qz tr:nth-child(even) td { background:#fafbfc; }
+.qz-ar { direction:rtl; text-align:right; background:#fafbfc; border:1px solid #e6eaee;
+         border-right:3px solid #D84315; border-left:none; border-radius:6px; padding:24px 28px; margin:22px 0; }
+.qz-ar h2 { border:none; margin:0 0 12px; padding:0; font-size:22px; }
+.qz-ar p, .qz-ar li { font-size:15.5px; color:#54636f; }
+.qz-ar ul { padding-right:20px; padding-left:0; }
+.qz-note { background:#fff8e6; border:1px solid #f2dfab; border-radius:6px; padding:16px 20px; font-size:14.5px; margin:20px 0; }
+.qz-foot { margin-top:44px; padding-top:22px; border-top:1px solid #e6eaee; font-size:13.5px; color:#7b8794; }
+.qz ul.qz-list { padding-left:20px; }
+.qz ul.qz-list li { margin-bottom:7px; font-size:14.5px; color:#54636f; }
+</style>
+
+<div class="qz-hero">
+  <div class="glyph">℞</div>
+  <h1>QUINZE Health Pharmacy</h1>
+  <p>Internal and external dispensing with real stock movements, lot and expiry tracking, and insurance claims.</p>
+  <div class="qz-badges"><span class="qz-badge">Odoo 17</span><span class="qz-badge">Stock Integrated</span><span class="qz-badge">Lot &amp; Expiry</span><span class="qz-badge">Insurance Claims</span><span class="qz-badge">Auto Invoicing</span></div>
+</div>
+<h2>Overview</h2><p>Dispense against clinic prescriptions or serve walk-in customers, with real stock movements, lot and expiry tracking, automatic invoicing and a full insurance claim workflow.</p><div class="qz-note"><strong>Bilingual by design.</strong> Every field label, selection value and report renders in English and Arabic together, so a single database serves both an English-speaking administrator and an Arabic-speaking clinician without switching languages. The screenshots below are taken with the interface language set to English.</div><div class="qz-shot"><img src="shot_01_external_dispensing.png" alt="External Dispensing"/><div class="qz-cap"><strong>External Dispensing</strong> &mdash; A walk-in dispensing, fully processed. The header smart buttons confirm the stock move is Done and the invoice is Posted, while each line carries batch number, expiry date, unit price and subtotal.</div></div><h2>Two Dispensing Modes</h2><div class="qz-grid"><div class="qz-card"><h3>Internal Dispensing</h3><p>Started from a confirmed clinic prescription. Lines are pre-filled, quantities validated against what was prescribed, and the prescription is marked partially dispensed or dispensed on completion.</p></div><div class="qz-card"><h3>External Dispensing</h3><p>For walk-in customers and outside prescriptions. Full drug selection and pricing, with an invoice created automatically on confirmation.</p></div></div><div class="qz-shot"><img src="shot_02_medication_product.png" alt="Medication Product Fields"/><div class="qz-cap"><strong>Medication Product Fields</strong> &mdash; A dedicated Pharmacy tab adds drug category, dosage form, strength and the Arabic generic name, plus cold-chain and controlled-substance flags &mdash; all on the standard Odoo product.</div></div><div class="qz-shot"><img src="shot_04_internal_dispensing.png" alt="Internal Dispensing from a Prescription"/><div class="qz-cap"><strong>Internal Dispensing from a Prescription</strong> &mdash; A dispensing generated from a confirmed clinic prescription. The banner identifies its origin, the prescription and patient links are populated, and each line arrives pre-filled with the ordered quantity, batch number and price &mdash; the pharmacist only confirms what is actually handed over.</div></div><h2>Insurance Claim Workflow</h2><div class="qz-flow"><span class="qz-step">Draft</span><span class="qz-arrow">&rarr;</span><span class="qz-step">Submitted</span><span class="qz-arrow">&rarr;</span><span class="qz-step">Approved / Rejected</span></div><div class="qz-shot"><img src="shot_03_insurance_claim.png" alt="Approved Insurance Claim"/><div class="qz-cap"><strong>Approved Insurance Claim</strong> &mdash; The claim links back to its dispensing and records insurer, policy number, member ID, submission date and response date, with the status bar showing it has reached Approved.</div></div><div class="qz-shot"><img src="shot_05_claim_financials.png" alt="Coverage Split"/><div class="qz-cap"><strong>Coverage Split</strong> &mdash; Entering a coverage percentage derives the covered amount and the patient share automatically, and the approved amount is tracked separately so partial settlements are visible.</div></div><h2>Key Features</h2><div class="qz-grid"><div class="qz-card"><h3>Real Stock Movements</h3><p>Each dispensing generates an outgoing stock.picking from a dedicated pharmacy location.</p></div><div class="qz-card"><h3>Lot &amp; Expiry Tracking</h3><p>Built on standard Odoo stock.lot, so expiry control works exactly as your team already expects.</p></div><div class="qz-card"><h3>Cold Chain &amp; Controlled Flags</h3><p>Mark medications requiring refrigeration or subject to controlled-substance handling.</p></div><div class="qz-card"><h3>Automatic Invoicing</h3><p>Confirmation posts an account.move with the correct patient and coverage split.</p></div></div><h2>Bilingual Dispensing Receipt</h2><div class="qz-shot"><img src="shot_06_dispensing_receipt_pdf.png" alt="Printed Receipt"/><div class="qz-cap"><strong>Printed Receipt</strong> &mdash; The receipt records the originating prescription, and each line carries its batch number and expiry date pulled straight from the lot &mdash; with signature blocks for both pharmacist and patient.</div></div><h2>REST API Available</h2><p>A companion module, <strong>QUINZE Health REST API</strong>, exposes authenticated JSON endpoints for dispensings and insurance claims &mdash; list, create an external dispensing, confirm it, and read claim status from an external system. It is sold separately and requires this module.</p><div class="qz-note"><strong>Requires:</strong> QUINZE Health Base (free), QUINZE Health Clinic, and Odoo Inventory.</div>
+<div class="qz-ar">
+  <h2>صيدلية نظام QUINZE الصحي</h2>
+  <p>إدارة الصيدلية بنمطين للصرف:</p><ul><li><strong>الصرف الداخلي:</strong> من وصفة العيادة مع تعبئة تلقائية والتحقق من الكميات</li><li><strong>الصرف الخارجي:</strong> للعملاء المباشرين مع فوترة تلقائية</li><li>حركات مخزون حقيقية من موقع الصيدلية</li><li>تتبع التشغيلة وتاريخ انتهاء الصلاحية</li><li>دورة كاملة لمطالبات التأمين مع نسبة التغطية</li><li>حقول دوائية إضافية: الاسم العلمي بالعربية، الشكل الصيدلاني، التركيز، سلسلة التبريد</li></ul>
+</div>
+<h2>Technical Information</h2>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Odoo Version</td><td>17.0 Community &amp; Enterprise</td></tr>
+  <tr><td>Dependencies</td><td>quinze_health_clinic, stock, account</td></tr>
+  <tr><td>License</td><td>OPL-1</td></tr>
+  <tr><td>Price</td><td>&euro;129</td></tr>
+  <tr><td>Languages</td><td>English and Arabic (ar_001), bilingual labels and reports</td></tr>
+  <tr><td>Automated Tests</td><td>Included</td></tr>
+</table>
+<div class="qz-foot">
+  <strong>Bakhit Alamin</strong> &mdash; Independent Odoo Developer<br/>
+  Email: amarnew198611@gmail.com &nbsp;&middot;&nbsp; WhatsApp: +966 55 167 3871<br/>
+  Includes 12 months of bug-fix support and version updates within Odoo 17.0.
+</div>
+</div>
+</body>
+</html>

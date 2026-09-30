@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         quinze.api.key — Form View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_quinze_api_key_form" model="ir.ui.view">
+        <field name="name">quinze.api.key.form</field>
+        <field name="model">quinze.api.key</field>
+        <field name="arch" type="xml">
+            <form string="API Key / مفتاح API">
+                <header>
+                    <button name="action_rotate" type="object"
+                            string="Rotate Token / تجديد الرمز"
+                            class="btn btn-warning"
+                            confirm="This will invalidate the current token. Continue? / سيؤدي هذا إلى إبطال الرمز الحالي. هل تريد المتابعة؟"/>
+                    <button name="action_revoke" type="object"
+                            string="Revoke / إلغاء"
+                            class="btn btn-danger"
+                            invisible="not active"
+                            confirm="Revoke this API key? / هل تريد إلغاء هذا المفتاح؟"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-warning" role="alert"
+                         invisible="active">
+                        ⛔ This key has been revoked / تم إلغاء هذا المفتاح
+                    </div>
+                    <group>
+                        <group string="Identity / الهوية">
+                            <field name="name"/>
+                            <field name="user_id"/>
+                            <field name="scope" widget="radio"/>
+                        </group>
+                        <group string="Token / الرمز">
+                            <field name="token_preview" readonly="1"/>
+                            <field name="expiry_date"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Usage Statistics / إحصاءات الاستخدام">
+                        <group>
+                            <field name="last_used" readonly="1"/>
+                            <field name="request_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="IP Whitelist / قائمة IP المسموح بها">
+                        <field name="ip_whitelist" nolabel="1"
+                               placeholder="One IP per line. Leave empty to allow all. / IP واحد في كل سطر. اتركه فارغاً للسماح بالجميع."/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         quinze.api.key — List View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_quinze_api_key_list" model="ir.ui.view">
+        <field name="name">quinze.api.key.list</field>
+        <field name="model">quinze.api.key</field>
+        <field name="arch" type="xml">
+            <tree string="API Keys / مفاتيح API"
+                  decoration-muted="active == False">
+                <field name="name"/>
+                <field name="token_preview" string="Token"/>
+                <field name="user_id"/>
+                <field name="scope" widget="badge"
+                       decoration-success="scope == 'read'"
+                       decoration-warning="scope == 'write'"/>
+                <field name="expiry_date"/>
+                <field name="last_used"/>
+                <field name="request_count"/>
+                <field name="active" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         quinze.api.key — Search View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_quinze_api_key_search" model="ir.ui.view">
+        <field name="name">quinze.api.key.search</field>
+        <field name="model">quinze.api.key</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="user_id"/>
+                <separator/>
+                <filter string="Active / نشط" name="active_keys"
+                        domain="[('active','=',True)]"/>
+                <filter string="Expired / منتهي الصلاحية" name="expired"
+                        domain="[('active','=',False)]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Scope / النطاق" name="group_scope"
+                            context="{'group_by': 'scope'}"/>
+                    <filter string="User / المستخدم" name="group_user"
+                            context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         quinze.api.key — Action
+    ════════════════════════════════════════════════════════════════════ -->
+    <record id="action_quinze_api_key" model="ir.actions.act_window">
+        <field name="name">API Keys / مفاتيح API</field>
+        <field name="res_model">quinze.api.key</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active_keys': 1}</field>
+    </record>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         Menu item for API Key management (under Configuration)
+    ════════════════════════════════════════════════════════════════════ -->
+    <menuitem id="menu_quinze_api_keys"
+              name="API Keys / مفاتيح API"
+              parent="quinze_health_base.menu_health_configuration"
+              action="action_quinze_api_key"
+              sequence="100"
+              groups="quinze_health_base.group_health_manager"/>
+
+</data>
+</odoo>

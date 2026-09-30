@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Portal navigation item  /my/health/
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="portal_my_home_health"
+              name="Portal My Home: Health"
+              customize_show="True"
+              inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Health / الصحة</t>
+                <t t-set="url">/my/health/appointments</t>
+                <t t-set="placeholder_count">appointment_count</t>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Appointments list  /my/health/appointments
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="portal_my_appointments"
+              name="My Appointments / مواعيدي">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Appointments / المواعيد</t>
+            </t>
+
+            <t t-if="not appointments">
+                <div class="alert alert-warning mt16">
+                    No appointments found. / لا توجد مواعيد.
+                </div>
+            </t>
+            <t t-if="appointments">
+                <div class="card mt16">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">
+                            My Appointments / مواعيدي
+                        </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No. / الرقم</th>
+                                    <th>Date / التاريخ</th>
+                                    <th>Doctor / الطبيب</th>
+                                    <th>Type / النوع</th>
+                                    <th>Status / الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="appointments" t-as="apt">
+                                    <tr>
+                                        <td>
+                                            <a t-attf-href="/my/health/appointments/#{apt.id}">
+                                                <t t-esc="apt.appointment_number"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <t t-esc="apt.start_datetime"
+                                               t-options='{"widget": "datetime", "format": "dd/MM/yyyy HH:mm"}'/>
+                                        </td>
+                                        <td><t t-esc="apt.doctor_id.name"/></td>
+                                        <td><t t-esc="apt.appointment_type"/></td>
+                                        <td>
+                                            <span t-attf-class="badge #{
+                                                'bg-success' if apt.state == 'done' else
+                                                'bg-warning text-dark' if apt.state in ('confirmed','in_progress') else
+                                                'bg-danger' if apt.state in ('cancelled','no_show') else
+                                                'bg-secondary'
+                                            }">
+                                                <t t-esc="apt.state"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <t t-call="portal.pager"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Appointment detail  /my/health/appointments/<id>
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="portal_my_appointment_detail"
+              name="Appointment Detail / تفاصيل الموعد">
+        <t t-call="portal.portal_layout">
+            <div class="card mt16">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        Appointment / موعد:
+                        <t t-esc="appointment.appointment_number"/>
+                    </h5>
+                    <span t-attf-class="badge #{
+                        'bg-success' if appointment.state == 'done' else
+                        'bg-warning text-dark' if appointment.state in ('confirmed','in_progress') else
+                        'bg-danger' if appointment.state in ('cancelled','no_show') else
+                        'bg-secondary'
+                    }">
+                        <t t-esc="appointment.state"/>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-5">Patient / المريض</dt>
+                                <dd class="col-7">
+                                    <t t-esc="appointment.patient_id.display_name"/>
+                                </dd>
+                                <dt class="col-5">Doctor / الطبيب</dt>
+                                <dd class="col-7">
+                                    <t t-esc="appointment.doctor_id.name"/>
+                                </dd>
+                                <dt class="col-5">Specialty / التخصص</dt>
+                                <dd class="col-7">
+                                    <t t-esc="appointment.specialty_id.name"/>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-5">Date / التاريخ</dt>
+                                <dd class="col-7">
+                                    <t t-esc="appointment.start_datetime"
+                                       t-options='{"widget": "datetime", "format": "dd/MM/yyyy HH:mm"}'/>
+                                </dd>
+                                <dt class="col-5">Duration / المدة</dt>
+                                <dd class="col-7">
+                                    <t t-esc="'%d min' % int(appointment.duration)"/>
+                                </dd>
+                                <dt class="col-5">Type / النوع</dt>
+                                <dd class="col-7">
+                                    <t t-esc="appointment.appointment_type"/>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <t t-if="appointment.chief_complaint">
+                        <hr/>
+                        <h6>Chief Complaint / الشكوى الرئيسية</h6>
+                        <p><t t-esc="appointment.chief_complaint"/></p>
+                    </t>
+                </div>
+            </div>
+            <div class="mt-3">
+                <a href="/my/health/appointments" class="btn btn-secondary btn-sm">
+                    ← Back to Appointments / العودة للمواعيد
+                </a>
+            </div>
+        </t>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Prescriptions list  /my/health/prescriptions
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="portal_my_prescriptions"
+              name="My Prescriptions / وصفاتي الطبية">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Prescriptions / الوصفات الطبية</t>
+            </t>
+
+            <t t-if="not prescriptions">
+                <div class="alert alert-warning mt16">
+                    No prescriptions found. / لا توجد وصفات طبية.
+                </div>
+            </t>
+            <t t-if="prescriptions">
+                <div class="card mt16">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">My Prescriptions / وصفاتي الطبية</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No. / الرقم</th>
+                                    <th>Date / التاريخ</th>
+                                    <th>Doctor / الطبيب</th>
+                                    <th>Drugs / الأدوية</th>
+                                    <th>Valid Until / صالح حتى</th>
+                                    <th>Status / الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="prescriptions" t-as="rx">
+                                    <tr t-attf-class="#{
+                                        'table-danger' if rx.is_expired else ''
+                                    }">
+                                        <td>
+                                            <a t-attf-href="/my/health/prescriptions/#{rx.id}">
+                                                <t t-esc="rx.prescription_number"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rx.prescription_date"
+                                               t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                        <td><t t-esc="rx.doctor_id.name"/></td>
+                                        <td><t t-esc="rx.line_count"/></td>
+                                        <td>
+                                            <t t-esc="rx.valid_until"
+                                               t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                        <td>
+                                            <span t-attf-class="badge #{
+                                                'bg-danger' if rx.is_expired else
+                                                'bg-success' if rx.state == 'dispensed' else
+                                                'bg-warning text-dark' if rx.state == 'confirmed' else
+                                                'bg-secondary'
+                                            }">
+                                                <t t-if="rx.is_expired">Expired / منتهية</t>
+                                                <t t-else=""><t t-esc="rx.state"/></t>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <t t-call="portal.pager"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Prescription detail  /my/health/prescriptions/<id>
+    ══════════════════════════════════════════════════════════════════════ -->
+    <template id="portal_my_prescription_detail"
+              name="Prescription Detail / تفاصيل الوصفة">
+        <t t-call="portal.portal_layout">
+            <!-- Expiry banner -->
+            <t t-if="prescription.is_expired">
+                <div class="alert alert-danger mt16" role="alert">
+                    ⚠️ This prescription has expired / هذه الوصفة منتهية الصلاحية
+                </div>
+            </t>
+
+            <div class="card mt16">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        Prescription / وصفة:
+                        <t t-esc="prescription.prescription_number"/>
+                    </h5>
+                    <span t-attf-class="badge #{
+                        'bg-danger' if prescription.is_expired else
+                        'bg-success' if prescription.state == 'dispensed' else
+                        'bg-warning text-dark' if prescription.state == 'confirmed' else
+                        'bg-secondary'
+                    }">
+                        <t t-if="prescription.is_expired">Expired / منتهية</t>
+                        <t t-else=""><t t-esc="prescription.state"/></t>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-5">Patient / المريض</dt>
+                                <dd class="col-7">
+                                    <t t-esc="prescription.patient_id.display_name"/>
+                                </dd>
+                                <dt class="col-5">Doctor / الطبيب</dt>
+                                <dd class="col-7">
+                                    <t t-esc="prescription.doctor_id.name"/>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-5">Date / التاريخ</dt>
+                                <dd class="col-7">
+                                    <t t-esc="prescription.prescription_date"
+                                       t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                </dd>
+                                <dt class="col-5">Valid Until / صالح حتى</dt>
+                                <dd class="col-7">
+                                    <t t-esc="prescription.valid_until"
+                                       t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <!-- Medications table -->
+                    <h6>Medications / الأدوية</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Drug / الدواء</th>
+                                    <th>Dose / الجرعة</th>
+                                    <th>Frequency / التكرار</th>
+                                    <th>Duration / المدة</th>
+                                    <th>Route / طريقة الإعطاء</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="prescription.prescription_line_ids"
+                                   t-as="line">
+                                    <tr>
+                                        <td><t t-esc="line_index + 1"/></td>
+                                        <td>
+                                            <t t-esc="line.product_id.name"/>
+                                            <t t-if="line.drug_name_ar">
+                                                <br/>
+                                                <small class="text-muted">
+                                                    <t t-esc="line.drug_name_ar"/>
+                                                </small>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.dose"/>
+                                            <t t-esc="line.dose_uom_id.name"/>
+                                        </td>
+                                        <td><t t-esc="line.frequency"/></td>
+                                        <td>
+                                            <t t-esc="'%d days / %d يوم' % (line.duration_days, line.duration_days)"/>
+                                        </td>
+                                        <td><t t-esc="line.route"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <a href="/my/health/prescriptions" class="btn btn-secondary btn-sm">
+                    ← Back to Prescriptions / العودة للوصفات
+                </a>
+            </div>
+        </t>
+    </template>
+
+</odoo>

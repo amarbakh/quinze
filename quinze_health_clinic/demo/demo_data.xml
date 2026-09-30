@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Clinic — Demo Data
+    =================================
+    Provides realistic Arabic/English demo records for development and
+    testing purposes. Loaded only when the module is installed in demo mode.
+
+    بيانات تجريبية واقعية باللغتين العربية والإنجليزية للتطوير والاختبار.
+    يتم تحميلها فقط عند تثبيت الموديول في وضع العرض التجريبي.
+-->
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         res.partner — demo patients & doctors
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Demo doctor -->
+    <record id="demo_partner_doctor_ali" model="res.partner">
+        <field name="name">Dr. Ali Hassan Al-Qahtani / د. علي حسن القحطاني</field>
+        <field name="is_doctor" eval="True"/>
+        <field name="is_patient" eval="False"/>
+        <field name="medical_license_no">SA-DOC-10234</field>
+        <field name="phone">+966501234567</field>
+        <field name="email">ali.qahtani@quinze.demo</field>
+    </record>
+
+    <!-- Demo patients -->
+    <record id="demo_partner_patient_sara" model="res.partner">
+        <field name="name">Sara Mohammed Al-Otaibi / سارة محمد العتيبي</field>
+        <field name="is_patient" eval="True"/>
+        <field name="national_id">1098765432</field>
+        <field name="dob">1990-05-15</field>
+        <field name="gender">female</field>
+        <field name="blood_type">A+</field>
+        <field name="phone">+966509876543</field>
+        <field name="email">sara.otaibi@demo.sa</field>
+    </record>
+
+    <record id="demo_partner_patient_khalid" model="res.partner">
+        <field name="name">Khalid Ibrahim Al-Dosari / خالد إبراهيم الدوسري</field>
+        <field name="is_patient" eval="True"/>
+        <field name="national_id">1076543210</field>
+        <field name="dob">1978-11-03</field>
+        <field name="gender">male</field>
+        <field name="blood_type">O+</field>
+        <field name="phone">+966553456789</field>
+        <field name="email">khalid.dosari@demo.sa</field>
+    </record>
+
+    <record id="demo_partner_patient_nour" model="res.partner">
+        <field name="name">Nour Abdullah Al-Shehri / نور عبدالله الشهري</field>
+        <field name="is_patient" eval="True"/>
+        <field name="national_id">1054321098</field>
+        <field name="dob">2001-02-20</field>
+        <field name="gender">female</field>
+        <field name="blood_type">B-</field>
+        <field name="phone">+966567891234</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.patient
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_patient_sara" model="health.patient">
+        <field name="partner_id" ref="demo_partner_patient_sara"/>
+        <field name="chronic_conditions">Type 2 Diabetes / السكري من النوع الثاني</field>
+        <field name="medical_history">Appendectomy 2015 / استئصال الزائدة الدودية 2015</field>
+        <field name="family_history">Father: Hypertension / الأب: ضغط الدم المرتفع</field>
+        <field name="note">Patient prefers Arabic language / المريضة تفضل اللغة العربية</field>
+    </record>
+
+    <record id="demo_patient_khalid" model="health.patient">
+        <field name="partner_id" ref="demo_partner_patient_khalid"/>
+        <field name="chronic_conditions">Hypertension, Hyperlipidemia / ارتفاع ضغط الدم، فرط شحميات الدم</field>
+        <field name="medical_history">No major surgeries / لا عمليات جراحية كبرى</field>
+        <field name="family_history">Mother: Diabetes / الأم: سكري</field>
+    </record>
+
+    <record id="demo_patient_nour" model="health.patient">
+        <field name="partner_id" ref="demo_partner_patient_nour"/>
+        <field name="chronic_conditions">Asthma / الربو</field>
+        <field name="medical_history">No significant history / لا تاريخ طبي مهم</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.room — demo rooms
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_room_c1" model="health.room">
+        <field name="name">Clinic Room 1 / عيادة 1</field>
+        <field name="code">C-01</field>
+        <field name="room_type">clinic</field>
+        <field name="floor">1</field>
+        <field name="capacity">1</field>
+    </record>
+
+    <record id="demo_room_c2" model="health.room">
+        <field name="name">Clinic Room 2 / عيادة 2</field>
+        <field name="code">C-02</field>
+        <field name="room_type">clinic</field>
+        <field name="floor">1</field>
+        <field name="capacity">1</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.appointment — demo appointments
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Confirmed appointment — Sara -->
+    <record id="demo_apt_sara_confirmed" model="health.appointment">
+        <field name="patient_id" ref="demo_patient_sara"/>
+        <field name="doctor_id" ref="demo_partner_doctor_ali"/>
+        <field name="start_datetime" eval="(DateTime.now() + timedelta(days=1)).replace(hour=9, minute=0, second=0)"/>
+        <field name="stop_datetime" eval="(DateTime.now() + timedelta(days=1)).replace(hour=9, minute=30, second=0)"/>
+        <field name="appointment_type">follow_up</field>
+        <field name="room_id" ref="demo_room_c1"/>
+        <field name="chief_complaint">Follow-up for diabetes / متابعة السكري</field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <!-- Done appointment — Khalid (has encounter) -->
+    <record id="demo_apt_khalid_done" model="health.appointment">
+        <field name="patient_id" ref="demo_patient_khalid"/>
+        <field name="doctor_id" ref="demo_partner_doctor_ali"/>
+        <field name="start_datetime" eval="(DateTime.now() - timedelta(days=3)).replace(hour=10, minute=0, second=0)"/>
+        <field name="stop_datetime" eval="(DateTime.now() - timedelta(days=3)).replace(hour=10, minute=30, second=0)"/>
+        <field name="appointment_type">new</field>
+        <field name="room_id" ref="demo_room_c1"/>
+        <field name="chief_complaint">
+            Chest pain and shortness of breath / ألم في الصدر وضيق في التنفس
+        </field>
+        <field name="state">done</field>
+    </record>
+
+    <!-- New appointment — Nour -->
+    <record id="demo_apt_nour_new" model="health.appointment">
+        <field name="patient_id" ref="demo_patient_nour"/>
+        <field name="doctor_id" ref="demo_partner_doctor_ali"/>
+        <field name="start_datetime" eval="(DateTime.now() + timedelta(days=2)).replace(hour=11, minute=0, second=0)"/>
+        <field name="stop_datetime" eval="(DateTime.now() + timedelta(days=2)).replace(hour=11, minute=30, second=0)"/>
+        <field name="appointment_type">new</field>
+        <field name="room_id" ref="demo_room_c2"/>
+        <field name="chief_complaint">
+            Asthma exacerbation / تفاقم أعراض الربو
+        </field>
+        <field name="state">draft</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.encounter — demo encounter for Khalid
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_encounter_khalid" model="health.encounter">
+        <field name="patient_id" ref="demo_patient_khalid"/>
+        <field name="doctor_id" ref="demo_partner_doctor_ali"/>
+        <field name="appointment_id" ref="demo_apt_khalid_done"/>
+        <field name="encounter_date" eval="(DateTime.now() - timedelta(days=3)).date()"/>
+        <field name="chief_complaint">
+            Chest pain and shortness of breath / ألم في الصدر وضيق في التنفس
+        </field>
+        <field name="clinical_notes">
+            Patient presented with intermittent chest pain for 2 days.
+            BP elevated at 160/95. ECG normal. Advised lifestyle changes and
+            medication adjustment. /
+            المريض يشكو من آلام متقطعة في الصدر منذ يومين.
+            ضغط الدم مرتفع 160/95. تخطيط القلب طبيعي.
+            تم إرشاده لتعديل نمط الحياة وتعديل الدواء.
+        </field>
+        <field name="state">done</field>
+    </record>
+
+    <!-- Vital signs for Khalid's encounter -->
+    <record id="demo_vital_khalid_1" model="health.vital.sign">
+        <field name="encounter_id" ref="demo_encounter_khalid"/>
+        <field name="measured_at" eval="(DateTime.now() - timedelta(days=3)).replace(hour=10, minute=5, second=0)"/>
+        <field name="systolic_bp">160</field>
+        <field name="diastolic_bp">95</field>
+        <field name="heart_rate">88</field>
+        <field name="temperature">36.8</field>
+        <field name="spo2">97</field>
+        <field name="weight_kg">92</field>
+        <field name="height_cm">178</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.prescription — demo prescription for Khalid
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_rx_khalid" model="health.prescription">
+        <field name="patient_id" ref="demo_patient_khalid"/>
+        <field name="doctor_id" ref="demo_partner_doctor_ali"/>
+        <field name="encounter_id" ref="demo_encounter_khalid"/>
+        <field name="prescription_date" eval="(DateTime.now() - timedelta(days=3)).date()"/>
+        <field name="valid_until" eval="(DateTime.now() + timedelta(days=27)).date()"/>
+        <field name="state">confirmed</field>
+        <field name="note">
+            Patient counselled on low-sodium diet and regular exercise. /
+            تم توجيه المريض باتباع نظام غذائي قليل الصوديوم وممارسة الرياضة بانتظام.
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         health.lab.request — demo lab request for Khalid
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_lab_req_khalid" model="health.lab.request">
+        <field name="encounter_id" ref="demo_encounter_khalid"/>
+        <field name="request_date" eval="(DateTime.now() - timedelta(days=3)).date()"/>
+        <field name="priority">1</field>
+        <field name="tests_description">
+            CBC, Lipid Profile, HbA1c, Creatinine, eGFR /
+            صورة دم كاملة، ملف الدهون، سكر التحكم، كرياتينين، معدل الترشيح الكبيبي
+        </field>
+        <field name="clinical_indication">
+            Hypertension workup, cardiovascular risk assessment /
+            تقييم ارتفاع ضغط الدم وخطر الأمراض القلبية الوعائية
+        </field>
+        <field name="state">confirmed</field>
+    </record>
+
+</data>
+</odoo>

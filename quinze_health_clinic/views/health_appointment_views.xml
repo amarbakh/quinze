@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <!-- ═══════════════ FORM ════════════════════════════════════════════ -->
+    <record id="view_health_appointment_form" model="ir.ui.view">
+        <field name="name">health.appointment.form</field>
+        <field name="model">health.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment / موعد">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm / تأكيد"
+                            invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_arrive" type="object"
+                            string="Patient Arrived / وصل المريض"
+                            invisible="state != 'confirmed'" class="oe_highlight"/>
+                    <button name="action_open_encounter" type="object"
+                            string="Open Encounter / فتح الزيارة"
+                            invisible="state not in ['confirmed', 'in_progress']"
+                            class="oe_highlight"/>
+                    <button name="action_done" type="object"
+                            string="Done / منتهٍ"
+                            invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel / إلغاء"
+                            invisible="state not in ['draft', 'confirmed', 'in_progress']"
+                            confirm="Cancel this appointment? / إلغاء هذا الموعد؟"/>
+                    <button name="action_no_show" type="object"
+                            string="No-Show / غياب"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_reset_draft" type="object"
+                            string="Reset to Draft / إعادة للمسودة"
+                            invisible="state not in ['cancelled', 'no_show']"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,in_progress,done"/>
+                    <!-- invisible fields required by Odoo 17 modifier validation -->
+                    <field name="encounter_id" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_encounter" type="object"
+                                class="oe_stat_button" icon="fa-stethoscope"
+                                invisible="not encounter_id">
+                            <span class="o_stat_text">Encounter / الزيارة</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="appointment_number" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Participants / المشاركون">
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="specialty_id" readonly="1"/>
+                        </group>
+                        <group string="Scheduling / الجدولة">
+                            <field name="start_datetime"/>
+                            <field name="stop_datetime"/>
+                            <field name="duration" readonly="1" widget="float_time"/>
+                            <field name="room_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="appointment_type"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="branch_id"/>
+                        </group>
+                    </group>
+                    <separator string="Chief Complaint / الشكوى الرئيسية"/>
+                    <field name="chief_complaint" nolabel="1"
+                           placeholder="Reason for the visit... / سبب الزيارة..."/>
+                    <separator string="Notes / ملاحظات"/>
+                    <field colspan="2" name="note" nolabel="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ═══════════════ LIST ════════════════════════════════════════════ -->
+    <record id="view_health_appointment_list" model="ir.ui.view">
+        <field name="name">health.appointment.list</field>
+        <field name="model">health.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Appointments / المواعيد"
+                  decoration-success="state == 'done'"
+                  decoration-warning="state == 'in_progress'"
+                  decoration-danger="state == 'no_show'"
+                  decoration-it="state == 'cancelled'">
+                <field name="appointment_number"/>
+                <field name="start_datetime"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="specialty_id"/>
+                <field name="room_id" optional="show"/>
+                <field name="appointment_type" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-warning="state in ('confirmed','in_progress')"
+                       decoration-danger="state in ('cancelled','no_show')"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ═══════════════ KANBAN ══════════════════════════════════════════ -->
+    <record id="view_health_appointment_kanban" model="ir.ui.view">
+        <field name="name">health.appointment.kanban</field>
+        <field name="model">health.appointment</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state"
+                    class="o_kanban_small_column"
+                    quick_create="false">
+                <field name="state"/>
+                <field name="color"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="start_datetime"/>
+                <field name="appointment_type"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click
+                            o_kanban_record_has_image_fill
+                            oe_kanban_color_#{kanban_getcolor(record.color.raw_value)}">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="patient_id"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div><i class="fa fa-user-md"/> <field name="doctor_id"/></div>
+                                <div><i class="fa fa-clock-o"/> <field name="start_datetime"
+                                     widget="datetime" options="{'format': 'DD/MM HH:mm'}"/></div>
+                                <div><field name="appointment_type"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ═══════════════ CALENDAR ════════════════════════════════════════ -->
+    <record id="view_health_appointment_calendar" model="ir.ui.view">
+        <field name="name">health.appointment.calendar</field>
+        <field name="model">health.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments / المواعيد"
+                      date_start="start_datetime"
+                      date_stop="stop_datetime"
+                      color="doctor_id"
+                      mode="week"
+                      quick_create="false">
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="room_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- ═══════════════ SEARCH ══════════════════════════════════════════ -->
+    <record id="view_health_appointment_search" model="ir.ui.view">
+        <field name="name">health.appointment.search</field>
+        <field name="model">health.appointment</field>
+        <field name="arch" type="xml">
+            <search string="Search Appointments / بحث في المواعيد">
+                <field name="appointment_number"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <separator/>
+                <filter string="Today / اليوم" name="today"
+                        domain="[('start_datetime','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                                 ('start_datetime','&lt;',  datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <filter string="This Week / هذا الأسبوع" name="this_week"
+                        domain="[('start_datetime','&gt;=', (context_today() + relativedelta(weekday=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('start_datetime','&lt;',  (context_today() + relativedelta(weeks=1, weekday=0)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <separator/>
+                <filter string="Draft / مسودة" name="draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="Confirmed / مؤكد" name="confirmed"
+                        domain="[('state','=','confirmed')]"/>
+                <filter string="In Progress / جارٍ" name="in_progress"
+                        domain="[('state','=','in_progress')]"/>
+                <filter string="Done / منتهٍ" name="done"
+                        domain="[('state','=','done')]"/>
+                <filter string="Cancelled / ملغى" name="cancelled"
+                        domain="[('state','=','cancelled')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Doctor / الطبيب" name="group_doctor"
+                            context="{'group_by': 'doctor_id'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Date / التاريخ" name="group_date"
+                            context="{'group_by': 'start_datetime:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ═══════════════ ACTIONS ══════════════════════════════════════════ -->
+    <record id="action_health_appointment_calendar" model="ir.actions.act_window">
+        <field name="name">Appointments / المواعيد</field>
+        <field name="res_model">health.appointment</field>
+        <field name="view_mode">calendar,kanban,tree,form</field>
+        <field name="context">{'search_default_confirmed': 1,
+                               'search_default_in_progress': 1}</field>
+    </record>
+
+    <record id="action_health_appointment_list" model="ir.actions.act_window">
+        <field name="name">Appointments List / قائمة المواعيد</field>
+        <field name="res_model">health.appointment</field>
+        <field name="view_mode">tree,calendar,form</field>
+    </record>
+
+</data></odoo>

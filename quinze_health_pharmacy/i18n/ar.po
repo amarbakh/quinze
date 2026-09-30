@@ -1,0 +1,498 @@
+# Arabic translation for QUINZE Health Pharmacy
+# ترجمة عربية لوحدة صيدلية QUINZE الصحي
+# Copyright (C) 2026 QUINZE Solutions
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QUINZE Health Pharmacy 17.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 00:00+0000\n"
+"PO-Revision-Date: 2026-05-18 00:00+0000\n"
+"Last-Translator: Bakhit Al-Amin <bakhit@quinze-solutions.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+# ─────────────────────────────────────────────────────────────────
+#  Module name / description
+# ─────────────────────────────────────────────────────────────────
+msgid "QUINZE Health Pharmacy"
+msgstr "صيدلية نظام QUINZE الصحي"
+
+msgid "Internal & external pharmacy dispensing, stock integration, automatic invoicing and insurance claim management"
+msgstr "الصرف الداخلي والخارجي للصيدلية، تكامل المخزون، الفوترة التلقائية، وإدارة مطالبات التأمين"
+
+# ─────────────────────────────────────────────────────────────────
+#  pharmacy.drug.category
+# ─────────────────────────────────────────────────────────────────
+msgid "Drug Category / تصنيف دواء"
+msgstr "تصنيف الدواء"
+
+msgid "Drug Categories / تصنيفات الأدوية"
+msgstr "تصنيفات الأدوية"
+
+msgid "Category Name"
+msgstr "اسم التصنيف"
+
+msgid "Arabic Name / الاسم بالعربية"
+msgstr "الاسم بالعربية"
+
+msgid "Code / الرمز"
+msgstr "الرمز"
+
+msgid "Description / الوصف"
+msgstr "الوصف"
+
+msgid "# Medications"
+msgstr "عدد الأدوية"
+
+# ─────────────────────────────────────────────────────────────────
+#  product.template — medication extension
+# ─────────────────────────────────────────────────────────────────
+msgid "Is Medication / دواء"
+msgstr "دواء"
+
+msgid "Flag this product as a dispensable medication."
+msgstr "تمييز هذا المنتج كدواء قابل للصرف."
+
+msgid "Generic Name (AR) / الاسم العلمي"
+msgstr "الاسم العلمي (بالعربية)"
+
+msgid "Generic/scientific name in Arabic for prescription printout."
+msgstr "الاسم العلمي/الجنيسي بالعربية للطباعة على الوصفة."
+
+msgid "Drug Category / تصنيف الدواء"
+msgstr "تصنيف الدواء"
+
+msgid "Dosage Form / الشكل الصيدلاني"
+msgstr "الشكل الصيدلاني"
+
+msgid "Strength / التركيز"
+msgstr "التركيز"
+
+msgid "Cold Chain / سلسلة التبريد"
+msgstr "سلسلة التبريد"
+
+msgid "Requires refrigeration (2–8 °C)"
+msgstr "يتطلب التبريد (2–8 درجة مئوية)"
+
+msgid "Controlled Substance / مادة مضبوطة"
+msgstr "مادة مضبوطة"
+
+msgid "Narcotic / psychotropic substance requiring special record-keeping."
+msgstr "مادة مخدرة أو ذات تأثير نفسي تتطلب تسجيلاً خاصاً."
+
+# dosage_form selection values
+msgid "Tablet / قرص"
+msgstr "قرص"
+
+msgid "Capsule / كبسولة"
+msgstr "كبسولة"
+
+msgid "Syrup / شراب"
+msgstr "شراب"
+
+msgid "Injection / حقنة"
+msgstr "حقنة"
+
+msgid "Cream / كريم"
+msgstr "كريم"
+
+msgid "Ointment / مرهم"
+msgstr "مرهم"
+
+msgid "Drops / قطرات"
+msgstr "قطرات"
+
+msgid "Inhaler / بخاخ"
+msgstr "بخاخ"
+
+msgid "Patch / لاصق جلدي"
+msgstr "لاصق جلدي"
+
+msgid "Suppository / تحميلة"
+msgstr "تحميلة"
+
+msgid "Powder / مسحوق"
+msgstr "مسحوق"
+
+msgid "Solution / محلول"
+msgstr "محلول"
+
+msgid "Other / أخرى"
+msgstr "أخرى"
+
+# ─────────────────────────────────────────────────────────────────
+#  pharmacy.dispensing
+# ─────────────────────────────────────────────────────────────────
+msgid "Pharmacy Dispensing / سجل صرف الصيدلية"
+msgstr "سجل صرف الصيدلية"
+
+msgid "Dispensing No. / رقم الصرف"
+msgstr "رقم الصرف"
+
+msgid "Dispensing Type / نوع الصرف"
+msgstr "نوع الصرف"
+
+msgid "Internal / داخلي (من وصفة العيادة)"
+msgstr "داخلي (من وصفة العيادة)"
+
+msgid "External / خارجي (مريض خارجي)"
+msgstr "خارجي (مريض من خارج العيادة)"
+
+msgid "Prescription / الوصفة"
+msgstr "الوصفة الطبية"
+
+msgid "Patient / المريض"
+msgstr "المريض"
+
+msgid "Customer / العميل"
+msgstr "العميل"
+
+msgid "Used for external dispensing invoicing"
+msgstr "يُستخدم لفوترة الصرف الخارجي"
+
+msgid "Pharmacist / الصيدلاني"
+msgstr "الصيدلاني"
+
+msgid "Date / التاريخ"
+msgstr "التاريخ"
+
+msgid "Dispensed At / وقت الصرف"
+msgstr "وقت الصرف"
+
+msgid "Medications / الأدوية"
+msgstr "الأدوية"
+
+msgid "Stock Picking / حركة المخزون"
+msgstr "حركة المخزون"
+
+msgid "Picking State"
+msgstr "حالة المخزون"
+
+msgid "Invoice / الفاتورة"
+msgstr "الفاتورة"
+
+msgid "Invoice State"
+msgstr "حالة الفاتورة"
+
+msgid "Insurance Claims / مطالبات التأمين"
+msgstr "مطالبات التأمين"
+
+msgid "# Claims"
+msgstr "عدد المطالبات"
+
+msgid "Total / المجموع"
+msgstr "المجموع الكلي"
+
+msgid "Notes / ملاحظات"
+msgstr "ملاحظات"
+
+# state selection
+msgid "Draft / مسودة"
+msgstr "مسودة"
+
+msgid "Confirmed / مؤكد"
+msgstr "مؤكد"
+
+msgid "Dispensed / تم الصرف"
+msgstr "تم الصرف"
+
+msgid "Cancelled / ملغى"
+msgstr "ملغى"
+
+# state labels (state field string)
+msgid "State / الحالة"
+msgstr "الحالة"
+
+# button labels
+msgid "Confirm / تأكيد"
+msgstr "تأكيد"
+
+msgid "Dispense / صرف"
+msgstr "صرف الدواء"
+
+msgid "Print Receipt / طباعة إيصال"
+msgstr "طباعة الإيصال"
+
+msgid "Cancel / إلغاء"
+msgstr "إلغاء"
+
+msgid "Reset / إعادة"
+msgstr "إعادة للمسودة"
+
+msgid "New Dispensing / صرف جديد"
+msgstr "صرف جديد"
+
+# error messages
+msgid "Please add at least one medication line before confirming. / الرجاء إضافة دواء واحد على الأقل قبل التأكيد."
+msgstr "الرجاء إضافة دواء واحد على الأقل قبل التأكيد."
+
+msgid "Please select a customer or patient for external dispensing invoicing. / الرجاء تحديد عميل أو مريض لفوترة الصرف الخارجي."
+msgstr "الرجاء تحديد عميل أو مريض لإنشاء فاتورة الصرف الخارجي."
+
+# ─────────────────────────────────────────────────────────────────
+#  pharmacy.dispensing.line
+# ─────────────────────────────────────────────────────────────────
+msgid "Dispensing Line / بند صرف"
+msgstr "بند الصرف"
+
+msgid "Dispensing / الصرف"
+msgstr "سجل الصرف"
+
+msgid "Rx Line / سطر الوصفة"
+msgstr "سطر الوصفة"
+
+msgid "Medication / الدواء"
+msgstr "الدواء"
+
+msgid "Drug Name (AR) / اسم الدواء"
+msgstr "اسم الدواء بالعربية"
+
+msgid "Ordered / المطلوب"
+msgstr "الكمية المطلوبة"
+
+msgid "Dispensed / المصروف"
+msgstr "الكمية المصروفة"
+
+msgid "Unit / الوحدة"
+msgstr "الوحدة"
+
+msgid "Batch / Lot"
+msgstr "رقم الدفعة"
+
+msgid "Expiry / انتهاء الصلاحية"
+msgstr "تاريخ انتهاء الصلاحية"
+
+msgid "Unit Price / سعر الوحدة"
+msgstr "سعر الوحدة"
+
+msgid "Subtotal / المجموع الفرعي"
+msgstr "المجموع الفرعي"
+
+msgid "Instructions / التعليمات"
+msgstr "تعليمات الاستخدام"
+
+msgid "Substitution / بديل"
+msgstr "بديل جنيسي"
+
+msgid "True if this is a generic substitution for the prescribed brand"
+msgstr "صحيح إذا كان هذا بديلاً جنيسياً للدواء الأصلي في الوصفة"
+
+# ─────────────────────────────────────────────────────────────────
+#  pharmacy.insurance.claim
+# ─────────────────────────────────────────────────────────────────
+msgid "Insurance Claim / مطالبة تأمين"
+msgstr "مطالبة التأمين"
+
+msgid "Claim No. / رقم المطالبة"
+msgstr "رقم المطالبة"
+
+msgid "Dispensing / سجل الصرف"
+msgstr "سجل الصرف"
+
+msgid "Insurance Company / شركة التأمين"
+msgstr "شركة التأمين"
+
+msgid "Policy No. / رقم البوليصة"
+msgstr "رقم وثيقة التأمين"
+
+msgid "Member ID / رقم العضو"
+msgstr "رقم العضوية"
+
+msgid "Approval No. / رقم الموافقة"
+msgstr "رقم الموافقة"
+
+msgid "Amount Claimed / المبلغ المطالب به"
+msgstr "المبلغ المطالب به"
+
+msgid "Coverage % / نسبة التغطية"
+msgstr "نسبة التغطية التأمينية"
+
+msgid "Percentage covered by the insurer"
+msgstr "النسبة التي يغطيها التأمين"
+
+msgid "Covered Amount / المبلغ المغطى"
+msgstr "المبلغ المغطى بالتأمين"
+
+msgid "Patient Share / حصة المريض"
+msgstr "حصة المريض من التكلفة"
+
+msgid "Approved Amount / المبلغ المعتمد"
+msgstr "المبلغ المعتمد من التأمين"
+
+msgid "Actual amount approved by the insurer after review"
+msgstr "المبلغ الفعلي الذي اعتمده التأمين بعد المراجعة"
+
+msgid "Submission Date / تاريخ التقديم"
+msgstr "تاريخ تقديم المطالبة"
+
+msgid "Response Date / تاريخ الرد"
+msgstr "تاريخ رد التأمين"
+
+msgid "Rejection Reason / سبب الرفض"
+msgstr "سبب رفض المطالبة"
+
+# claim state selection
+msgid "Submitted / مُقدَّمة"
+msgstr "مُقدَّمة"
+
+msgid "Approved / موافق عليها"
+msgstr "موافق عليها"
+
+msgid "Partially Approved / موافقة جزئية"
+msgstr "موافقة جزئية"
+
+msgid "Rejected / مرفوضة"
+msgstr "مرفوضة"
+
+# claim buttons
+msgid "Submit / تقديم"
+msgstr "تقديم المطالبة"
+
+msgid "Approve / قبول"
+msgstr "الموافقة على المطالبة"
+
+msgid "Partial Approve / قبول جزئي"
+msgstr "موافقة جزئية"
+
+msgid "Reject / رفض"
+msgstr "رفض المطالبة"
+
+# claim error messages
+msgid "Please enter the insurance company name. / الرجاء إدخال اسم شركة التأمين."
+msgstr "الرجاء إدخال اسم شركة التأمين."
+
+msgid "Please enter the rejection reason. / الرجاء إدخال سبب الرفض."
+msgstr "الرجاء إدخال سبب رفض المطالبة."
+
+# ─────────────────────────────────────────────────────────────────
+#  health.prescription extension
+# ─────────────────────────────────────────────────────────────────
+msgid "Dispensed Qty / الكمية المصروفة"
+msgstr "الكمية المصروفة"
+
+msgid "Total quantity dispensed across all dispensing records"
+msgstr "إجمالي الكمية المصروفة في جميع سجلات الصرف"
+
+msgid "Remaining / المتبقية"
+msgstr "الكمية المتبقية"
+
+msgid "Line State / حالة البند"
+msgstr "حالة بند الوصفة"
+
+msgid "Pending / معلق"
+msgstr "معلق (لم يُصرف)"
+
+msgid "Partially Dispensed / جزئي"
+msgstr "مصروف جزئياً"
+
+msgid "Fully Dispensed / مكتمل"
+msgstr "مصروف بالكامل"
+
+msgid "Dispensings / سجلات الصرف"
+msgstr "سجلات الصرف"
+
+msgid "# Dispensings"
+msgstr "عدد سجلات الصرف"
+
+# ─────────────────────────────────────────────────────────────────
+#  Menu items
+# ─────────────────────────────────────────────────────────────────
+msgid "Pharmacy / الصيدلية"
+msgstr "الصيدلية"
+
+msgid "Dispensing / الصرف"
+msgstr "الصرف الصيدلاني"
+
+msgid "Dispensing / الصرف الصيدلاني"
+msgstr "الصرف الصيدلاني"
+
+msgid "Insurance Claims / مطالبات التأمين"
+msgstr "مطالبات التأمين"
+
+msgid "Medications / الأدوية"
+msgstr "الأدوية"
+
+msgid "Drug Categories / تصنيفات الأدوية"
+msgstr "تصنيفات الأدوية"
+
+# ─────────────────────────────────────────────────────────────────
+#  Report labels
+# ─────────────────────────────────────────────────────────────────
+msgid "Dispensing Receipt / إيصال الصرف"
+msgstr "إيصال الصرف الصيدلاني"
+
+msgid "Dispensing Receipt"
+msgstr "إيصال الصرف"
+
+msgid "Internal Dispensing — linked to clinic prescription"
+msgstr "صرف داخلي مرتبط بوصفة العيادة"
+
+msgid "External Dispensing — walk-in customer"
+msgstr "صرف خارجي لمريض زيارة"
+
+msgid "Generic Sub."
+msgstr "بديل جنيسي"
+
+# ─────────────────────────────────────────────────────────────────
+#  Stock / picking type data
+# ─────────────────────────────────────────────────────────────────
+msgid "Pharmacy / الصيدلية"
+msgstr "الصيدلية"
+
+msgid "Pharmacy Dispensing / صرف الصيدلية"
+msgstr "صرف الصيدلية"
+
+# ─────────────────────────────────────────────────────────────────
+#  Drug category reference data
+# ─────────────────────────────────────────────────────────────────
+msgid "Analgesics & Antipyretics"
+msgstr "مسكنات الألم وخافضات الحرارة"
+
+msgid "Antibiotics"
+msgstr "المضادات الحيوية"
+
+msgid "Antihypertensives"
+msgstr "خافضات ضغط الدم"
+
+msgid "Antidiabetics"
+msgstr "أدوية السكري"
+
+msgid "Lipid-Lowering Agents"
+msgstr "خافضات الدهون"
+
+msgid "Antihistamines"
+msgstr "مضادات الهيستامين"
+
+msgid "Gastrointestinal"
+msgstr "أدوية الجهاز الهضمي"
+
+msgid "Respiratory"
+msgstr "أدوية الجهاز التنفسي"
+
+msgid "Vitamins & Supplements"
+msgstr "الفيتامينات والمكملات الغذائية"
+
+# ─────────────────────────────────────────────────────────────────
+#  Security rule names
+# ─────────────────────────────────────────────────────────────────
+msgid "Pharmacy Dispensing: Company Isolation / عزل سجلات الصرف"
+msgstr "عزل سجلات الصرف حسب الشركة"
+
+msgid "Insurance Claim: Company Isolation / عزل مطالبات التأمين"
+msgstr "عزل مطالبات التأمين حسب الشركة"
+
+# ─────────────────────────────────────────────────────────────────
+#  Chatter / credit note messages
+# ─────────────────────────────────────────────────────────────────
+msgid "Credit note %s created for insurance coverage."
+msgstr "تم إنشاء إشعار دائن رقم %s لتغطية التأمين."
+
+msgid "Insurance Coverage / تغطية التأمين"
+msgstr "تغطية التأمين"

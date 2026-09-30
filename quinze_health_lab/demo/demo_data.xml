@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Lab — Demo Data
+    ===============================
+    Provides realistic lab order demo data that builds on
+    the quinze_health_clinic demo patients and encounters.
+-->
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Demo lab order for Khalid (linked to clinic demo encounter)
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_lab_order_khalid" model="lab.order">
+        <field name="patient_id"
+               ref="quinze_health_clinic.demo_patient_khalid"/>
+        <field name="doctor_id"
+               ref="quinze_health_clinic.demo_partner_doctor_ali"/>
+        <field name="lab_request_id"
+               ref="quinze_health_clinic.demo_lab_req_khalid"/>
+        <field name="order_date" eval="(DateTime.now() - timedelta(days=3)).date()"/>
+        <field name="priority">1</field>
+        <field name="clinical_indication">
+            Hypertension workup, cardiovascular risk /
+            تقييم ارتفاع ضغط الدم وخطر الأمراض القلبية
+        </field>
+        <field name="state">done</field>
+        <field name="completed_date"
+               eval="DateTime.now() - timedelta(days=2)"/>
+    </record>
+
+    <!-- Update lab request FK -->
+    <record id="quinze_health_clinic.demo_lab_req_khalid"
+            model="health.lab.request">
+        <field name="lab_order_id" ref="demo_lab_order_khalid"/>
+    </record>
+
+    <!-- Sample for Khalid's order -->
+    <record id="demo_sample_khalid" model="lab.sample">
+        <field name="lab_order_id" ref="demo_lab_order_khalid"/>
+        <field name="sample_type">blood_venous</field>
+        <field name="volume_ml">5.0</field>
+        <field name="container">EDTA Tube / أنبوب EDTA</field>
+        <field name="collection_datetime"
+               eval="(DateTime.now() - timedelta(days=3)).replace(hour=10, minute=15)"/>
+        <field name="received_datetime"
+               eval="(DateTime.now() - timedelta(days=3)).replace(hour=10, minute=45)"/>
+        <field name="state">received</field>
+    </record>
+
+    <!-- Lab order lines with results for Khalid -->
+
+    <!-- HGB — Low (anaemia) -->
+    <record id="demo_line_khalid_hgb" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_hgb"/>
+        <field name="sequence">10</field>
+        <field name="ref_low_male">13.5</field>
+        <field name="ref_high_male">17.5</field>
+        <field name="ref_low">13.5</field>
+        <field name="ref_high">17.5</field>
+        <field name="result_value">11.8</field>
+        <field name="state">resulted</field>
+    </record>
+
+    <!-- WBC — Normal -->
+    <record id="demo_line_khalid_wbc" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_wbc"/>
+        <field name="sequence">20</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">11.0</field>
+        <field name="result_value">7.2</field>
+        <field name="state">resulted</field>
+    </record>
+
+    <!-- Total Cholesterol — High -->
+    <record id="demo_line_khalid_tc" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_tc"/>
+        <field name="sequence">30</field>
+        <field name="ref_low">0.0</field>
+        <field name="ref_high">200.0</field>
+        <field name="result_value">248.0</field>
+        <field name="state">resulted</field>
+    </record>
+
+    <!-- LDL — High -->
+    <record id="demo_line_khalid_ldl" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_ldl"/>
+        <field name="sequence">40</field>
+        <field name="ref_low">0.0</field>
+        <field name="ref_high">100.0</field>
+        <field name="result_value">152.0</field>
+        <field name="state">resulted</field>
+    </record>
+
+    <!-- HbA1c — High (pre-diabetic) -->
+    <record id="demo_line_khalid_hba1c" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_hba1c"/>
+        <field name="sequence">50</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">5.7</field>
+        <field name="result_value">6.4</field>
+        <field name="state">resulted</field>
+    </record>
+
+    <!-- Creatinine — Normal -->
+    <record id="demo_line_khalid_creat" model="lab.order.line">
+        <field name="order_id" ref="demo_lab_order_khalid"/>
+        <field name="test_id" ref="test_creatinine"/>
+        <field name="sequence">60</field>
+        <field name="ref_low_male">0.74</field>
+        <field name="ref_high_male">1.35</field>
+        <field name="ref_low">0.74</field>
+        <field name="ref_high">1.35</field>
+        <field name="result_value">1.02</field>
+        <field name="state">resulted</field>
+    </record>
+
+</data>
+</odoo>

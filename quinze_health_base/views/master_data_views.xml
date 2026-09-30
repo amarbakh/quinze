@@ -207,9 +207,8 @@
                             <field name="allergy_type"/>
                             <field name="active" widget="boolean_toggle"/>
                         </group>
-                        <group string="Clinical Notes / ملاحظات سريرية">
-                            <field name="note" nolabel="1"/>
-                        </group>
+                        <separator string="Clinical Notes / ملاحظات سريرية"/>
+                        <field colspan="2" name="note" nolabel="1"/>
                     </sheet>
                 </form>
             </field>

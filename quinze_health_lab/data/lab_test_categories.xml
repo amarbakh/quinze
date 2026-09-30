@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Lab — Standard Test Categories & Tests
+    ======================================================
+    Reference data: noupdate=1 so admin changes persist on upgrade.
+    Covers the most common clinical lab panels used in Saudi Arabia.
+
+    بيانات مرجعية: noupdate=1 لحفظ التعديلات الإدارية عند الترقية.
+    يشمل أكثر الفحوصات المخبرية شيوعاً في المملكة العربية السعودية.
+-->
+<odoo>
+<data noupdate="1">
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Lab test sequences
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="seq_lab_sample" model="ir.sequence">
+        <field name="name">Lab Sample</field>
+        <field name="code">lab.sample</field>
+        <field name="prefix">SMP/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Categories
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="cat_hematology" model="lab.test.category">
+        <field name="name">Hematology</field>
+        <field name="name_ar">أمراض الدم / الهيماتولوجي</field>
+        <field name="code">HEM</field>
+        <field name="sequence">10</field>
+        <field name="color">1</field>
+    </record>
+
+    <record id="cat_chemistry" model="lab.test.category">
+        <field name="name">Clinical Chemistry</field>
+        <field name="name_ar">الكيمياء السريرية</field>
+        <field name="code">CHEM</field>
+        <field name="sequence">20</field>
+        <field name="color">2</field>
+    </record>
+
+    <record id="cat_lipids" model="lab.test.category">
+        <field name="name">Lipid Profile</field>
+        <field name="name_ar">ملف الدهون</field>
+        <field name="code">LIP</field>
+        <field name="sequence">30</field>
+        <field name="color">3</field>
+    </record>
+
+    <record id="cat_diabetes" model="lab.test.category">
+        <field name="name">Diabetes Monitoring</field>
+        <field name="name_ar">متابعة السكري</field>
+        <field name="code">DM</field>
+        <field name="sequence">40</field>
+        <field name="color">4</field>
+    </record>
+
+    <record id="cat_thyroid" model="lab.test.category">
+        <field name="name">Thyroid Function</field>
+        <field name="name_ar">وظائف الغدة الدرقية</field>
+        <field name="code">THY</field>
+        <field name="sequence">50</field>
+        <field name="color">5</field>
+    </record>
+
+    <record id="cat_renal" model="lab.test.category">
+        <field name="name">Renal Function</field>
+        <field name="name_ar">وظائف الكلى</field>
+        <field name="code">REN</field>
+        <field name="sequence">60</field>
+        <field name="color">6</field>
+    </record>
+
+    <record id="cat_liver" model="lab.test.category">
+        <field name="name">Liver Function</field>
+        <field name="name_ar">وظائف الكبد</field>
+        <field name="code">LFT</field>
+        <field name="sequence">70</field>
+        <field name="color">7</field>
+    </record>
+
+    <record id="cat_urine" model="lab.test.category">
+        <field name="name">Urinalysis</field>
+        <field name="name_ar">تحليل البول</field>
+        <field name="code">URI</field>
+        <field name="sequence">80</field>
+        <field name="color">8</field>
+    </record>
+
+    <record id="cat_microbiology" model="lab.test.category">
+        <field name="name">Microbiology</field>
+        <field name="name_ar">الميكروبيولوجيا</field>
+        <field name="code">MIC</field>
+        <field name="sequence">90</field>
+        <field name="color">9</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Hematology tests
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- CBC — WBC -->
+    <record id="test_wbc" model="lab.test">
+        <field name="name">White Blood Cell Count</field>
+        <field name="name_ar">تعداد خلايا الدم البيضاء</field>
+        <field name="code">WBC</field>
+        <field name="category_id" ref="cat_hematology"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">10³/µL</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">11.0</field>
+        <field name="critical_low">2.0</field>
+        <field name="critical_high">30.0</field>
+        <field name="turnaround_hours">2</field>
+    </record>
+
+    <!-- CBC — RBC Male -->
+    <record id="test_rbc" model="lab.test">
+        <field name="name">Red Blood Cell Count</field>
+        <field name="name_ar">تعداد خلايا الدم الحمراء</field>
+        <field name="code">RBC</field>
+        <field name="category_id" ref="cat_hematology"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">10⁶/µL</field>
+        <field name="ref_low_male">4.5</field>
+        <field name="ref_high_male">5.9</field>
+        <field name="ref_low_female">3.8</field>
+        <field name="ref_high_female">5.2</field>
+        <field name="ref_low">3.8</field>
+        <field name="ref_high">5.9</field>
+        <field name="turnaround_hours">2</field>
+    </record>
+
+    <!-- Hemoglobin -->
+    <record id="test_hgb" model="lab.test">
+        <field name="name">Hemoglobin</field>
+        <field name="name_ar">الهيموجلوبين</field>
+        <field name="code">HGB</field>
+        <field name="category_id" ref="cat_hematology"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">g/dL</field>
+        <field name="ref_low_male">13.5</field>
+        <field name="ref_high_male">17.5</field>
+        <field name="ref_low_female">12.0</field>
+        <field name="ref_high_female">15.5</field>
+        <field name="ref_low">12.0</field>
+        <field name="ref_high">17.5</field>
+        <field name="critical_low">7.0</field>
+        <field name="critical_high">20.0</field>
+        <field name="turnaround_hours">2</field>
+    </record>
+
+    <!-- Platelets -->
+    <record id="test_plt" model="lab.test">
+        <field name="name">Platelet Count</field>
+        <field name="name_ar">تعداد الصفائح الدموية</field>
+        <field name="code">PLT</field>
+        <field name="category_id" ref="cat_hematology"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">10³/µL</field>
+        <field name="ref_low">150.0</field>
+        <field name="ref_high">400.0</field>
+        <field name="critical_low">50.0</field>
+        <field name="critical_high">1000.0</field>
+        <field name="turnaround_hours">2</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Clinical Chemistry
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Sodium -->
+    <record id="test_na" model="lab.test">
+        <field name="name">Sodium</field>
+        <field name="name_ar">الصوديوم</field>
+        <field name="code">NA</field>
+        <field name="category_id" ref="cat_chemistry"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mEq/L</field>
+        <field name="ref_low">136.0</field>
+        <field name="ref_high">145.0</field>
+        <field name="critical_low">120.0</field>
+        <field name="critical_high">160.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <!-- Potassium -->
+    <record id="test_k" model="lab.test">
+        <field name="name">Potassium</field>
+        <field name="name_ar">البوتاسيوم</field>
+        <field name="code">K</field>
+        <field name="category_id" ref="cat_chemistry"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mEq/L</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.1</field>
+        <field name="critical_low">2.5</field>
+        <field name="critical_high">6.5</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Lipid Profile
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_tc" model="lab.test">
+        <field name="name">Total Cholesterol</field>
+        <field name="name_ar">الكوليسترول الكلي</field>
+        <field name="code">TC</field>
+        <field name="category_id" ref="cat_lipids"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low">0.0</field>
+        <field name="ref_high">200.0</field>
+        <field name="critical_high">300.0</field>
+        <field name="instructions">Fasting 9–12 hours required / يُشترط الصيام 9–12 ساعة</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <record id="test_tg" model="lab.test">
+        <field name="name">Triglycerides</field>
+        <field name="name_ar">الدهون الثلاثية</field>
+        <field name="code">TG</field>
+        <field name="category_id" ref="cat_lipids"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low">0.0</field>
+        <field name="ref_high">150.0</field>
+        <field name="critical_high">500.0</field>
+        <field name="instructions">Fasting 9–12 hours required / يُشترط الصيام 9–12 ساعة</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <record id="test_hdl" model="lab.test">
+        <field name="name">HDL Cholesterol</field>
+        <field name="name_ar">الكوليسترول الجيد (HDL)</field>
+        <field name="code">HDL</field>
+        <field name="category_id" ref="cat_lipids"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low_male">40.0</field>
+        <field name="ref_high_male">60.0</field>
+        <field name="ref_low_female">50.0</field>
+        <field name="ref_high_female">60.0</field>
+        <field name="ref_low">40.0</field>
+        <field name="ref_high">60.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <record id="test_ldl" model="lab.test">
+        <field name="name">LDL Cholesterol</field>
+        <field name="name_ar">الكوليسترول الضار (LDL)</field>
+        <field name="code">LDL</field>
+        <field name="category_id" ref="cat_lipids"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low">0.0</field>
+        <field name="ref_high">100.0</field>
+        <field name="critical_high">190.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Diabetes Monitoring
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_fbs" model="lab.test">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="name_ar">سكر الدم الصائم</field>
+        <field name="code">FBS</field>
+        <field name="category_id" ref="cat_diabetes"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low">70.0</field>
+        <field name="ref_high">100.0</field>
+        <field name="critical_low">40.0</field>
+        <field name="critical_high">500.0</field>
+        <field name="instructions">Fasting 8+ hours required / يُشترط الصيام 8 ساعات أو أكثر</field>
+        <field name="turnaround_hours">2</field>
+    </record>
+
+    <record id="test_hba1c" model="lab.test">
+        <field name="name">Glycated Hemoglobin (HbA1c)</field>
+        <field name="name_ar">الهيموجلوبين الغليكوزيلاتي (HbA1c)</field>
+        <field name="code">HBA1C</field>
+        <field name="category_id" ref="cat_diabetes"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">%</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">5.7</field>
+        <field name="critical_high">14.0</field>
+        <field name="turnaround_hours">6</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Thyroid Function
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_tsh" model="lab.test">
+        <field name="name">Thyroid Stimulating Hormone (TSH)</field>
+        <field name="name_ar">هرمون تحفيز الغدة الدرقية (TSH)</field>
+        <field name="code">TSH</field>
+        <field name="category_id" ref="cat_thyroid"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mIU/L</field>
+        <field name="ref_low">0.4</field>
+        <field name="ref_high">4.0</field>
+        <field name="critical_low">0.01</field>
+        <field name="critical_high">10.0</field>
+        <field name="turnaround_hours">6</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Renal Function
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_creatinine" model="lab.test">
+        <field name="name">Creatinine</field>
+        <field name="name_ar">الكرياتينين</field>
+        <field name="code">CREAT</field>
+        <field name="category_id" ref="cat_renal"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low_male">0.74</field>
+        <field name="ref_high_male">1.35</field>
+        <field name="ref_low_female">0.59</field>
+        <field name="ref_high_female">1.04</field>
+        <field name="ref_low">0.59</field>
+        <field name="ref_high">1.35</field>
+        <field name="critical_high">10.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <record id="test_urea" model="lab.test">
+        <field name="name">Blood Urea Nitrogen (BUN)</field>
+        <field name="name_ar">نيتروجين اليوريا في الدم</field>
+        <field name="code">BUN</field>
+        <field name="category_id" ref="cat_renal"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">mg/dL</field>
+        <field name="ref_low">7.0</field>
+        <field name="ref_high">20.0</field>
+        <field name="critical_high">100.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Liver Function
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_alt" model="lab.test">
+        <field name="name">Alanine Aminotransferase (ALT)</field>
+        <field name="name_ar">انزيم ALT / ناقلة أمين الألانين</field>
+        <field name="code">ALT</field>
+        <field name="category_id" ref="cat_liver"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">U/L</field>
+        <field name="ref_low_male">7.0</field>
+        <field name="ref_high_male">56.0</field>
+        <field name="ref_low_female">7.0</field>
+        <field name="ref_high_female">45.0</field>
+        <field name="ref_low">7.0</field>
+        <field name="ref_high">56.0</field>
+        <field name="critical_high">500.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <record id="test_ast" model="lab.test">
+        <field name="name">Aspartate Aminotransferase (AST)</field>
+        <field name="name_ar">انزيم AST / ناقلة أمين الأسبارتات</field>
+        <field name="code">AST</field>
+        <field name="category_id" ref="cat_liver"/>
+        <field name="result_type">numeric</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="result_uom">U/L</field>
+        <field name="ref_low">10.0</field>
+        <field name="ref_high">40.0</field>
+        <field name="critical_high">500.0</field>
+        <field name="turnaround_hours">4</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Microbiology
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <record id="test_culture_blood" model="lab.test">
+        <field name="name">Blood Culture</field>
+        <field name="name_ar">مزرعة الدم</field>
+        <field name="code">CULT-B</field>
+        <field name="category_id" ref="cat_microbiology"/>
+        <field name="result_type">text</field>
+        <field name="sample_type">blood_venous</field>
+        <field name="normal_text_result">No growth / لا نمو بكتيري</field>
+        <field name="turnaround_hours">72</field>
+    </record>
+
+    <record id="test_culture_urine" model="lab.test">
+        <field name="name">Urine Culture</field>
+        <field name="name_ar">مزرعة البول</field>
+        <field name="code">CULT-U</field>
+        <field name="category_id" ref="cat_microbiology"/>
+        <field name="result_type">text</field>
+        <field name="sample_type">urine</field>
+        <field name="normal_text_result">No growth / لا نمو بكتيري</field>
+        <field name="turnaround_hours">48</field>
+    </record>
+
+</data>
+</odoo>

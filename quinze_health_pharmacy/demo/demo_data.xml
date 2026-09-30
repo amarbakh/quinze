@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Pharmacy — Demo Data
+    ====================================
+    Realistic demo dispensing records for development and testing.
+    Loaded only when the module is installed in demo mode.
+
+    بيانات تجريبية واقعية لسجلات الصرف الصيدلاني.
+    يتم تحميلها فقط عند التثبيت في وضع العرض التجريبي.
+-->
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         product.product variant IDs for demo lines
+         (Templates were created in pharmacy_data.xml; here we declare
+          the auto-created product.product so we can reference them)
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_pp_paracetamol" model="product.product">
+        <field name="product_tmpl_id"
+               ref="quinze_health_pharmacy.product_paracetamol_500"/>
+    </record>
+
+    <record id="demo_pp_amlodipine" model="product.product">
+        <field name="product_tmpl_id"
+               ref="quinze_health_pharmacy.product_amlodipine_5"/>
+    </record>
+
+    <record id="demo_pp_atorvastatin" model="product.product">
+        <field name="product_tmpl_id"
+               ref="quinze_health_pharmacy.product_atorvastatin_20"/>
+    </record>
+
+    <record id="demo_pp_amoxicillin" model="product.product">
+        <field name="product_tmpl_id"
+               ref="quinze_health_pharmacy.product_amoxicillin_500"/>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Demo dispensing 1 — INTERNAL
+         Linked to Khalid's prescription (demo_rx_khalid)
+         Pre-filled from clinic prescription (Amlodipine + Atorvastatin)
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_dispensing_khalid_internal" model="pharmacy.dispensing">
+        <field name="dispensing_type">internal</field>
+        <field name="prescription_id"
+               ref="quinze_health_clinic.demo_rx_khalid"/>
+        <field name="patient_id"
+               ref="quinze_health_clinic.demo_patient_khalid"/>
+        <field name="partner_id"
+               ref="quinze_health_clinic.demo_partner_patient_khalid"/>
+        <field name="dispensing_date"
+               eval="(DateTime.now() - timedelta(days=2)).date()"/>
+        <field name="state">draft</field>
+        <field name="note">
+            Internal dispensing from clinic prescription.
+            Amlodipine for hypertension + Atorvastatin for hyperlipidemia. /
+            صرف داخلي من وصفة العيادة.
+            أملوديبين لضغط الدم + أتورفاستاتين لفرط الدهون.
+        </field>
+    </record>
+
+    <!-- Lines for internal dispensing -->
+    <record id="demo_disp_line_khalid_1" model="pharmacy.dispensing.line">
+        <field name="dispensing_id" ref="demo_dispensing_khalid_internal"/>
+        <field name="product_id" ref="demo_pp_amlodipine"/>
+        <field name="qty_ordered">30.0</field>
+        <field name="qty_dispensed">30.0</field>
+        <field name="price_unit">0.80</field>
+        <field name="instructions">
+            Take 1 tablet daily in the morning / تناول قرصاً واحداً يومياً في الصباح
+        </field>
+    </record>
+
+    <record id="demo_disp_line_khalid_2" model="pharmacy.dispensing.line">
+        <field name="dispensing_id" ref="demo_dispensing_khalid_internal"/>
+        <field name="product_id" ref="demo_pp_atorvastatin"/>
+        <field name="qty_ordered">30.0</field>
+        <field name="qty_dispensed">30.0</field>
+        <field name="price_unit">1.50</field>
+        <field name="instructions">
+            Take 1 tablet at night / تناول قرصاً واحداً في المساء
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Demo dispensing 2 — EXTERNAL
+         Walk-in patient Sara — Paracetamol + Amoxicillin
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="demo_dispensing_sara_external" model="pharmacy.dispensing">
+        <field name="dispensing_type">external</field>
+        <field name="patient_id"
+               ref="quinze_health_clinic.demo_patient_sara"/>
+        <field name="partner_id"
+               ref="quinze_health_clinic.demo_partner_patient_sara"/>
+        <field name="dispensing_date"
+               eval="(DateTime.now() - timedelta(days=1)).date()"/>
+        <field name="state">draft</field>
+        <field name="note">
+            Walk-in external dispensing. Patient presented with fever and
+            throat infection (external prescription from private clinic). /
+            صرف خارجي لمريضة حضرت بشكل مباشر. وصفة خارجية من عيادة خاصة.
+            حمى والتهاب في الحلق.
+        </field>
+    </record>
+
+    <!-- Lines for external dispensing -->
+    <record id="demo_disp_line_sara_1" model="pharmacy.dispensing.line">
+        <field name="dispensing_id" ref="demo_dispensing_sara_external"/>
+        <field name="product_id" ref="demo_pp_paracetamol"/>
+        <field name="qty_ordered">20.0</field>
+        <field name="qty_dispensed">20.0</field>
+        <field name="price_unit">0.50</field>
+        <field name="instructions">
+            Take 2 tablets every 6 hours as needed for fever /
+            تناول قرصين كل 6 ساعات عند الحاجة للحمى
+        </field>
+    </record>
+
+    <record id="demo_disp_line_sara_2" model="pharmacy.dispensing.line">
+        <field name="dispensing_id" ref="demo_dispensing_sara_external"/>
+        <field name="product_id" ref="demo_pp_amoxicillin"/>
+        <field name="qty_ordered">21.0</field>
+        <field name="qty_dispensed">21.0</field>
+        <field name="price_unit">1.20</field>
+        <field name="instructions">
+            Take 1 capsule three times daily for 7 days /
+            تناول كبسولة واحدة ثلاث مرات يومياً لمدة 7 أيام
+        </field>
+    </record>
+
+</data>
+</odoo>

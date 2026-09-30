@@ -1,0 +1,267 @@
+# Arabic translation for QUINZE Health Lab
+# Copyright (C) 2026 QUINZE Solutions
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: Bakhit Al-Amin <bakhit@quinze-solutions.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. ── lab.test.category ───────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_lab.model_lab_test_category
+msgid "Lab Test Category"
+msgstr "تصنيف الفحوصات المخبرية"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test_category__name
+msgid "Category Name"
+msgstr "اسم التصنيف"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test_category__test_count
+msgid "# Tests"
+msgstr "عدد الفحوصات"
+
+#. ── lab.test ─────────────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_lab.model_lab_test
+msgid "Lab Test"
+msgstr "فحص مخبري"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__code
+msgid "Test Code"
+msgstr "رمز الفحص"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__result_type
+msgid "Result Type"
+msgstr "نوع النتيجة"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__result_type__numeric
+msgid "Numeric"
+msgstr "رقمي"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__result_type__text
+msgid "Text"
+msgstr "نصي"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__result_type__boolean
+msgid "Positive/Negative"
+msgstr "إيجابي/سلبي"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__sample_type
+msgid "Sample Type"
+msgstr "نوع العينة"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__blood_venous
+msgid "Venous Blood"
+msgstr "دم وريدي"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__blood_capillary
+msgid "Capillary Blood"
+msgstr "دم شعري"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__urine
+msgid "Urine"
+msgstr "بول"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__stool
+msgid "Stool"
+msgstr "براز"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__sputum
+msgid "Sputum"
+msgstr "بلغم"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__swab
+msgid "Swab"
+msgstr "مسحة"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_test__sample_type__csf
+msgid "CSF"
+msgstr "سائل نخاعي"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__result_uom
+msgid "Unit"
+msgstr "الوحدة"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__turnaround_hours
+msgid "Turnaround (hrs)"
+msgstr "وقت الاستجابة (ساعة)"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__ref_low
+msgid "Ref Low"
+msgstr "الحد الأدنى المرجعي"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__ref_high
+msgid "Ref High"
+msgstr "الحد الأعلى المرجعي"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__critical_low
+msgid "Critical Low"
+msgstr "الحد الحرج الأدنى"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_test__critical_high
+msgid "Critical High"
+msgstr "الحد الحرج الأعلى"
+
+#. ── lab.order ────────────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_lab.model_lab_order
+msgid "Lab Order"
+msgstr "أمر مختبر"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__order_number
+msgid "Order Number"
+msgstr "رقم الأمر"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__order_date
+msgid "Order Date"
+msgstr "تاريخ الأمر"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__expected_date
+msgid "Expected Date"
+msgstr "التاريخ المتوقع"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__completed_date
+msgid "Completed At"
+msgstr "وقت الاكتمال"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__clinical_indication
+msgid "Clinical Indication"
+msgstr "المؤشر السريري"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__abnormal_count
+msgid "# Abnormal"
+msgstr "عدد النتائج الشاذة"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order__critical_count
+msgid "# Critical"
+msgstr "عدد القيم الحرجة"
+
+#. Lab order states
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order__state__sample_collected
+msgid "Sample Collected"
+msgstr "تم جمع العينة"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order__state__in_progress
+msgid "In Progress"
+msgstr "جارٍ"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order__state__done
+msgid "Done"
+msgstr "منتهٍ"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order__state__cancelled
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. ── lab.order.line ───────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_lab.model_lab_order_line
+msgid "Lab Order Line"
+msgstr "بند أمر المختبر"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order_line__result_value
+msgid "Result"
+msgstr "النتيجة"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order_line__ref_display
+msgid "Reference Range"
+msgstr "النطاق المرجعي"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_order_line__flag
+msgid "Flag"
+msgstr "العلامة"
+
+#. Flag selections
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order_line__flag__normal
+msgid "Normal"
+msgstr "طبيعي"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order_line__flag__high
+msgid "High ↑"
+msgstr "مرتفع ↑"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order_line__flag__low
+msgid "Low ↓"
+msgstr "منخفض ↓"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order_line__flag__critical_high
+msgid "Critical High ↑↑"
+msgstr "حرج مرتفع ↑↑"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_order_line__flag__critical_low
+msgid "Critical Low ↓↓"
+msgstr "حرج منخفض ↓↓"
+
+#. ── lab.sample ───────────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_lab.model_lab_sample
+msgid "Lab Sample"
+msgstr "عينة مخبرية"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_sample__collection_datetime
+msgid "Collected At"
+msgstr "وقت الجمع"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_sample__collector_id
+msgid "Collected By"
+msgstr "جُمعت بواسطة"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_sample__received_datetime
+msgid "Received At"
+msgstr "وقت الاستلام"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_sample__barcode
+msgid "Barcode"
+msgstr "الباركود"
+
+#: model:ir.model.fields,field_description:quinze_health_lab.field_lab_sample__rejection_reason
+msgid "Rejection Reason"
+msgstr "سبب الرفض"
+
+#. Sample states
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_sample__state__pending
+msgid "Pending"
+msgstr "معلق"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_sample__state__collected
+msgid "Collected"
+msgstr "تم الجمع"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_sample__state__received
+msgid "Received"
+msgstr "تم الاستلام"
+
+#: model:ir.model.fields.selection,name:quinze_health_lab.selection__lab_sample__state__rejected
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. ── Menu items ───────────────────────────────────────────────────────────────
+#: model:ir.ui.menu,name:quinze_health_lab.menu_health_lab_root
+msgid "Laboratory"
+msgstr "المختبر"
+
+#: model:ir.ui.menu,name:quinze_health_lab.menu_lab_orders
+msgid "Lab Orders"
+msgstr "أوامر المختبر"
+
+#: model:ir.ui.menu,name:quinze_health_lab.menu_lab_samples
+msgid "Samples"
+msgstr "العينات"
+
+#: model:ir.ui.menu,name:quinze_health_lab.menu_lab_test_categories
+msgid "Test Categories"
+msgstr "تصنيفات الفحوصات"
+
+#: model:ir.ui.menu,name:quinze_health_lab.menu_lab_tests
+msgid "Test Catalog"
+msgstr "كتالوج الفحوصات"

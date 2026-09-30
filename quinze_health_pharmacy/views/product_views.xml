@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         product.template — Medication tab injected into standard form
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_product_template_pharmacy_form" model="ir.ui.view">
+        <field name="name">product.template.pharmacy.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Add "Is Medication" badge next to the product name -->
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <div invisible="not is_medication">
+                    <span class="badge text-bg-success">
+                        💊 Medication / دواء
+                    </span>
+                    <span invisible="not is_controlled"
+                          class="badge text-bg-danger ms-1">
+                        ⚠ Controlled / مادة مضبوطة
+                    </span>
+                    <span invisible="not requires_cold_chain"
+                          class="badge text-bg-info ms-1">
+                        ❄ Cold Chain / سلسلة التبريد
+                    </span>
+                </div>
+            </xpath>
+
+            <!-- Inject Pharmacy tab after the General Information tab -->
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page string="Pharmacy / الصيدلية" name="pharmacy">
+                    <group>
+                        <group string="Classification / التصنيف">
+                            <field name="is_medication"/>
+                            <field name="drug_category_id"
+                                   invisible="not is_medication"/>
+                            <field name="dosage_form"
+                                   invisible="not is_medication"/>
+                            <field name="strength"
+                                   invisible="not is_medication"/>
+                        </group>
+                        <group string="Arabic / العربية">
+                            <field name="generic_name_ar"
+                                   invisible="not is_medication"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Storage &amp; Control / التخزين والضبط">
+                            <field name="requires_cold_chain"
+                                   invisible="not is_medication"/>
+                            <field name="is_controlled"
+                                   invisible="not is_medication"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.drug.category — Form, List, Search, Action
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_drug_category_form" model="ir.ui.view">
+        <field name="name">pharmacy.drug.category.form</field>
+        <field name="model">pharmacy.drug.category</field>
+        <field name="arch" type="xml">
+            <form string="Drug Category / تصنيف الدواء">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_medications"
+                                class="oe_stat_button" icon="fa-pills">
+                            <field name="product_count" widget="statinfo"
+                                   string="Medications / الأدوية"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Category name..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name_ar"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <field colspan="2" nolabel="1" name="description" placeholder="Description / الوصف"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pharmacy_drug_category_list" model="ir.ui.view">
+        <field name="name">pharmacy.drug.category.list</field>
+        <field name="model">pharmacy.drug.category</field>
+        <field name="arch" type="xml">
+            <tree string="Drug Categories / تصنيفات الأدوية">
+                <field name="name"/>
+                <field name="name_ar"/>
+                <field name="code"/>
+                <field name="product_count" string="# Medications"/>
+                <field name="active" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pharmacy_drug_category_search" model="ir.ui.view">
+        <field name="name">pharmacy.drug.category.search</field>
+        <field name="model">pharmacy.drug.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Active / نشط" name="active" domain="[('active','=',True)]"/>
+                <filter string="Archived / مؤرشف" name="archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pharmacy_drug_category" model="ir.actions.act_window">
+        <field name="name">Drug Categories / تصنيفات الأدوية</field>
+        <field name="res_model">pharmacy.drug.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Medications quick-access action (filtered product list)
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="action_pharmacy_medications" model="ir.actions.act_window">
+        <field name="name">Medications / الأدوية</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('is_medication','=',True)]</field>
+        <field name="context">{'default_is_medication': True}</field>
+    </record>
+
+</data>
+</odoo>

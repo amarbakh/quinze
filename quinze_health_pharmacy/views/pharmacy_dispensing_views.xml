@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.dispensing — Form View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_dispensing_form" model="ir.ui.view">
+        <field name="name">pharmacy.dispensing.form</field>
+        <field name="model">pharmacy.dispensing</field>
+        <field name="arch" type="xml">
+            <form string="Dispensing / سجل الصرف">
+                <header>
+                    <!-- Confirm button (draft) -->
+                    <button name="action_confirm" type="object"
+                            string="Confirm / تأكيد"
+                            invisible="state != 'draft'"
+                            class="oe_highlight"
+                            groups="quinze_health_base.group_health_pharmacist"/>
+                    <!-- Dispense button (confirmed) -->
+                    <button name="action_dispense" type="object"
+                            string="Dispense / صرف"
+                            invisible="state != 'confirmed'"
+                            class="oe_highlight"
+                            groups="quinze_health_base.group_health_pharmacist"/>
+                    <!-- Print receipt -->
+                    <button name="action_print_receipt" type="object"
+                            string="Print Receipt / طباعة إيصال"
+                            invisible="state != 'dispensed'"
+                            class="btn btn-secondary"/>
+                    <!-- Cancel -->
+                    <button name="action_cancel" type="object"
+                            string="Cancel / إلغاء"
+                            invisible="state not in ['draft', 'confirmed']"
+                            groups="quinze_health_base.group_health_pharmacist"/>
+                    <!-- Reset to draft -->
+                    <button name="action_reset_draft" type="object"
+                            string="Reset / إعادة"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,dispensed"/>
+                    <!-- invisible fields required by Odoo 17 modifier validation -->
+                    <field name="picking_id" invisible="1"/>
+                    <field name="invoice_id" invisible="1"/>
+                </header>
+
+                <sheet>
+                    <!-- Smart buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Stock Picking -->
+                        <button name="action_view_picking" type="object"
+                                class="oe_stat_button" icon="fa-truck"
+                                invisible="not picking_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Stock / المخزون</span>
+                                <span class="o_stat_value">
+                                    <field name="picking_state" widget="badge"
+                                           decoration-success="picking_state == 'done'"
+                                           decoration-warning="picking_state in ('assigned','waiting','confirmed')"
+                                           decoration-danger="picking_state == 'cancel'"/>
+                                </span>
+                            </div>
+                        </button>
+                        <!-- Invoice (external only) -->
+                        <button name="action_view_invoice" type="object"
+                                class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="not invoice_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Invoice / الفاتورة</span>
+                                <span class="o_stat_value">
+                                    <field name="invoice_state" widget="badge"
+                                           decoration-success="invoice_state == 'posted'"
+                                           decoration-warning="invoice_state == 'draft'"/>
+                                </span>
+                            </div>
+                        </button>
+                        <!-- Insurance claims -->
+                        <button name="action_create_insurance_claim" type="object"
+                                class="oe_stat_button" icon="fa-shield"
+                                invisible="state != 'dispensed'">
+                            <field name="insurance_claim_count" widget="statinfo"
+                                   string="Insurance / التأمين"/>
+                        </button>
+                    </div>
+
+                    <!-- Dispensing number -->
+                    <div class="oe_title">
+                        <label for="dispensing_number"/>
+                        <h1><field name="dispensing_number" readonly="1"/></h1>
+                    </div>
+
+                    <!-- Type banner -->
+                    <div class="alert alert-info" role="alert"
+                         invisible="dispensing_type != 'internal'">
+                        🏥 Internal Dispensing — linked to clinic prescription /
+                        صرف داخلي مرتبط بوصفة العيادة
+                    </div>
+                    <div class="alert alert-warning" role="alert"
+                         invisible="dispensing_type != 'external'">
+                        🛒 External Dispensing — walk-in customer /
+                        صرف خارجي — مريض زيارة
+                    </div>
+
+                    <!-- Header group -->
+                    <group>
+                        <group string="General / عام">
+                            <field name="dispensing_type"
+                                   readonly="state != 'draft'"
+                                   widget="radio"/>
+                            <field name="dispensing_date"
+                                   readonly="state != 'draft'"/>
+                            <field name="pharmacist_id"
+                                   readonly="state != 'draft'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Patient / Customer / المريض / العميل">
+                            <!-- Prescription (internal) -->
+                            <field name="prescription_id"
+                                   invisible="dispensing_type != 'internal'"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+                            <field name="patient_id"
+                                   readonly="state != 'draft'"/>
+                            <field name="partner_id"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+
+                    <!-- Medication lines -->
+                    <notebook>
+                        <page string="Medications / الأدوية" name="medications">
+                            <field name="line_ids"
+                                   readonly="state not in ['draft', 'confirmed']"
+                                   nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"
+                                           domain="[('is_medication','=',True)]"
+                                           context="{'default_is_medication': True}"/>
+                                    <field name="drug_name_ar" optional="show"/>
+                                    <field name="qty_ordered" optional="show"/>
+                                    <field name="qty_dispensed"/>
+                                    <field name="uom_id" readonly="1" optional="show"/>
+                                    <field name="lot_id" optional="show"/>
+                                    <field name="expiry_date" optional="show"/>
+                                    <field name="price_unit"/>
+                                    <field name="subtotal" readonly="1"/>
+                                    <field name="is_substitution" optional="show"/>
+                                    <field name="prescription_line_id"
+                                           optional="hide"
+                                           column_invisible="parent.dispensing_type != 'internal'"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </tree>
+                            </field>
+                            <!-- Total -->
+                            <group class="oe_subtotal_footer">
+                                <field name="amount_total" readonly="1"
+                                       widget="monetary"
+                                       string="Total / المجموع الكلي"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </page>
+
+                        <!-- Insurance Claims tab (dispensed only) -->
+                        <page string="Insurance Claims / مطالبات التأمين"
+                              name="insurance"
+                              invisible="state != 'dispensed'">
+                            <field name="insurance_claim_ids" nolabel="1">
+                                <tree>
+                                    <field name="claim_number"/>
+                                    <field name="insurer_name"/>
+                                    <field name="amount_claimed"/>
+                                    <field name="coverage_pct" string="Coverage %"/>
+                                    <field name="amount_covered"/>
+                                    <field name="amount_patient"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state in ('approved','partial')"
+                                           decoration-danger="state == 'rejected'"
+                                           decoration-warning="state == 'submitted'"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Notes tab -->
+                        <page string="Notes / ملاحظات" name="notes">
+                            <field name="note"
+                                   placeholder="Internal notes / ملاحظات داخلية"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.dispensing — List View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_dispensing_list" model="ir.ui.view">
+        <field name="name">pharmacy.dispensing.list</field>
+        <field name="model">pharmacy.dispensing</field>
+        <field name="arch" type="xml">
+            <tree string="Dispensings / سجلات الصرف"
+                  decoration-success="state == 'dispensed'"
+                  decoration-danger="state == 'cancelled'">
+                <field name="dispensing_number"/>
+                <field name="dispensing_date"/>
+                <field name="dispensing_type"/>
+                <field name="patient_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="prescription_id" optional="show"/>
+                <field name="pharmacist_id" optional="show"/>
+                <field name="amount_total" widget="monetary"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'dispensed'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-danger="state == 'cancelled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.dispensing — Search View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_dispensing_search" model="ir.ui.view">
+        <field name="name">pharmacy.dispensing.search</field>
+        <field name="model">pharmacy.dispensing</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="dispensing_number"/>
+                <field name="patient_id"/>
+                <field name="partner_id"/>
+                <field name="prescription_id"/>
+                <field name="pharmacist_id"/>
+                <separator/>
+                <filter string="Draft / مسودة" name="draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="Confirmed / مؤكد" name="confirmed"
+                        domain="[('state','=','confirmed')]"/>
+                <filter string="Dispensed / مصروف" name="dispensed"
+                        domain="[('state','=','dispensed')]"/>
+                <filter string="Internal / داخلي" name="internal"
+                        domain="[('dispensing_type','=','internal')]"/>
+                <filter string="External / خارجي" name="external"
+                        domain="[('dispensing_type','=','external')]"/>
+                <separator/>
+                <filter string="Today / اليوم" name="today"
+                        domain="[('dispensing_date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Type / النوع" name="group_type"
+                            context="{'group_by': 'dispensing_type'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Patient / المريض" name="group_patient"
+                            context="{'group_by': 'patient_id'}"/>
+                    <filter string="Date / التاريخ" name="group_date"
+                            context="{'group_by': 'dispensing_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.dispensing — Actions
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="action_pharmacy_dispensing" model="ir.actions.act_window">
+        <field name="name">Dispensing / الصرف الصيدلاني</field>
+        <field name="res_model">pharmacy.dispensing</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_confirmed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first dispensing record!
+                أنشئ أول سجل صرف لديك!
+            </p>
+        </field>
+    </record>
+
+</data>
+</odoo>

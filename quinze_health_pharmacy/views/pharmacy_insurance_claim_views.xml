@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.insurance.claim — Form View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_insurance_claim_form" model="ir.ui.view">
+        <field name="name">pharmacy.insurance.claim.form</field>
+        <field name="model">pharmacy.insurance.claim</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Claim / مطالبة تأمين">
+                <header>
+                    <button name="action_submit" type="object"
+                            string="Submit / تقديم"
+                            invisible="state != 'draft'"
+                            class="oe_highlight"
+                            groups="quinze_health_base.group_health_pharmacist"/>
+                    <button name="action_approve" type="object"
+                            string="Approve / قبول"
+                            invisible="state != 'submitted'"
+                            class="oe_highlight"
+                            groups="quinze_health_base.group_health_manager"/>
+                    <button name="action_partial_approve" type="object"
+                            string="Partial Approve / قبول جزئي"
+                            invisible="state != 'submitted'"
+                            groups="quinze_health_base.group_health_manager"/>
+                    <button name="action_reject" type="object"
+                            string="Reject / رفض"
+                            invisible="state != 'submitted'"
+                            groups="quinze_health_base.group_health_manager"/>
+                    <button name="action_reset_draft" type="object"
+                            string="Reset / إعادة"
+                            invisible="state not in ['submitted', 'rejected']"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,approved"/>
+                </header>
+
+                <sheet>
+                    <!-- Rejection reason banner -->
+                    <div class="alert alert-danger" role="alert"
+                         invisible="state != 'rejected'">
+                        ❌ Rejected: <field name="rejection_reason" readonly="1"
+                                          nolabel="1" class="d-inline"/>
+                    </div>
+                    <!-- Partial approval note -->
+                    <div class="alert alert-warning" role="alert"
+                         invisible="state != 'partial'">
+                        ⚠ Partially Approved — please update the approved amount. /
+                        موافقة جزئية — الرجاء تحديث المبلغ المعتمد.
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="claim_number"/>
+                        <h1><field name="claim_number" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Links / الروابط">
+                            <field name="dispensing_id"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+                            <field name="patient_id" readonly="1"/>
+                        </group>
+                        <group string="Dates / التواريخ">
+                            <field name="submission_date" readonly="1"/>
+                            <field name="response_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Insurance Details / بيانات التأمين">
+                        <group>
+                            <field name="insurer_name"
+                                   readonly="state != 'draft'"/>
+                            <field name="policy_number"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="member_id"
+                                   readonly="state != 'draft'"/>
+                            <field name="approval_number"
+                                   readonly="state == 'draft'"/>
+                        </group>
+                    </group>
+
+                    <group string="Financials / المالية">
+                        <group>
+                            <field name="amount_claimed"
+                                   readonly="state != 'draft'"/>
+                            <field name="coverage_pct"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="amount_covered" readonly="1"/>
+                            <field name="amount_patient" readonly="1"/>
+                            <field name="amount_approved"
+                                   invisible="state not in ['approved', 'partial']"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <field colspan="2" nolabel="1" name="rejection_reason" placeholder="Enter rejection reason / أدخل سبب الرفض"/>
+
+                    <field colspan="2" nolabel="1" name="notes" placeholder="Notes / ملاحظات"/>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.insurance.claim — List View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_insurance_claim_list" model="ir.ui.view">
+        <field name="name">pharmacy.insurance.claim.list</field>
+        <field name="model">pharmacy.insurance.claim</field>
+        <field name="arch" type="xml">
+            <tree string="Insurance Claims / مطالبات التأمين"
+                  decoration-success="state in ('approved','partial')"
+                  decoration-danger="state == 'rejected'"
+                  decoration-it="state == 'draft'">
+                <field name="claim_number"/>
+                <field name="submission_date"/>
+                <field name="patient_id"/>
+                <field name="insurer_name"/>
+                <field name="policy_number" optional="show"/>
+                <field name="amount_claimed" widget="monetary"/>
+                <field name="coverage_pct" string="Coverage %"/>
+                <field name="amount_covered" widget="monetary"/>
+                <field name="amount_patient" widget="monetary"/>
+                <field name="amount_approved" widget="monetary" optional="show"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge"
+                       decoration-success="state in ('approved','partial')"
+                       decoration-warning="state == 'submitted'"
+                       decoration-danger="state == 'rejected'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.insurance.claim — Search View
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="view_pharmacy_insurance_claim_search" model="ir.ui.view">
+        <field name="name">pharmacy.insurance.claim.search</field>
+        <field name="model">pharmacy.insurance.claim</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="claim_number"/>
+                <field name="patient_id"/>
+                <field name="insurer_name"/>
+                <field name="policy_number"/>
+                <separator/>
+                <filter string="Draft / مسودة" name="draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="Submitted / مُقدَّمة" name="submitted"
+                        domain="[('state','=','submitted')]"/>
+                <filter string="Approved / موافق عليها" name="approved"
+                        domain="[('state','in',['approved','partial'])]"/>
+                <filter string="Rejected / مرفوضة" name="rejected"
+                        domain="[('state','=','rejected')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Insurer / شركة التأمين" name="group_insurer"
+                            context="{'group_by': 'insurer_name'}"/>
+                    <filter string="State / الحالة" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Patient / المريض" name="group_patient"
+                            context="{'group_by': 'patient_id'}"/>
+                    <filter string="Month / الشهر" name="group_month"
+                            context="{'group_by': 'submission_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         pharmacy.insurance.claim — Action
+    ══════════════════════════════════════════════════════════════════════ -->
+    <record id="action_pharmacy_insurance_claim" model="ir.actions.act_window">
+        <field name="name">Insurance Claims / مطالبات التأمين</field>
+        <field name="res_model">pharmacy.insurance.claim</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_submitted': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No insurance claims yet. Create one from a dispensing record.
+                لا توجد مطالبات تأمين بعد. أنشئ واحدة من سجل الصرف.
+            </p>
+        </field>
+    </record>
+
+</data>
+</odoo>

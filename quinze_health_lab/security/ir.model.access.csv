@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lab_test_category_user,lab.test.category user,model_lab_test_category,quinze_health_base.group_health_user,1,0,0,0
+access_lab_test_category_manager,lab.test.category manager,model_lab_test_category,quinze_health_base.group_health_manager,1,1,1,1
+access_lab_test_category_lab_tech,lab.test.category lab_tech,model_lab_test_category,quinze_health_base.group_health_lab_tech,1,0,0,0
+access_lab_test_user,lab.test user,model_lab_test,quinze_health_base.group_health_user,1,0,0,0
+access_lab_test_manager,lab.test manager,model_lab_test,quinze_health_base.group_health_manager,1,1,1,1
+access_lab_test_lab_tech,lab.test lab_tech,model_lab_test,quinze_health_base.group_health_lab_tech,1,0,0,0
+access_lab_order_user,lab.order user,model_lab_order,quinze_health_base.group_health_user,1,0,0,0
+access_lab_order_doctor,lab.order doctor,model_lab_order,quinze_health_base.group_health_doctor,1,1,1,0
+access_lab_order_lab_tech,lab.order lab_tech,model_lab_order,quinze_health_base.group_health_lab_tech,1,1,1,0
+access_lab_order_manager,lab.order manager,model_lab_order,quinze_health_base.group_health_manager,1,1,1,1
+access_lab_order_line_user,lab.order.line user,model_lab_order_line,quinze_health_base.group_health_user,1,0,0,0
+access_lab_order_line_doctor,lab.order.line doctor,model_lab_order_line,quinze_health_base.group_health_doctor,1,1,1,0
+access_lab_order_line_lab_tech,lab.order.line lab_tech,model_lab_order_line,quinze_health_base.group_health_lab_tech,1,1,1,0
+access_lab_order_line_manager,lab.order.line manager,model_lab_order_line,quinze_health_base.group_health_manager,1,1,1,1
+access_lab_sample_user,lab.sample user,model_lab_sample,quinze_health_base.group_health_user,1,0,0,0
+access_lab_sample_lab_tech,lab.sample lab_tech,model_lab_sample,quinze_health_base.group_health_lab_tech,1,1,1,0
+access_lab_sample_manager,lab.sample manager,model_lab_sample,quinze_health_base.group_health_manager,1,1,1,1

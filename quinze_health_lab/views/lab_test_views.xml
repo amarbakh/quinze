@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="view_lab_test_form" model="ir.ui.view">
+        <field name="name">lab.test.form</field>
+        <field name="model">lab.test</field>
+        <field name="arch" type="xml">
+            <form string="Lab Test / فحص مخبري">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Test Name / اسم الفحص"/>
+                        </h1>
+                        <h4 class="text-muted">
+                            <field name="name_ar" placeholder="الاسم بالعربية"/>
+                        </h4>
+                    </div>
+                    <group>
+                        <group string="Identity / الهوية">
+                            <field name="code"/>
+                            <field name="category_id"/>
+                            <field name="result_type"/>
+                            <field name="sample_type"/>
+                            <field name="result_uom"/>
+                            <field name="turnaround_hours" widget="float_time"/>
+                        </group>
+                        <group string="Settings / الإعدادات">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="sequence"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+
+                    <!-- Reference ranges — only for numeric tests -->
+                    <group string="Reference Ranges / النطاقات المرجعية"
+                           invisible="result_type != 'numeric'">
+                        <group string="Universal / عام">
+                            <field name="ref_low"/>
+                            <field name="ref_high"/>
+                        </group>
+                        <group string="Gender-specific / حسب الجنس">
+                            <field name="ref_low_male"/>
+                            <field name="ref_high_male"/>
+                            <field name="ref_low_female"/>
+                            <field name="ref_high_female"/>
+                        </group>
+                        <group string="Critical Limits / الحدود الحرجة">
+                            <field name="critical_low"/>
+                            <field name="critical_high"/>
+                        </group>
+                    </group>
+
+                    <!-- Text result normal value -->
+                    <group invisible="result_type not in ['text', 'boolean']">
+                        <field name="normal_text_result"/>
+                    </group>
+
+                    <separator string="Patient Instructions / تعليمات للمريض"/>
+                    <field colspan="2" name="instructions" nolabel="1" placeholder="e.g. Fasting required / يشترط الصيام"/>
+                    <separator string="Description / الوصف"/>
+                    <field colspan="2" name="description" nolabel="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lab_test_list" model="ir.ui.view">
+        <field name="name">lab.test.list</field>
+        <field name="model">lab.test</field>
+        <field name="arch" type="xml">
+            <tree string="Lab Tests / الفحوصات المخبرية">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="name_ar"/>
+                <field name="category_id"/>
+                <field name="result_type"/>
+                <field name="sample_type"/>
+                <field name="result_uom" optional="show"/>
+                <field name="turnaround_hours" optional="show" string="TAT (h)"/>
+                <field name="active" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lab_test_search" model="ir.ui.view">
+        <field name="name">lab.test.search</field>
+        <field name="model">lab.test</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="name_ar"/>
+                <field name="category_id"/>
+                <separator/>
+                <filter string="Numeric / رقمي" name="numeric"
+                        domain="[('result_type','=','numeric')]"/>
+                <filter string="Text / نصي" name="text"
+                        domain="[('result_type','=','text')]"/>
+                <group expand="0" string="Group By / تجميع حسب">
+                    <filter string="Category / التصنيف" name="group_category"
+                            context="{'group_by': 'category_id'}"/>
+                    <filter string="Sample Type / نوع العينة" name="group_sample"
+                            context="{'group_by': 'sample_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lab_test" model="ir.actions.act_window">
+        <field name="name">Test Catalog / كتالوج الفحوصات</field>
+        <field name="res_model">lab.test</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_numeric': 1}</field>
+    </record>
+
+</data></odoo>

@@ -1,0 +1,512 @@
+# Arabic translation for QUINZE Health Clinic
+# Copyright (C) 2026 QUINZE Solutions
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: Bakhit Al-Amin <bakhit@quinze-solutions.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. Module name
+#: __manifest__.py:0
+msgid "QUINZE Health Clinic"
+msgstr "عيادة نظام QUINZE الصحي"
+
+#. ── health.patient ──────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_patient
+msgid "Health Patient"
+msgstr "مريض"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__patient_number
+msgid "Patient Number"
+msgstr "رقم المريض"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__partner_id
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__medical_history
+msgid "Medical History"
+msgstr "التاريخ الطبي"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__chronic_conditions
+msgid "Chronic Conditions"
+msgstr "الأمراض المزمنة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__family_history
+msgid "Family History"
+msgstr "التاريخ العائلي"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__surgical_history
+msgid "Surgical History"
+msgstr "التاريخ الجراحي"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__appointment_count
+msgid "Appointments"
+msgstr "المواعيد"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__encounter_count
+msgid "Encounters"
+msgstr "الزيارات"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_patient__prescription_count
+msgid "Prescriptions"
+msgstr "الوصفات الطبية"
+
+#. ── health.appointment ──────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_appointment
+msgid "Health Appointment"
+msgstr "موعد طبي"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__appointment_number
+msgid "Appointment Number"
+msgstr "رقم الموعد"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__patient_id
+msgid "Patient"
+msgstr "المريض"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__doctor_id
+msgid "Doctor"
+msgstr "الطبيب"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__start_datetime
+msgid "Start"
+msgstr "البداية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__stop_datetime
+msgid "End"
+msgstr "النهاية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__duration
+msgid "Duration (min)"
+msgstr "المدة (دقيقة)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__room_id
+msgid "Room"
+msgstr "الغرفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__specialty_id
+msgid "Specialty"
+msgstr "التخصص"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__chief_complaint
+msgid "Chief Complaint"
+msgstr "الشكوى الرئيسية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_appointment__appointment_type
+msgid "Type"
+msgstr "النوع"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__appointment_type__new
+msgid "New Visit"
+msgstr "زيارة جديدة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__appointment_type__follow_up
+msgid "Follow-up"
+msgstr "متابعة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__appointment_type__emergency
+msgid "Emergency"
+msgstr "طوارئ"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__appointment_type__routine
+msgid "Routine Check"
+msgstr "فحص روتيني"
+
+#. Appointment states
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__confirmed
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__in_progress
+msgid "In Progress"
+msgstr "جارٍ"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__done
+msgid "Done"
+msgstr "منتهٍ"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__cancelled
+msgid "Cancelled"
+msgstr "ملغى"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_appointment__state__no_show
+msgid "No-Show"
+msgstr "لم يحضر"
+
+#. ── health.encounter ─────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_encounter
+msgid "Health Encounter"
+msgstr "زيارة طبية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_encounter__encounter_number
+msgid "Encounter Number"
+msgstr "رقم الزيارة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_encounter__encounter_date
+msgid "Date"
+msgstr "التاريخ"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_encounter__clinical_notes
+msgid "Clinical Notes"
+msgstr "الملاحظات السريرية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_encounter__diagnosis_ids
+msgid "Diagnoses"
+msgstr "التشخيصات"
+
+#. Encounter states
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_encounter__state__invoiced
+msgid "Invoiced"
+msgstr "مفوتر"
+
+#. ── health.vital.sign ───────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_vital_sign
+msgid "Vital Sign"
+msgstr "علامة حيوية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__measured_at
+msgid "Measured At"
+msgstr "وقت القياس"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__systolic_bp
+msgid "Systolic BP (mmHg)"
+msgstr "الضغط الانقباضي (ملم زئبق)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__diastolic_bp
+msgid "Diastolic BP (mmHg)"
+msgstr "الضغط الانبساطي (ملم زئبق)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__heart_rate
+msgid "Heart Rate (bpm)"
+msgstr "معدل ضربات القلب (نبضة/دقيقة)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__temperature
+msgid "Temperature (°C)"
+msgstr "درجة الحرارة (°م)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__spo2
+msgid "SpO₂ (%)"
+msgstr "تشبع الأكسجين (%)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__weight_kg
+msgid "Weight (kg)"
+msgstr "الوزن (كغ)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__height_cm
+msgid "Height (cm)"
+msgstr "الطول (سم)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__bmi
+msgid "BMI"
+msgstr "مؤشر كتلة الجسم"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_vital_sign__blood_glucose
+msgid "Blood Glucose (mg/dL)"
+msgstr "سكر الدم (ملغ/ديسيلتر)"
+
+#. ── health.prescription ─────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_prescription
+msgid "Health Prescription"
+msgstr "وصفة طبية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription__prescription_number
+msgid "Prescription Number"
+msgstr "رقم الوصفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription__prescription_date
+msgid "Prescription Date"
+msgstr "تاريخ الوصفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription__valid_until
+msgid "Valid Until"
+msgstr "صالح حتى"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription__is_expired
+msgid "Expired"
+msgstr "منتهية الصلاحية"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription__line_count
+msgid "# Medications"
+msgstr "عدد الأدوية"
+
+#. Prescription states
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription__state__partially_dispensed
+msgid "Partially Dispensed"
+msgstr "صُرف جزئياً"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription__state__dispensed
+msgid "Dispensed"
+msgstr "تم الصرف"
+
+#. ── health.prescription.line ────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_prescription_line
+msgid "Prescription Line"
+msgstr "بند الوصفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__product_id
+msgid "Medication"
+msgstr "الدواء"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__drug_name_ar
+msgid "Drug Name (AR)"
+msgstr "اسم الدواء (عربي)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__dose
+msgid "Dose"
+msgstr "الجرعة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__dose_uom_id
+msgid "Unit"
+msgstr "الوحدة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__frequency
+msgid "Frequency"
+msgstr "التكرار"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__duration_days
+msgid "Duration (days)"
+msgstr "المدة (أيام)"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__route
+msgid "Route"
+msgstr "طريقة الإعطاء"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__qty_to_dispense
+msgid "Qty to Dispense"
+msgstr "الكمية للصرف"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_prescription_line__instructions
+msgid "Instructions"
+msgstr "التعليمات"
+
+#. Route selections
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__oral
+msgid "Oral"
+msgstr "فموي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__iv
+msgid "Intravenous (IV)"
+msgstr "وريدي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__im
+msgid "Intramuscular (IM)"
+msgstr "عضلي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__sc
+msgid "Subcutaneous (SC)"
+msgstr "تحت الجلد"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__sl
+msgid "Sublingual (SL)"
+msgstr "تحت اللسان"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__topical
+msgid "Topical"
+msgstr "موضعي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__inhaled
+msgid "Inhaled"
+msgstr "استنشاق"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__ophthalmic
+msgid "Ophthalmic"
+msgstr "قطرة عينية"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__otic
+msgid "Otic"
+msgstr "قطرة أذنية"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__rectal
+msgid "Rectal"
+msgstr "شرجي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__route__nasal
+msgid "Nasal"
+msgstr "أنفي"
+
+#. Frequency selections
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__once
+msgid "Once"
+msgstr "مرة واحدة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__od
+msgid "Once Daily (OD)"
+msgstr "مرة يومياً"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__bd
+msgid "Twice Daily (BD)"
+msgstr "مرتين يومياً"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__tds
+msgid "Three Times Daily (TDS)"
+msgstr "ثلاث مرات يومياً"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__qid
+msgid "Four Times Daily (QID)"
+msgstr "أربع مرات يومياً"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__prn
+msgid "As Needed (PRN)"
+msgstr "عند الحاجة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__stat
+msgid "Immediately (STAT)"
+msgstr "فوري"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_prescription_line__frequency__weekly
+msgid "Weekly"
+msgstr "أسبوعياً"
+
+#. ── health.lab.request ──────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_lab_request
+msgid "Lab Request"
+msgstr "طلب مختبر"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_lab_request__request_number
+msgid "Request Number"
+msgstr "رقم الطلب"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_lab_request__request_date
+msgid "Request Date"
+msgstr "تاريخ الطلب"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_lab_request__tests_description
+msgid "Tests Description"
+msgstr "وصف الفحوصات"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_lab_request__clinical_indication
+msgid "Clinical Indication"
+msgstr "المؤشر السريري"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_lab_request__priority
+msgid "Priority"
+msgstr "الأولوية"
+
+#. Priority selections
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_lab_request__priority__0
+msgid "Normal"
+msgstr "عادي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_lab_request__priority__1
+msgid "High"
+msgstr "عالٍ"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_lab_request__priority__2
+msgid "Urgent"
+msgstr "عاجل"
+
+#. ── health.room ─────────────────────────────────────────────────────────────
+#: model:ir.model,name:quinze_health_clinic.model_health_room
+msgid "Health Room"
+msgstr "غرفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_room__code
+msgid "Code"
+msgstr "الرمز"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_room__room_type
+msgid "Room Type"
+msgstr "نوع الغرفة"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_room__floor
+msgid "Floor"
+msgstr "الطابق"
+
+#: model:ir.model.fields,field_description:quinze_health_clinic.field_health_room__capacity
+msgid "Capacity"
+msgstr "السعة"
+
+#. Room type selections
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_room__room_type__clinic
+msgid "Clinic"
+msgstr "عيادة"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_room__room_type__lab
+msgid "Laboratory"
+msgstr "مختبر"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_room__room_type__pharmacy
+msgid "Pharmacy"
+msgstr "صيدلية"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_room__room_type__procedure
+msgid "Procedure"
+msgstr "إجراء طبي"
+
+#: model:ir.model.fields.selection,name:quinze_health_clinic.selection__health_room__room_type__other
+msgid "Other"
+msgstr "أخرى"
+
+#. ── UserError / ValidationError messages ────────────────────────────────────
+#: code:addons/quinze_health_clinic/models/health_appointment.py:0
+msgid "Doctor %s already has an appointment at this time."
+msgstr "الطبيب %s لديه موعد آخر في هذا الوقت."
+
+#: code:addons/quinze_health_clinic/models/health_appointment.py:0
+msgid "Room %s is already booked at this time."
+msgstr "الغرفة %s محجوزة في هذا الوقت."
+
+#: code:addons/quinze_health_clinic/models/health_encounter.py:0
+msgid "Please enter the chief complaint before completing the visit."
+msgstr "الرجاء إدخال الشكوى الرئيسية قبل إتمام الزيارة."
+
+#: code:addons/quinze_health_clinic/models/health_encounter.py:0
+msgid "Please record at least one set of vital signs before completing the visit."
+msgstr "الرجاء تسجيل مجموعة واحدة على الأقل من العلامات الحيوية قبل إتمام الزيارة."
+
+#: code:addons/quinze_health_clinic/models/health_encounter.py:0
+msgid "No consultation product configured for specialty %s. Please configure it in the specialty settings."
+msgstr "لم يتم تكوين منتج الاستشارة للتخصص %s. الرجاء تكوينه في إعدادات التخصص."
+
+#: code:addons/quinze_health_clinic/models/health_prescription.py:0
+msgid "Please add at least one medication before confirming."
+msgstr "الرجاء إضافة دواء واحد على الأقل قبل التأكيد."
+
+#. ── Menu items ───────────────────────────────────────────────────────────────
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_clinic_root
+msgid "Clinic"
+msgstr "العيادة"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_appointments
+msgid "Appointments"
+msgstr "المواعيد"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_encounters
+msgid "Encounters"
+msgstr "الزيارات"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_patients
+msgid "Patients"
+msgstr "المرضى"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_prescriptions
+msgid "Prescriptions"
+msgstr "الوصفات الطبية"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_lab_requests
+msgid "Lab Requests"
+msgstr "طلبات المختبر"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_clinic_config
+msgid "Configuration"
+msgstr "الإعدادات"
+
+#: model:ir.ui.menu,name:quinze_health_clinic.menu_health_rooms
+msgid "Rooms"
+msgstr "الغرف"

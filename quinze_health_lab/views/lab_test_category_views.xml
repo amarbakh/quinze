@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="view_lab_test_category_form" model="ir.ui.view">
+        <field name="name">lab.test.category.form</field>
+        <field name="model">lab.test.category</field>
+        <field name="arch" type="xml">
+            <form string="Test Category / تصنيف الفحوصات">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-flask"
+                                type="object" name="action_view_tests">
+                            <field name="test_count" string="Tests" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Category Name / اسم التصنيف"/></h1>
+                        <h4 class="text-muted"><field name="name_ar" placeholder="الاسم بالعربية"/></h4>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lab_test_category_list" model="ir.ui.view">
+        <field name="name">lab.test.category.list</field>
+        <field name="model">lab.test.category</field>
+        <field name="arch" type="xml">
+            <tree string="Test Categories / تصنيفات الفحوصات">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="name_ar"/>
+                <field name="test_count" string="# Tests"/>
+                <field name="active" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lab_test_category" model="ir.actions.act_window">
+        <field name="name">Test Categories / تصنيفات الفحوصات</field>
+        <field name="res_model">lab.test.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</data></odoo>

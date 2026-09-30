@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    QUINZE Health Clinic — Consultation Service Products
+    منتجات الاستشارة الطبية
+
+    One service product per specialty (per OQ-02 decision).
+    These are TEMPLATE records — the clinic admin should:
+    1. Set the correct price (lst_price) for each.
+    2. Link them to the specialty via Health > Configuration > Specialties.
+
+    noupdate="0" so prices can be changed by the admin after install.
+-->
+<odoo>
+    <data noupdate="0">
+
+        <!-- ── General Practice consultation ──────────────────────────── -->
+        <record id="product_consultation_gp" model="product.template">
+            <field name="name">General Practice Consultation / استشارة طب عام</field>
+            <field name="type">service</field>
+            <field name="list_price">150.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+        <!-- ── Cardiology consultation ────────────────────────────────── -->
+        <record id="product_consultation_cardiology" model="product.template">
+            <field name="name">Cardiology Consultation / استشارة أمراض القلب</field>
+            <field name="type">service</field>
+            <field name="list_price">300.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+        <!-- ── Internal Medicine consultation ─────────────────────────── -->
+        <record id="product_consultation_internal" model="product.template">
+            <field name="name">Internal Medicine Consultation / استشارة طب باطني</field>
+            <field name="type">service</field>
+            <field name="list_price">250.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+        <!-- ── Orthopedics consultation ────────────────────────────────── -->
+        <record id="product_consultation_orthopedics" model="product.template">
+            <field name="name">Orthopedics Consultation / استشارة جراحة العظام</field>
+            <field name="type">service</field>
+            <field name="list_price">280.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+        <!-- ── Pediatrics consultation ─────────────────────────────────── -->
+        <record id="product_consultation_pediatrics" model="product.template">
+            <field name="name">Pediatrics Consultation / استشارة طب الأطفال</field>
+            <field name="type">service</field>
+            <field name="list_price">200.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+    </data>
+</odoo>

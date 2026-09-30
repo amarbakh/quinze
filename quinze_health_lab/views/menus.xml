@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_health_lab_root"
+                  name="Laboratory / المختبر"
+                  parent="quinze_health_base.menu_health_root"
+                  sequence="30"
+                  groups="quinze_health_base.group_health_user"/>
+
+        <menuitem id="menu_lab_orders"
+                  name="Lab Orders / أوامر المختبر"
+                  parent="menu_health_lab_root"
+                  action="action_lab_order"
+                  sequence="10"
+                  groups="quinze_health_base.group_health_user"/>
+
+        <menuitem id="menu_lab_samples"
+                  name="Samples / العينات"
+                  parent="menu_health_lab_root"
+                  action="action_lab_sample"
+                  sequence="20"
+                  groups="quinze_health_base.group_health_lab_tech"/>
+
+        <menuitem id="menu_lab_requests_lab"
+                  name="Lab Requests / طلبات المختبر"
+                  parent="menu_health_lab_root"
+                  action="action_lab_request_from_lab"
+                  sequence="30"
+                  groups="quinze_health_base.group_health_user"/>
+
+        <menuitem id="menu_lab_config"
+                  name="Configuration / الإعدادات"
+                  parent="menu_health_lab_root"
+                  sequence="90"
+                  groups="quinze_health_base.group_health_manager"/>
+
+        <menuitem id="menu_lab_test_categories"
+                  name="Test Categories / تصنيفات الفحوصات"
+                  parent="menu_lab_config"
+                  action="action_lab_test_category"
+                  sequence="10"
+                  groups="quinze_health_base.group_health_manager"/>
+
+        <menuitem id="menu_lab_tests"
+                  name="Test Catalog / كتالوج الفحوصات"
+                  parent="menu_lab_config"
+                  action="action_lab_test"
+                  sequence="20"
+                  groups="quinze_health_base.group_health_manager"/>
+
+    </data>
+</odoo>
